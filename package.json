@@ -1,0 +1,20 @@
+{
+  "name": "ucm-cau",
+  "version": "1.0.0",
+  "description": "Centro de Atención de Usuarios creado en la asignatura de Aplicaciones Web del Grado en Ingeniería de Software de la UCM",
+  "main": "app.js",
+  "scripts": {
+    "devStart": "nodemon app.js",
+    "test": "mocha"
+  },
+  "keywords": [
+    "ucm",
+    "fdi",
+    "aw",
+    "node",
+    "express",
+    "practica-obligatoria"
+  ],
+  "author": "Carlo Dubini Marqués, Sebastián Pinto Justiniano",
+  "license": "ISC"
+}
