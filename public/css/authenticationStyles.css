@@ -1,0 +1,176 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
+
+body {
+    background: linear-gradient(90deg, rgba(216,75,86,1) 0%, rgba(119,32,162,1) 100%);
+}
+
+.container {
+    display: flex;
+    font-family: 'Rubik';
+    margin-top: 25vh;
+    margin-bottom: 2rem;
+}
+
+.logo-container {
+    margin-left: 10%;
+}
+
+.logo {
+    min-width: 400px;
+    width: 40%;
+}
+
+.login-container, .signup-container {
+    width: 60%;
+    border-radius: 12px;
+    padding: 2rem;
+    background-color: rgb(255, 255, 255, 0.1);
+    margin-right: 10%;
+}
+
+.login-form {
+    display: flex;
+    flex-direction: column;
+    row-gap: 1rem;
+}
+
+.signup-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.signup-form p {
+    grid-column: span 2;
+}
+.signup-form div {
+    margin: 1rem 0.5rem;
+}
+
+.form-title {
+    margin: 3rem auto;
+    font-weight: 700;
+    font-size: 3rem;
+    color: white;
+    text-decoration: underline 0.25rem;
+}
+
+.login-input, .login-button{
+    font-size: 2rem;
+}
+
+.signup-input {
+    font-size: 1.25rem;
+} 
+
+.signup-button {
+    font-size: 2rem;
+}
+
+.icon {
+    margin-left: 10px;
+    color: #9e3184;
+    align-self: center;
+    font-size: 1.25rem;
+}
+
+.email-container, .password-container, .username-container, .profile-container{
+    background-color: white;
+    border-radius: 12px;
+    display: flex;
+}
+
+.email-container > *, .password-container > *, .username-container > *, .profile-container {
+    padding: 1rem;
+}
+
+.profile {
+    background-color: white;
+    margin-left: 1.25rem;
+}
+
+.employee-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.employee-container label {
+    color: white;
+    font-size: 1.25rem;
+}
+
+.employee-container div {
+    display: flex;
+}
+
+.employee-id {
+    padding: 1rem;
+}
+
+.invisible{
+    display: none;
+}
+
+.login-input, .signup-input {
+    width: 100%;
+    background-color: none;
+    outline: none;
+    border: none;
+    border-radius: 12px;
+}
+
+.form-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.signup-actions{
+    grid-column: span 2;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.login-button, .signup-button {
+    padding: 0.25rem 0.5rem;
+    color: white;
+    background: rgb(255, 255, 255, 0.1);
+    -webkit-transition: background-color 0.5s ease;
+    border: 0;
+    border-radius: 10px;
+}
+
+.login-button:hover, .signup-button:hover {
+    cursor: pointer;
+    color: #852697;
+    background-color: white;
+}
+
+
+@media (max-width: 1080px) {
+    html {
+        font-size: 12px;
+    }
+    .logo {
+        min-width: 200px;
+        margin-top: 8vh;
+    }
+}
+
+@media (max-width: 720px) {
+    .container{
+        margin-top: 0;
+        flex-direction: column;
+        align-items: center;
+    }
+    .logo {
+        justify-self: center;
+        margin-top: 2vh;
+        min-width: 0px;
+        width: 50px;
+    }
+
+    .email, .password {
+        overflow: scroll;
+    }
+}
