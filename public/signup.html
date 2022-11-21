@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/authenticationStyles.css">
     <script src="https://kit.fontawesome.com/4b4a59d23d.js" crossorigin="anonymous"></script>
+    <script src="./../utils.js"></script>
     <title>UCM-CAU</title>
 </head>
 <body>
@@ -14,15 +15,15 @@
             <img class="logo" src="./img/ucm-logo.png" alt="">
         </div>
         <div class="signup-container">
-            <form class="signup-form" method="POST" action="/signup">
+            <form class="signup-form" action="">
                 <p class="form-title">Registrarse</p>
                 <div class="email-container">
                     <i class="fa-solid fa-envelope icon"></i>
-                    <input class="signup-input email" type="text" name="email" id="email" placeholder="Correo">
+                    <input class="signup-input email" type="text" placeholder="Correo">
                 </div>
                 <div class="username-container">
                     <i class="fa-solid fa-user icon"></i>
-                    <input class="signup-input username" type="text" name="username" id="username" placeholder="Nombre de Usuario">
+                    <input class="signup-input username" type="text" placeholder="Nombre de Usuario">
                 </div>
                 <div class="password-container">
                     <i class="fa-solid fa-lock icon"></i>
@@ -45,26 +46,16 @@
                 <div class="employee-container">
                     <div>
                         <label for="is-technician">Técnico</label>
-                        <input type="checkbox" name="is-technician" id="is-technician" onclick=toggleCheckbox()>
+                        <input type="checkbox" name="is-technician" id="is-technician" onclick="toggleCheckbox()">
                     </div>
                     <input class="signup-input employee-id invisible" type="text" name="employee-id" id="employee-id" placeholder="Nº Empleado">
                 </div>
                 <div class="signup-actions">
-                    <a href="/login">Ya tengo una cuenta</a>
+                    <a href="">Ya tengo una cuenta</a>
                     <button class="signup-button" type="submit">Registrarse</button>
                 </div>
             </form>
         </div>
     </main>
 </body>
-
-<script>
-    function toggleCheckbox() {
-        const checkbox = document.querySelector("#is-technician")   
-        console.log(checkbox)
-        if (checkbox.checked) document.getElementById("employee-id").className = "signup-input employee-id"
-        else document.getElementById("employee-id").className = "signup-input employee-id invisible"
-    }
-</script>
-
 </html>
