@@ -4,9 +4,11 @@ const {check, validationResult} = require("express-validator")
 
 class userController {
     signUp(req, res) {
-        const errors = validationResult(req)
-        if (errors) res.json(errors)
-        else res.json("no errores")
+        // console.log(req.body)
+        // console.log(req.file)
+        const errors = validationResult(req).errors
+        if (errors.length === 0) res.render("login", {registered: true, errors: null})
+        else res.render("signup", {errors: errors})
     }
 }
 
