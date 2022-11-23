@@ -2,6 +2,7 @@
 const express = require("express")
 const path = require("path")
 const bodyParser = require("body-parser")
+const multer = require("multer")
 
 //Importar módulos internos
 const usersController = require("./controllers/usersController")
@@ -14,6 +15,7 @@ const { check } = require("express-validator")
 const app = express()
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended: false}))
+app.use(multer({dest: path.join(__dirname, "/public/img")}).single("user-image"))
 app.set("views", path.join(__dirname, "/views"))
 app.set("view engine", "ejs")
 
@@ -32,7 +34,7 @@ app.listen(3000, () => console.log("Hola mundo :)"))
 // Inicio de Sesión
 app
 .get("/login", (req, res) => {
-    res.status(200).render("login")
+    res.status(200).render("login", {registered: false, errors: null})
 })
 .post("/login", (req, res) => {
     // TODO: comprobaciones de login
@@ -41,7 +43,7 @@ app
 
 app
 .get("/signup", (req, res) => {
-    res.status(200).render("signup")
+    res.status(200).render("signup", {errors: null})
 })
 .post("/signup",
     userValidator.validateSignup,

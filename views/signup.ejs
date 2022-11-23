@@ -14,23 +14,57 @@
             <img class="logo" src="./img/ucm-logo.png" alt="">
         </div>
         <div class="signup-container">
-            <form class="signup-form" method="POST" action="/signup">
+            <form class="signup-form" method="POST" action="/signup" enctype="multipart/form-data">
+                <!-- Titulo del formulario -->
                 <p class="form-title">Registrarse</p>
+
+                <!-- TODO: Errores (pasarlos a debajo de los inputs) -->
+            <%   if (errors) { %>
+                    <div class="errors">
+            <%          errors.forEach(e => { %>
+                            <div class="error">
+                                <i class="fa-solid fa-circle-exclamation error-icon"></i>
+                                <span class="error-message" role="alert"><%= e.msg %></span>
+                            </div>
+            <%      }) %>
+                </div>
+            <%    } %> 
+
+                <!-- Correo electrónico -->
                 <div class="email-container">
                     <i class="fa-solid fa-envelope icon"></i>
                     <input class="signup-input email" type="text" name="email" id="email" placeholder="Correo">
                 </div>
+
+                <!-- Nombre de usuario -->
                 <div class="username-container">
                     <i class="fa-solid fa-user icon"></i>
                     <input class="signup-input username" type="text" name="username" id="username" placeholder="Nombre de Usuario">
                 </div>
+
+                <!-- Contraseña -->
                 <div class="password-container">
                     <i class="fa-solid fa-lock icon"></i>
                     <input class="signup-input password" type="password" name="password" id="password" placeholder="Contraseña">
                 </div>
+
+                <!-- Imagen de usuario -->
+                <div class="image-container">
+                    <i class="fa-solid fa-camera icon"></i>
+                    <label for="user-image" id="image-label">Imagen de Perfil</label>
+                    <input class="signup-input user-image" type="file" name="user-image" id="user-image" onchange=showImgName()>
+                </div>
+
+                <!-- Confirmación de Contraseña -->
+                <div class="password-container">
+                    <i class="fa-solid fa-lock icon"></i>
+                    <input class="signup-input password" type="password" name="passwordConfirmation" id="password-confirmation" placeholder="Confirme la contraseña">
+                </div>
+
+                <!-- Selección de perfil -->
                 <div class="profile-container">
                     <i class="fa-solid fa-address-card icon"></i>
-                    <select class="signup-input profile" name="profile" id="profile">
+                    <select class="signup-input profile" name="profile" id="profile" onchange=toggleCheckbox()>
                         <option value="invalid" selected disabled>Perfil Universitario</option>
                         <option value="student">Alumno</option>
                         <option value="PAS">Personal de Administración y Servicios</option>
@@ -38,17 +72,17 @@
                         <option value="former-student">Antiguo Alumno</option>
                     </select>
                 </div>
-                <div class="password-container">
-                    <i class="fa-solid fa-lock icon"></i>
-                    <input class="signup-input password" type="password" name="password-confirmation" id="password-confirmation" placeholder="Confirme la contraseña">
-                </div>
+
+                <!-- Número de empleado -->
                 <div class="employee-container">
                     <div>
-                        <label for="is-technician">Técnico</label>
-                        <input type="checkbox" name="is-technician" id="is-technician" onclick=toggleCheckbox()>
+                        <label class="invisible" for="is-technician" id="checkbox-label">Técnico</label>
+                        <input class="invisible" type="checkbox" name="isTechnician" id="is-technician" onclick=toggleEmployeeID()>
                     </div>
-                    <input class="signup-input employee-id invisible" type="text" name="employee-id" id="employee-id" placeholder="Nº Empleado">
+                    <input class="signup-input employee-id invisible" type="text" name="employeeID" id="employee-id" placeholder="Nº Empleado">
                 </div>
+
+                <!-- Acciones del formulario -->
                 <div class="signup-actions">
                     <a href="/login">Ya tengo una cuenta</a>
                     <button class="signup-button" type="submit">Registrarse</button>
@@ -59,11 +93,37 @@
 </body>
 
 <script>
-    function toggleCheckbox() {
+    function showImgName() {
+        const label = document.querySelector("#image-label")
+        const fakeFileName = document.querySelector("#user-image").value
+
+        fileName = fakeFileName.split("\\")[2]
+        label.innerHTML = fileName
+    }
+
+    function toggleEmployeeID() {
         const checkbox = document.querySelector("#is-technician")   
-        console.log(checkbox)
         if (checkbox.checked) document.getElementById("employee-id").className = "signup-input employee-id"
         else document.getElementById("employee-id").className = "signup-input employee-id invisible"
+    }
+
+    function toggleCheckbox() {
+        const select = document.querySelector("#profile")
+        const checkboxLabel = document.querySelector("#checkbox-label")
+        const checkbox = document.querySelector("#is-technician")
+        const employeeID = document.querySelector("#employee-id")
+
+        if (select.value === "PAS") {
+            checkbox.checked = false
+            checkboxLabel.className = ""
+            checkbox.className = ""
+            console.log(checkbox.checked)
+        }
+        else {
+            checkboxLabel.className = "invisible"
+            checkbox.className = "invisible"
+            employeeID.className = "signup-input employee-id invisible"
+        }
     }
 </script>
 
