@@ -17,7 +17,6 @@ class DAOUsers {
                 function(e, rows) {
                     c.release()
                     if (e) callback(new Error("Error al acceso de la base de datos"))
-                    
                     else {
                         if (rows == 0) callback(null, false)
                         else callback(null, true)
@@ -26,6 +25,7 @@ class DAOUsers {
             }
         })
     }
+
     insertUser(user, callback){
         this.pool.getConnection(function(e, c) {
             if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
@@ -42,7 +42,21 @@ class DAOUsers {
                             
                             //usuario técnico
                             if(user.tecnico === 1){
-                                connection.query("INSERT INTO UCM_AW_CAU_USU_Usuarios (nombre, email, password, perfil, tecnico , nEmpleado, img) values(?,?,?)",)
+                                connection.query("INSERT INTO UCM_AW_CAU_USU_Usuarios (nombre, email, password, perfil, tecnico , nEmpleado, img) values(?,?,?, pas, 1, ?, ?)",
+                                [user.nombre,user.email,user.password,user.nEmpleado,user.img], function(e, rows){
+                                    c.release()
+                                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                                    else callback(null,true)
+                                });
+                            }
+                            //usuario no técnico
+                            else{ 
+                                connection.query("INSERT INTO UCM_AW_CAU_USU_Usuarios (nombre, email, password, perfil, tecnico , nEmpleado, img) values(?,?,?, ?, 0, NULL, ?)",
+                                [user.nombre,user.email,user.password,user.perfil,user.img], function(e, rows){
+                                    c.release()
+                                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                                    else callback(null,true)
+                                });
                             }
                             
                         }
@@ -52,19 +66,42 @@ class DAOUsers {
         })      
     }
 
-    isProperPassword(password,callback){ //cuano el usuario quiera crear una cuenta, tenemos que ver si la contraseña es correcta antes de hacer toda la parafernalia
+   deleteUser(idUser,callback){
+    this.pool.getConnection(function(e, c) {
+        if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
 
-        var res= password.search(/[A-Z]/);  //tiene que tener al menos una mayuscula
-        if(res===-1) callback(null,false);
-        res= password.search(/[a-z]/);  //tiene que tener al menos una minuscula
-        if(res===-1) callback(null,false);
-        res= password.search(/[\W]/);  //tiene que tener al menos un caracter no alfanumérico
-        if(res===-1) callback(null,false);
-        res= password.search(/\d/);  //tiene que tener al menos un digito
-        if(res===-1) callback(null,false);
-        
-        if(password.length >=8 && password.length<= 16) callback(null,true);
-    }
+        else {
+            c.query("DELETE FROM UCM_AW_CAU_USU_Usuarios WHERE idUser = ? ", [idUser],
+            function(e, rows) {
+                c.release()
+                if (e) callback(new Error("Error al acceso de la base de datos"))
+                
+                else {
+                    callback(null,true)
+                }
+            })
+        }
+    })
+   }
+
+   esTecnico(idUser,callback){
+    this.pool.getConnection(function(e, c) {
+        if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+
+        else {
+            c.query("SELECT tecnico FROM UCM_AW_CAU_USU_Usuarios WHERE idUser = ? ", [idUser],
+            function(e, rows) {
+                c.release()
+                if (e) callback(new Error("Error al acceso de la base de datos"))
+                
+                else {
+                    if (rows == 0) callback(null, false)
+                    else callback(null, true)
+                }
+            })
+        }
+    })
+   }
 
     getUserImageName(email, callback) {
         this.pool.getConnection(function(e, c) {
