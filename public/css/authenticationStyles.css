@@ -170,7 +170,7 @@ main {
     margin-top: 0;
     grid-column: span 2;
     display: flex;
-    align-items: center;    
+    align-items: center;   
     background-color: rgb(255, 255, 255, 0.1);
     border-radius: 0.75rem;
     padding: 1rem 0;
@@ -183,7 +183,7 @@ main {
 }
 
 .login-error {
-    padding: 0.5rem;
+    margin: auto;
 }
 
 .error-icon {

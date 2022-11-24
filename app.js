@@ -3,6 +3,21 @@ const express = require("express")
 const path = require("path")
 const bodyParser = require("body-parser")
 const multer = require("multer")
+const session = require("express-session")
+const mySQLSession = require("express-mysql-session")
+const mySQLStore = mySQLSession(session)
+const sessionStore = new mySQLStore({
+    host: "localhost",
+    user: "root",
+    password: "",
+    database: "practica_obligatoria"
+})
+const middlewareSession = session({
+    saveUninitialized: false,
+    secret: "secreto",
+    resave: false,
+    store: sessionStore
+})
 
 //Importar módulos internos
 const usersController = require("./controllers/usersController")
@@ -25,6 +40,7 @@ const app = express()
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(multer({storage: storage, dest: path.join(__dirname, "/public/img")}).single("user-image"))
+app.use(middlewareSession)
 app.set("views", path.join(__dirname, "/views"))
 app.set("view engine", "ejs")
 
@@ -45,10 +61,7 @@ app
 .get("/login", (req, res) => {
     res.status(200).render("login", {registered: false, errors: null})
 })
-.post("/login", (req, res) => {
-    // TODO: comprobaciones de login
-    res.status(200).json(req.body)
-})
+.post("/login", userController.login)
 
 app
 .get("/signup", (req, res) => {
