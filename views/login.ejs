@@ -14,18 +14,34 @@
             <img class="logo" src="./img/ucm-logo.png" alt="">
         </div>
         <div class="login-container">
-            <form class="login-form" action="">
+            <form class="login-form" method="POST" action="/login">
                 <p class="form-title">Iniciar Sesión</p>
+                <% if (registered) { %>
+                    <div class="success">
+                        <i class="fa-solid fa-circle-check success-icon"></i>
+                        <span class="success-signup">Registro completado. Ya puedes iniciar sesión</span>
+                    </div>
+                <% } %>
+                <% if (errors) { %>
+                    <div class="errors">
+                <%  errors.forEach(e => { %>
+                        <div class="login-error">
+                            <i class="fa-solid fa-circle-exclamation error-icon"></i>
+                            <span class="error-message" role="alert"><%= e.msg %></span>
+                        </div>
+                    <% }) %>
+                    </div>
+                <% } %> 
                 <div class="email-container">
                     <i class="fa-solid fa-envelope icon"></i>
-                    <input class="login-input email" type="text" placeholder="Correo">
+                    <input class="login-input email" type="text" name="email" placeholder="Correo">
                 </div>
                 <div class="password-container">
                     <i class="fa-solid fa-lock icon"></i>
                     <input class="login-input password" type="password" name="password" id="password" placeholder="Contraseña">
                 </div>
                 <div class="form-actions">
-                    <p>¿No tienes cuenta? <a href="">Regístrate</a></p>
+                    <p>¿No tienes cuenta? <a href="/signup">Regístrate</a></p>
                     <button class="login-button" type="submit">Iniciar</button>
                 </div>
             </form>

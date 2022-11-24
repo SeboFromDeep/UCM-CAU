@@ -4,16 +4,13 @@ body {
     background: linear-gradient(90deg, rgba(216,75,86,1) 0%, rgba(119,32,162,1) 100%);
 }
 
-.container {
-    display: flex;
+main {
     font-family: 'Rubik';
-    margin-top: 25vh;
-    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.logo-container {
-    margin-left: 10%;
-}
 
 .logo {
     min-width: 400px;
@@ -37,6 +34,8 @@ body {
 .signup-form {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-height: 90vh;
+    overflow-y: auto;
 }
 
 .signup-form p {
@@ -47,7 +46,7 @@ body {
 }
 
 .form-title {
-    margin: 3rem auto;
+    text-align: center;
     font-weight: 700;
     font-size: 3rem;
     color: white;
@@ -73,19 +72,29 @@ body {
     font-size: 1.25rem;
 }
 
-.email-container, .password-container, .username-container, .profile-container{
+.email-container, .password-container, .username-container, .image-container, .profile-container{
     background-color: white;
     border-radius: 12px;
     display: flex;
 }
 
-.email-container > *, .password-container > *, .username-container > *, .profile-container {
+.email-container > *, .password-container > *, .username-container > *, .image-container > *, .profile-container {
     padding: 1rem;
 }
 
 .profile {
     background-color: white;
     margin-left: 1.25rem;
+}
+
+.image-container label {
+    color: black;
+    font-size: 1.25rem;
+    cursor: pointer;
+}
+
+.user-image {
+    display: none;
 }
 
 .employee-container {
@@ -146,6 +155,46 @@ body {
     background-color: white;
 }
 
+.errors {
+    margin-top: 0;
+    grid-column: span 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+    background-color: rgb(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    padding: 1rem 0;
+}
+
+.login-error {
+    padding: 0.5rem;
+}
+
+.error-icon {
+    color: crimson;
+}
+
+.error-message {
+    color: white;
+}
+
+.success {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(255, 255, 255, 0.1);
+    border-radius: 0.75rem;
+    padding: 1rem 0;
+}
+
+.success-icon {
+    color: green;
+    padding: 0 0.75rem;
+}
+
+.success-signup {
+    color: white
+}
 
 @media (max-width: 1080px) {
     html {
