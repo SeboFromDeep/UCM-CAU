@@ -91,7 +91,7 @@ ALTER TABLE `ucm_aw_cau_avi_avisos`
   ADD UNIQUE KEY `texto` (`texto`) USING HASH;
 
 --
--- Indexes for table `ucm_aw_cau_usu_usuarios`
+-- Indexes for table ` ucm_aw_cau_usu_usuarios`
 --
 ALTER TABLE `ucm_aw_cau_usu_usuarios`
   ADD PRIMARY KEY (`idUser`),
@@ -110,5 +110,10 @@ ALTER TABLE `ucm_aw_cau_avi_avisos`
 --
 -- AUTO_INCREMENT for table ` ucm_aw_cau_usu_usuarios`
 --
-ALTER TABLE ` ucm_aw_cau_usu_usuarios`
+ALTER TABLE `ucm_aw_cau_usu_usuarios`
   MODIFY `idUser` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

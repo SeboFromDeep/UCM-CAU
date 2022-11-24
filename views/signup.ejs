@@ -52,7 +52,7 @@
                 <div class="image-container">
                     <i class="fa-solid fa-camera icon"></i>
                     <label for="user-image" id="image-label">Imagen de Perfil</label>
-                    <input class="signup-input user-image" type="file" name="user-image" id="user-image" onchange=showImgName()>
+                    <input class="signup-input user-image" type="file" name="user-image" id="user-image" accept=".jpg, .png" onchange=showImgName()>
                 </div>
 
                 <!-- Confirmación de Contraseña -->
@@ -66,10 +66,10 @@
                     <i class="fa-solid fa-address-card icon"></i>
                     <select class="signup-input profile" name="profile" id="profile" onchange=toggleCheckbox()>
                         <option value="invalid" selected disabled>Perfil Universitario</option>
-                        <option value="student">Alumno</option>
+                        <option value="Alumno">Alumno</option>
                         <option value="PAS">Personal de Administración y Servicios</option>
                         <option value="PDI">Personal Docente e Investigador</option>
-                        <option value="former-student">Antiguo Alumno</option>
+                        <option value="Antiguo Alumno">Antiguo Alumno</option>
                     </select>
                 </div>
 

@@ -10,12 +10,21 @@ const userController = new usersController()
 const userValidator = require("./validators/users")
 const { check } = require("express-validator")
 
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, path.join(__dirname, "/public/img"))
+    },
+    filename: function(req, file, cb) {
+        cb(null, file.originalname)
+    }
+})
+
 
 // * Crear un servidor Express.js
 const app = express()
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended: false}))
-app.use(multer({dest: path.join(__dirname, "/public/img")}).single("user-image"))
+app.use(multer({storage: storage, dest: path.join(__dirname, "/public/img")}).single("user-image"))
 app.set("views", path.join(__dirname, "/views"))
 app.set("view engine", "ejs")
 
