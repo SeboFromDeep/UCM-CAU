@@ -18,6 +18,7 @@ body {
 .navbar {
     background: var(--transparent);
     color: var(--secondary-color);
+    border-radius: 12px;
 }
 
 .navbar-content {
@@ -119,4 +120,16 @@ body {
 
 /* messages */
 
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
 
+.table {
+    background: var(--transparent);
+    width: 80%;
+    border-radius: 12px;
+    padding: 1rem 1rem;
+}
