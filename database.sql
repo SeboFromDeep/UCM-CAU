@@ -30,7 +30,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `ucm_aw_cau_avi_avisos` (
   `idAviso` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
-  `tipo` int(1) NOT NULL,
+  `tipo` int(1) NOT NULL,-- 0: felicitacion   1: sugerencia     2: Incidencia   -1: borrado
   `fecha` date NOT NULL,
   `texto` varchar(1000) NOT NULL,
   `tecnico` varchar(50) DEFAULT NULL,
