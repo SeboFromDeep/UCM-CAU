@@ -72,3 +72,7 @@ app
     (req, res) => {
     userController.signUp(req, res)
 })
+
+app.get("/messages", (req, res) => {
+    res.render("mainPage")
+})
