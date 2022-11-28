@@ -2,23 +2,20 @@
 
 
 
-const utils = require("./utils")
-
-
 class DAOMessages{
     constructor(pool) {
         this.pool=pool;
     }
    
     
-    getAdvice(idAviso,callback){
+    getMessage(idMessage,callback){
         this.pool.getConnection(function(e,connection){
             if(e){
                 callback(utils.DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
                 
-                connection.query("SELECT * FROM UCM_AW_CAU_AVI_Avisos WHERE idAviso = ?",[idAviso],
+                connection.query("SELECT * FROM UCM_AW_CAU_AVI_Avisos WHERE idAviso = ?",[idMessage],
                 function(e, rows){
                     connection.release();
                     if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
@@ -29,7 +26,7 @@ class DAOMessages{
         });
     }
 
-    getMyAdvicesUser(idUser,callback){
+    getMyMessagesUser(idUser,callback){
         this.pool.getConnection(function(e,connection){
             if(e){
                 callback(utils.DB_CONNECTION_ERROR_MESSAGE)
@@ -41,8 +38,16 @@ class DAOMessages{
                     connection.release();
                     if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
                     else {
-                        let advices = rows.Object;
-                        callback(null, advices)
+                        let messages = []
+                        rows.forEach(message => {
+                            messages.push({
+                                tipo: message.tipo,
+                                fecha: message.fecha,
+                                texto: message.texto,
+                                tecnico: message.tecnico
+                            })
+                        });
+                        callback(null, messages)
                     }
                 });
                 
@@ -50,7 +55,7 @@ class DAOMessages{
         });
     }
 
-    getMyAdvicesTecnico(idTecnico,callback){
+    getMyMessagesTecnico(idTecnico,callback){
         this.pool.getConnection(function(e,connection){
             if(e){
                 callback(utils.DB_CONNECTION_ERROR_MESSAGE)
@@ -62,8 +67,8 @@ class DAOMessages{
                     connection.release();
                     if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
                     else {
-                        let advices = rows.Object;
-                        callback(null, advices)
+                        let Messages = rows.Object;
+                        callback(null, Messages)
                     }
                 });
                 
@@ -280,6 +285,8 @@ class DAOMessages{
 
 }
 
+
+module.exports = DAOMessages
 
 
 
