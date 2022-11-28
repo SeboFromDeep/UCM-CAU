@@ -136,6 +136,24 @@ class DAOUsers {
             }
         })        
     }
+
+    getUserId (email,callback){
+        this.pool.getConnection(function(e, c) {
+            if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+
+            else {
+                c.query("SELECT id FROM ucm_aw_cau_usu_usuarios WHERE email = ?", [email],
+                function(e, rows) {
+                    c.release()
+                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    else {
+                        if (rows == 0) callback(null, false)
+                        else callback(rows[0], true)
+                    }
+                })
+            }
+        })
+    }
 }
 
 module.exports = DAOUsers
