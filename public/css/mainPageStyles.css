@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;700&display=swap');
+
+:root {
+    --background-color: linear-gradient(90deg, rgba(216,75,86,1) 0%, rgba(119,32,162,1) 100%);
+    --transparent: rgb(255, 255, 255, 0.1);
+    --primary-color: #852697;
+    --secondary-color: white;
+}
+
+body {
+    font-family: 'Rubik';
+
+    background: var(--background-color)
+}
+
+/* navbar */
+
+.navbar {
+    background: var(--transparent);
+    border-radius: 0.75rem;
+    color: var(--secondary-color);
+}
+
+.navbar-content {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.navbar-logo {
+    width: 60px;
+    padding: 1rem 1rem;
+}
+
+.navbar-text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    font-weight: 700;
+}
+
+.navbar-links {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column: 1;
+    width: 100%;
+}
+
+.nav-item {
+    list-style: none;
+    padding: 1.25rem 1rem;
+    margin: 0 0.1rem;
+    border-radius: 0.5rem;
+
+    text-align: center;
+}
+
+.nav-item:hover {
+    background: var(--secondary-color);
+    -webkit-transition: background-color 0.5s ease;
+}
+
+.nav-item:hover .nav-link {
+    color: var(--primary-color);
+    -webkit-transition: color 0.5s ease;
+
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--secondary-color);
+}
+
+
+.navbar-user {
+    display: flex;
+}
+
+.user-image {
+    width: 60px;
+    border-radius: 0.25rem;
+}
+
+.user-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 1.25rem;
+}
+
+.logout-button {
+    font-family: 'Rubik';
+    background: var(--transparent);
+    color: var(--secondary-color);
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.logout-button:hover {
+    cursor: pointer;
+    background: var(--secondary-color);
+    color: var(--primary-color);
+    -webkit-transition: background-color 0.5s ease;
+    -webkit-transition: color 0.5s ease;
+}
+
+/* messages */
+
+
