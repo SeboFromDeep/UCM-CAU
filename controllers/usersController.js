@@ -13,6 +13,15 @@ const daoUser = new DAOUsers(pool)
 const {check, validationResult} = require("express-validator")
 
 class userController {
+
+    isUserAuthenticated(req, res, next) {
+        if (!req.session.currentUser) res.redirect("/login")
+        else {
+            res.locals.userEmail = req.session.currentUser
+            next()
+        }
+    }
+
     login(req, res) {
         daoUser.isUserCorrect(req.body.email, req.body.password, (error, isCorrect) => {
             if (error) res.render("login", {errors: [error]})
@@ -20,7 +29,7 @@ class userController {
                 if (isCorrect) {
                     // TODO: cambiar por pagina de usuario
                     req.session.currentUser = req.body.email
-                    res.status(200).render("mainPage")
+                    res.status(200).redirect("/messages")
                 }
                 else res.status(200).render("login", {registered: false, errors: ["Dirección de correo y/o contraseña no válidos"]})
             }

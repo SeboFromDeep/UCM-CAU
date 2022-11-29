@@ -59,13 +59,21 @@ app.listen(3000, () => console.log("Hola mundo :)"))
 // Inicio de Sesión
 app
 .get("/login", (req, res) => {
-    res.status(200).render("login", {registered: false, errors: null})
+    if (req.session.currentUser) res.redirect("/messages")
+    else res.status(200).render("login", {registered: false, errors: null})
 })
 .post("/login", userController.login)
 
 app
+.get("/logout", (req, res) => {
+    req.session.destroy()
+    res.status(200).redirect("/login")
+})
+
+app
 .get("/signup", (req, res) => {
-    res.status(200).render("signup", {errors: null})
+    if (req.session.currentUser) res.redirect("/messages")
+    else res.status(200).render("signup", {errors: null})
 })
 .post("/signup",
     userValidator.validateSignup,
@@ -73,6 +81,6 @@ app
     userController.signUp(req, res)
 })
 
-app.get("/messages", (req, res) => {
-    res.render("mainPage")
+app.get("/messages", userController.isUserAuthenticated, (req, res) => {
+    res.render("userMainPage")
 })
