@@ -85,7 +85,3 @@ app
     (req, res) => {
     userController.signUp(req, res)
 })
-
-app.get("/messages", userController.isUserAuthenticated, (req, res) => {
-    res.render("userMainPage")
-})
