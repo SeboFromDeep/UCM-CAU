@@ -53,8 +53,13 @@ app.listen(3000, () => console.log("Hola mundo :)"))
 // const usersRouter = require("./routers/usersRouter")
 // app.use("/users", usersRouter)
 
-// const messagesRouter = require("./routers/messagesRouter")
-// app.use("/messages", messagesRouter)
+const messagesRouter = require("./routers/messagesRouter")
+app.use("/messages", messagesRouter)
+
+app
+.get("/", (req, res) => {
+    res.redirect("/login")
+})
 
 // Inicio de Sesión
 app
