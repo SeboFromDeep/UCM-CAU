@@ -154,6 +154,33 @@ class DAOUsers {
             }
         })
     }
+
+    getUserByEmail(email, callback) {
+        this.pool.getConnection(function(e, c) {
+            if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+
+            else {
+                c.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE email = ?", [email],
+                function(e, rows) {
+                    c.release()
+                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    else {
+                        if (rows == 0) callback(null, false)
+                        else callback(null, {
+                            userID: rows[0].idUser,
+                            username: rows[0].nombre,
+                            email: rows[0].email,
+                            password: rows[0].password,
+                            profile: rows[0].profile,
+                            technician: rows[0].tecnico === 0 ? true : false,
+                            employeeID: rows[0].nEmpleado,
+                            img: rows[0].img
+                        })
+                    }
+                })
+            }
+        })
+    }
 }
 
 module.exports = DAOUsers

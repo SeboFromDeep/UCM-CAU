@@ -1,6 +1,6 @@
 <nav class="navbar">
     <div class="navbar-content">
-        <img class="navbar-logo" src="./img/ucm-logo.png" alt="logo">
+        <img class="navbar-logo" src="/img/ucm-logo.png" alt="logo">
         <div class="navbar-text">
             <span>UCM-CAU</span>
             <span>Centro de Atención al Usuario</span>
@@ -16,9 +16,9 @@
             </ul>
         </div>
         <div class="navbar-user">
-            <img class="user-image" src="./img/noUser.png" alt="imagen">
+            <img class="user-image" src="/img/noUser.png" alt="imagen">
             <div class="user-div">
-                <span class="username">SeboFromDeep</span>
+                <span class="username"><%= locals.user.username %> </span>
                 <form action="/logout">
                     <button class="logout-button">Desconectar</button>
                 </form>
