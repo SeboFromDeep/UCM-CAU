@@ -50,8 +50,8 @@ app.set("view engine", "ejs")
 app.listen(3000, () => console.log("Hola mundo :)"))
 
 // * Routers
-// const usersRouter = require("./routers/usersRouter")
-// app.use("/users", usersRouter)
+const usersRouter = require("./routers/usersRouter")
+app.use("/users", usersRouter)
 
 const messagesRouter = require("./routers/messagesRouter")
 app.use("/messages", messagesRouter)

@@ -171,10 +171,10 @@ class DAOUsers {
                             username: rows[0].nombre,
                             email: rows[0].email,
                             password: rows[0].password,
-                            profile: rows[0].profile,
+                            profile: rows[0].perfil,
                             technician: rows[0].tecnico === 0 ? true : false,
                             employeeID: rows[0].nEmpleado,
-                            img: rows[0].img
+                            img: rows[0].img !== null ? rows[0].img : "noUser.png"
                         })
                     }
                 })

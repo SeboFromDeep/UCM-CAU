@@ -10,6 +10,10 @@ const pool = mysql.createPool(config.mysqlConfig)
 const daoMessages = new DAOMessages(pool)
 const daoUsers = new DAOUsers(pool)
 
+const uC = require("./usersController")
+
+const userController = new uC()
+
 class messagesController {
     getMyMessages(req, res) {
         daoUsers.getUserByEmail(req.session.currentUser,
@@ -17,7 +21,7 @@ class messagesController {
                 if (error) res.json(error)
                 else {
                     res.locals.user = user
-                    console.log(res.locals.user)
+
                     res.render("userMainPage")
                 }
             })
