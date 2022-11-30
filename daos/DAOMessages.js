@@ -32,7 +32,6 @@ class DAOMessages{
                 callback(utils.DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
-                
                 connection.query("SELECT tipo, fecha, texto, tecnico FROM UCM_AW_CAU_AVI_Avisos WHERE idUsuario = ?",[idUser],
                 function(e, rows){
                     connection.release();
@@ -67,8 +66,15 @@ class DAOMessages{
                     connection.release();
                     if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
                     else {
-                        let Messages = rows.Object;
-                        callback(null, Messages)
+                        let messages = []
+                        rows.forEach(message => {
+                            messages.push({
+                                tipo: message.tipo,
+                                fecha: message.fecha,
+                                texto: message.texto,
+                            })
+                        });
+                        callback(null, messages)
                     }
                 });
                 

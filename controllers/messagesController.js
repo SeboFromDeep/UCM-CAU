@@ -1,7 +1,7 @@
 "use strict"
 
 const mysql = require("mysql")
-const DAOMessages = require("./../daos/DAOUsers")
+const DAOMessages = require("./../daos/DAOMessages")
 const DAOUsers = require("./../daos/DAOUsers")
 const config = require("./../config")
 
@@ -21,6 +21,23 @@ class messagesController {
                 if (error) res.json(error)
                 else {
                     res.locals.user = user
+
+                    if (!user.technician) {
+                        daoMessages.getMyMessagesUser(user.userID,
+                            (error, messages) => {
+                                if (error) res.json(error)
+                                else console.log(messages)
+                            }
+                        )
+                    }
+                    else {
+                        daoMessages.getMyMessagesTecnico(user.userID,
+                            (error, messages) => {
+                                if (error) res.json(error)
+                                else console.log(messages)
+                            }
+                        )
+                    }
 
                     res.render("userMainPage")
                 }
