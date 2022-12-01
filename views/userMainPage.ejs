@@ -23,24 +23,26 @@
                 </tr>
               </thead>
               <tbody>
-                <tr class="table-row">
-                  <td class="date">12/10/2021</td>
-                  <td class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, quaerat aperiam non officia tempore aspernatur tempora dicta minima illum quisquam iure recusandae rerum molestiae sunt totam impedit ad possimus quia ipsum ut voluptate a! Vitae, ipsa? Rerum sint natus porro fuga! Itaque voluptatibus numquam doloribus consequuntur voluptatem dolore voluptates earum!</td>
-                  <td class="type"><i class="fa-solid fa-circle-exclamation fa-xl red"></i></td>
-                  <td class="assignedTo"></td>
-                </tr>
-                <tr class="table-row">
-                    <td class="date">10/10/2021</td>
-                    <td class="text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores perspiciatis error incidunt corrupti sapiente harum, rem dolor id. Asperiores blanditiis ad rerum reiciendis molestias iste totam consectetur autem, sint qui.</td>
-                    <td class="type"><i class="fa-solid fa-lightbulb fa-xl yellow"></i></td>
-                    <td class="assignedTo">Aitor Tilla</td>
-                </tr>
-                <tr class="table-row">
-                    <td class="date">05/01/2021</td>
-                    <td class="text">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Nam, dolores adipisci facere ipsum magni laboriosam voluptatem neque, assumenda explicabo deleniti animi qui architecto libero provident sit ipsa et sint suscipit molestias repellat at tempore dolorum veritatis. Saepe ipsa consectetur tempore porro! Tempora, veniam, possimus corrupti odio quos aliquid quo dolor iusto neque doloribus, aspernatur excepturi nostrum voluptas in laborum unde ab magnam aut qui ducimus error blanditiis magni totam. Repellendus dicta, natus neque accusamus placeat laborum, porro mollitia vitae maiores quasi tenetur? Quisquam error aspernatur totam nostrum odio placeat mollitia consequatur minus earum natus! Officiis aut nobis vitae suscipit sequi?</td>
-                    <td class="type"><i class="fa-solid fa-heart fa-xl green"></i></td>
-                    <td class="assignedTo">Felipe Lotas</td>
-                </tr>
+                <% messages.forEach(message => { %>
+                  <tr class="table-row">
+                    <td class="date"><%= message.fecha %></td>
+                    <td class="text"><%= message.texto.length > 199 ? message.texto.slice(0, 200) + "..." : message.texto %></td>
+                    <% switch (message.tipo) {
+                      case 0: %>
+                        <td class="type"><i class="fa-solid fa-heart fa-xl green"></i></td>
+                       <% break;
+                      case 1: %>
+                        <td class="type"><i class="fa-solid fa-lightbulb fa-xl yellow"></i></td>
+                       <% break;
+                      case 2: %>
+                        <td class="type"><i class="fa-solid fa-circle-exclamation fa-xl red"></i></td>
+                       <% break;
+                      default:
+                        break;
+                    } %> 
+                    <td class="assignedTo"><%= message.tecnico !== null ? message.tecnico : "" %></td>
+                  </tr>
+               <% }); %> 
               </tbody>
         </table>
     </main>

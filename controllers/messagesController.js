@@ -26,20 +26,18 @@ class messagesController {
                         daoMessages.getMyMessagesUser(user.userID,
                             (error, messages) => {
                                 if (error) res.json(error)
-                                else console.log(messages)
+                                else res.render("userMainPage", {messages: messages})
                             }
                         )
                     }
                     else {
                         daoMessages.getMyMessagesTecnico(user.userID,
-                            (error, messages) => {
+                            (error, messagesList) => {
                                 if (error) res.json(error)
-                                else console.log(messages)
+                                else messages = messagesList
                             }
                         )
                     }
-
-                    res.render("userMainPage")
                 }
             })
     }

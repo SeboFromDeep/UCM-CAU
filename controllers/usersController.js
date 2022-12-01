@@ -24,7 +24,7 @@ class userController {
 
     login(req, res) {
         daoUser.isUserCorrect(req.body.email, req.body.password, (error, isCorrect) => {
-            if (error) res.render("login", {errors: [error]})
+            if (error) res.render("login", {errors: [error], registered: false})
             else {
                 if (isCorrect) {
                     // TODO: cambiar por pagina de usuario

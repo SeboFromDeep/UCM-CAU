@@ -32,7 +32,7 @@ class DAOMessages{
                 callback(utils.DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
-                connection.query("SELECT tipo, fecha, texto, tecnico FROM UCM_AW_CAU_AVI_Avisos WHERE idUsuario = ?",[idUser],
+                connection.query("SELECT AVI.fecha, AVI.texto, AVI.tipo, USU.nombre as nombreTecnico FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.tecnico = USU.idUser WHERE AVI.idUsuario = ?;",[idUser],
                 function(e, rows){
                     connection.release();
                     if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
@@ -40,10 +40,10 @@ class DAOMessages{
                         let messages = []
                         rows.forEach(message => {
                             messages.push({
-                                tipo: message.tipo,
-                                fecha: message.fecha,
+                                fecha: message.fecha.toLocaleDateString(),
                                 texto: message.texto,
-                                tecnico: message.tecnico
+                                tipo: message.tipo,
+                                tecnico: message.nombreTecnico
                             })
                         });
                         callback(null, messages)
