@@ -2,7 +2,7 @@
 
 
 
-class DAOMessages{
+class MessageDAO{
     constructor(pool) {
         this.pool=pool;
     }
@@ -32,8 +32,9 @@ class DAOMessages{
                 callback(utils.DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
-                connection.query("SELECT AVI.fecha, AVI.texto, AVI.tipo, USU.nombre as nombreTecnico FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.tecnico = USU.idUser WHERE AVI.idUsuario = ?;",[idUser],
+                connection.query("SELECT AVI.fecha, AVI.texto, AVI.tipo, USU.nombre as nombreTecnico FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.tecnico = USU.idUsuario WHERE AVI.idUsuario = ? and AVI.activo = 1;",[idUser],
                 function(e, rows){
+                    
                     connection.release();
                     if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
                     else {
@@ -61,7 +62,7 @@ class DAOMessages{
             }
             else{
                 
-                connection.query("SELECT tipo, fecha, texto FROM UCM_AW_CAU_AVI_Avisos WHERE tecnico = ?",[idTecnico],
+                connection.query("SELECT tipo, fecha, texto FROM UCM_AW_CAU_AVI_Avisos WHERE tecnico = ? AND activo = 1",[idTecnico],
                 function(e, rows){
                     connection.release();
                     if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
@@ -76,8 +77,7 @@ class DAOMessages{
                         });
                         callback(null, messages)
                     }
-                });
-                
+                }); 
             }
         });
     }
@@ -246,7 +246,6 @@ class DAOMessages{
                     if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
                     else callback(null)
                 });
-                
             }
         });
     }
@@ -270,6 +269,7 @@ class DAOMessages{
         });
     }
 
+    // TODO: no se borra se pone activo a 0
     deleteAviso(idAviso,callback){
         this.pool.getConnection(function(e,connection){
             if(e){
@@ -292,7 +292,7 @@ class DAOMessages{
 }
 
 
-module.exports = DAOMessages
+module.exports = MessageDAO
 
 
 
