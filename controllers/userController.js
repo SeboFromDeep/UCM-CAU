@@ -1,12 +1,12 @@
 "use strict"
 
 const mysql = require("mysql")
-const DAOUsers = require("./../daos/DAOUsers")
-const config = require("./../config")
+const UserDAO = require("../daos/userDAO")
+const config = require("../config")
 
 const pool = mysql.createPool(config.mysqlConfig)
 
-const daoUser = new DAOUsers(pool)
+const userDAO = new UserDAO(pool)
 
 
 
@@ -23,11 +23,10 @@ class userController {
     }
 
     login(req, res) {
-        daoUser.isUserCorrect(req.body.email, req.body.password, (error, isCorrect) => {
+        userDAO.isUserCorrect(req.body.email, req.body.password, (error, isCorrect) => {
             if (error) res.render("login", {errors: [error], registered: false})
             else {
                 if (isCorrect) {
-                    // TODO: cambiar por pagina de usuario
                     req.session.currentUser = req.body.email
                     res.status(200).redirect("/messages")
                 }
@@ -42,14 +41,14 @@ class userController {
         else {
             const user = {
                 nombre: req.body.username,
-                email: req.body.email,
-                password: req.body.password,
+                correo: req.body.email,
+                contrasena: req.body.password,
                 perfil: req.body.profile,
                 tecnico: req.body.isTechnician === "true" ? 1 : 0,
                 nEmpleado: req.body.employeeID ? req.body.employeeID : null,
                 img: req.file ? req.file.originalname : null
             }
-            daoUser.insertUser(user, (error, inserted) => {
+            userDAO.insertUser(user, (error, inserted) => {
                 if (inserted) res.render("login", {registered: true, errors: null})
                 else res.render("signup", {errors: [error.message]})
             })
