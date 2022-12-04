@@ -4,9 +4,9 @@ const { json } = require("body-parser")
 const { Router, request } = require("express")
 const express = require("express")
 const mysql = require("mysql")
-const config = require("./../config")
-const usersController = require("./../controllers/usersController")
-const DAOUsers = require("./../daos/DAOUsers")
+const config = require("../config")
+const usersController = require("./../controllers/userController")
+const DAOUsers = require("../daos/userDAO")
 
 // Crear un pool de conexiones a la base de datos de MySQL
 const pool = mysql.createPool(config.mysqlConfig);
@@ -17,11 +17,11 @@ const userController = new usersController()
 // Crear una instancia de DAOUsers
 const daoUser = new DAOUsers(pool);
 
-const usersRouter = express.Router()
+const userRouter = express.Router()
 
-usersRouter.use(userController.isUserAuthenticated)
+userRouter.use(userController.isUserAuthenticated)
 
-usersRouter
+userRouter
 .get("/userImg", (req, res) => {
     daoUser.getUserImageName(req.session.currentUser, function(err, image) {
         if (err) res.status(500).json(err)
@@ -33,4 +33,4 @@ usersRouter
     })
 })
 
-module.exports = usersRouter
+module.exports = userRouter
