@@ -5,20 +5,17 @@ const { Router, request } = require("express")
 const express = require("express")
 const mysql = require("mysql")
 const config = require("../config")
-const usersController = require("./../controllers/userController")
-const messagesController = require("./../controllers/messageController")
-const DAOMessages = require("./../daos/messageDAO")
-const DAOUsers = require("./../daos/userDAO")
+const UserController = require("./../controllers/userController")
+const MessageController = require("./../controllers/messageController")
+const MessageDAO = require("./../daos/messageDAO")
+const UserDAO = require("./../daos/userDAO")
 
 // Crear un pool de conexiones a la base de datos de MySQL
 const pool = mysql.createPool(config.mysqlConfig);
 
 // Crear una instancia del usersController
-const userController = new usersController()
-const messageController = new messagesController()
-
-// Crear una instancia de DAOMessages
-const daoMessages = new DAOMessages(pool);
+const userController = new UserController()
+const messageController = new MessageController()
 
 const messageRouter = express.Router()
 

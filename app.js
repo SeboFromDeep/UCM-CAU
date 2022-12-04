@@ -20,8 +20,8 @@ const middlewareSession = session({
 })
 
 //Importar módulos internos
-const usersController = require("./controllers/usersController")
-const userController = new usersController()
+const UserController = require("./controllers/userController")
+const userController = new UserController()
 const userValidator = require("./validators/users")
 const { check } = require("express-validator")
 
@@ -50,11 +50,11 @@ app.set("view engine", "ejs")
 app.listen(3000, () => console.log("Hola mundo :)"))
 
 // * Routers
-const usersRouter = require("./routers/usersRouter")
-app.use("/users", usersRouter)
+const userRouter = require("./routers/userRouter")
+app.use("/users", userRouter)
 
-const messagesRouter = require("./routers/messagesRouter")
-app.use("/messages", messagesRouter)
+const messageRouter = require("./routers/messageRouter")
+app.use("/messages", messageRouter)
 
 app
 .get("/", (req, res) => {
