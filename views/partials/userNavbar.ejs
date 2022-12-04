@@ -7,10 +7,10 @@
         </div>
         <div>
             <ul class="navbar-links">
-                <li class="nav-item current">
+                <li class="nav-item mis-avisos">
                     <a class="nav-link" href="#">Mis Avisos</a>
                 </li>
-                <li class="nav-item">
+                <li class="nav-item historico-de-avisos">
                     <a class="nav-link" href="#">Histórico de Avisos</a>
                 </li>
             </ul>
@@ -25,4 +25,8 @@
             </div>
         </div>
     </div>
+    <script>
+        currentPage = document.querySelector("<%= current%>")
+        currentPage.classList.add("current")
+    </script>
 </nav>

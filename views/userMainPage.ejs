@@ -28,13 +28,13 @@
                     <td class="date"><%= message.fecha %></td>
                     <td class="text"><%= message.texto.length > 199 ? message.texto.slice(0, 200) + "..." : message.texto %></td>
                     <% switch (message.tipo) {
-                      case 0: %>
+                      case "Felicitacion": %>
                         <td class="type"><i class="fa-solid fa-heart fa-xl green"></i></td>
                        <% break;
-                      case 1: %>
+                      case "Sugerencia": %>
                         <td class="type"><i class="fa-solid fa-lightbulb fa-xl yellow"></i></td>
                        <% break;
-                      case 2: %>
+                      case "Incidencia": %>
                         <td class="type"><i class="fa-solid fa-circle-exclamation fa-xl red"></i></td>
                        <% break;
                       default:
