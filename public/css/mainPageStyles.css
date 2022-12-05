@@ -143,7 +143,7 @@ main {
     border-top-right-radius: 12px;
 }
 
-.table-row {
+.table-row, .table-row-no-hover {
     background: var(--transparent);
 }
 
@@ -170,6 +170,21 @@ td {
     text-align: center;
 }
 
+.actions {
+    display: flex;
+	align-items: center;
+	justify-content: space-evenly;
+}
+
+.action {
+	padding: 0.5rem 0;
+}
+
+.action:hover {
+	cursor: pointer;
+	color: black;
+}
+
 .red {
     color: red;
 }
@@ -180,4 +195,8 @@ td {
 
 .yellow {
     color: yellow;
+}
+
+.black {
+	color: rgb(75, 68, 68);
 }

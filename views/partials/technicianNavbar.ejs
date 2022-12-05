@@ -1,0 +1,38 @@
+<nav class="navbar">
+    <div class="navbar-content">
+        <img class="navbar-logo" src="/img/ucm-logo.png" alt="logo">
+        <div class="navbar-text">
+            <span>UCM-CAU</span>
+            <span>Centro de Atención al Usuario</span>
+        </div>
+        <div>
+            <ul class="navbar-links">
+                <li class="nav-item avisos-entrantes">
+                    <a class="nav-link" href="#">Avisos Entrantes</a>
+                </li>
+                <li class="nav-item mis-avisos">
+                    <a class="nav-link" href="#">Mis Avisos</a>
+                </li>
+                <li class="nav-item historico-de-avisos">
+                    <a class="nav-link" href="#">Histórico de Avisos</a>
+                </li>
+                <li class="nav-item gestion-de-usuarios">
+                    <a class="nav-link" href="#">Gestión de Usuarios</a>
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-user">
+            <img class="user-image" src="/users/userImg" alt="imagen">
+            <div class="user-div">
+                <span class="username"><%= locals.user.username %> </span>
+                <form action="/logout">
+                    <button class="logout-button">Desconectar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script>
+        currentPage = document.querySelector("<%= current%>")
+        currentPage.classList.add("current")
+    </script>
+</nav>

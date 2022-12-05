@@ -61,18 +61,18 @@ class MessageDAO{
                 callback(utils.DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
-                
                 connection.query("SELECT tipo, fecha, texto FROM UCM_AW_CAU_AVI_Avisos WHERE tecnico = ? AND activo = 1",[idTecnico],
                 function(e, rows){
+
                     connection.release();
                     if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
                     else {
                         let messages = []
                         rows.forEach(message => {
                             messages.push({
-                                tipo: message.tipo,
-                                fecha: message.fecha,
+                                fecha: message.fecha.toLocaleDateString(),
                                 texto: message.texto,
+                                tipo: message.tipo,
                             })
                         });
                         callback(null, messages)

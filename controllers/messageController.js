@@ -32,9 +32,9 @@ class messagesController {
                     }
                     else {
                         messageDAO.getMyMessagesTecnico(user.userID,
-                            (error, messagesList) => {
+                            (error, messages) => {
                                 if (error) res.json(error)
-                                else messages = messagesList
+                                else res.render("technicianMainPage", {messages: messages, current: ".mis-avisos"})
                             }
                         )
                     }

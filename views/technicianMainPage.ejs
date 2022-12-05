@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/mainPageStyles.css">
+    <script src="https://kit.fontawesome.com/4b4a59d23d.js" crossorigin="anonymous"></script>
+    <title>UCM-CAU</title>
+</head>
+<body>
+    <header>
+        <%- include ("./partials/technicianNavbar") %>
+    </header>
+    <main>
+        <table class="table">
+            <thead>
+                <tr class="table-header">
+                  <th class="typeColumn top-left-corner">Tipo</th>
+                  <th class="dateColumn">Fecha</th>
+                  <th class="textColumn">Texto</th>
+                  <th class="actionsColumn top-right-corner">Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% messages.forEach(message => { %>
+                  <tr class="table-row-no-hover">
+                    <% switch (message.tipo) {
+                      case "Felicitacion": %>
+                        <td class="type"><i class="fa-solid fa-heart fa-xl green"></i></td>
+                       <% break;
+                      case "Sugerencia": %>
+                        <td class="type"><i class="fa-solid fa-lightbulb fa-xl yellow"></i></td>
+                       <% break;
+                      case "Incidencia": %>
+                        <td class="type"><i class="fa-solid fa-circle-exclamation fa-xl red"></i></td>
+                       <% break;
+                      default:
+                        break;
+                    } %> 
+                    <td class="date"><%= message.fecha %></td>
+                    <td class="text"><%= message.texto.length > 199 ? message.texto.slice(0, 200) + "..." : message.texto %></td>
+                    <td class="actions">
+                        <i class="action fa-solid fa-eye fa-xl black"></i>
+                        <i class="action fa-solid fa-trash fa-xl black"></i>
+                    </td>
+                  </tr>
+               <% }); %> 
+              </tbody>
+        </table>
+    </main>
+    <script>
+      const tableRows = document.querySelectorAll(".table-row")
+      tableRows.forEach((row) => {
+        row.addEventListener("click", e => {
+            <!-- TODO: abrir modal --> 
+            console.log("Clicked")
+        })
+      })
+    </script>
+</body>
+</html>
