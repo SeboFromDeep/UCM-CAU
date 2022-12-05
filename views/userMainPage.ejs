@@ -24,8 +24,8 @@
                 </tr>
               </thead>
               <tbody>
-                <% messages.forEach(message => { %>
-                  <tr class="table-row">
+                <% messages.forEach((message, i) => { %>
+                  <tr class="table-row" onclick = openModal(<%= i %>)>
                     <td class="date"><%= message.fecha %></td>
                     <td class="text"><%= message.texto.length > 199 ? message.texto.slice(0, 200) + "..." : message.texto %></td>
                     <% switch (message.tipo) {
@@ -47,7 +47,7 @@
               </tbody>
         </table>
 
-        <%- include ("./partials/activeUserMessage") %>
+        <%- include ("./partials/activeUserMessageModal") %>
 
       </main>
       <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -56,14 +56,16 @@
       <script>
         const tableRows = document.querySelectorAll(".table-row")
         const modal = document.querySelectorAll("#adviceModal")
+        const messages = <%- JSON.stringify(messages) %>
 
-        tableRows.forEach((row) => {
-          row.addEventListener("click", e => {
-            console.log($('#adviceModal'));
+        function openModal(index) {
+          $('#modal-date')[0].innerText = messages[index].fecha
+          $('#adviceModal').show()
+        }
 
-            $('#adviceModal').show()
-          })
-        })
+        function closeModal() {
+          $('#adviceModal').toggle()
+        }
       </script>
   </body>
 </html>

@@ -1,0 +1,34 @@
+<div class="modal fade" id="adviceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content ">
+            <div class="modal-body">
+                <div class="modal-header">
+                    <span id="modal-username"><%= locals.user.username %></span>
+                    <div class="modal-message-container">
+                        <span id="modal-message-label">Aviso <span id="modal-message-id">: <span id="modal-type"></span></span></span>
+                    </div>
+                </div>
+                <div class="modal-date-container">
+                    <span id="modal-date-label">Fecha:</span><span id="modal-date"></span>
+                </div>
+                <div class="modal-category-container">
+                    <span id="modal-category-label">Comunicaciones: <span id="modal-category"></span></span>
+                </div>
+                <div class="modal-profile-container">
+                    <span id="modal-profile-label">Perfil: <span id="modal-profile"></span></span>
+                </div>
+                <div class="modal-observations-container">
+                    <span id="modal-observations-label">Observaciones:</span>
+                    <p id="modal-observations"></p>
+                </div>
+                <div class="modal-comments-container">
+                    <span id="modal-comments-label">Observaciones:</span>
+                    <p id="modal-comments"></p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-close" onclick = closeModal()>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

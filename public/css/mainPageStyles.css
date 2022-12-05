@@ -200,3 +200,28 @@ td {
 .black {
 	color: rgb(75, 68, 68);
 }
+
+/* Modal */
+
+.modal {
+    font-size: 1.5rem;
+}
+
+.modal-date {
+    color: black;
+}
+
+.modal-close {
+    font-size: 1.5rem;
+    font-family: 'Rubik';
+    background: var(--primary-color);
+    color: var(--secondary-color);
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+}
+
+.modal-close:hover {
+    cursor: pointer;
+    background-color: #6c2b79;
+}
