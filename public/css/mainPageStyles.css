@@ -207,8 +207,23 @@ td {
     font-size: 1.5rem;
 }
 
-.modal-date {
-    color: black;
+.modal-body div + div{
+    margin: 1rem;
+}
+
+.modal-header {
+    font-size: 2rem;
+}
+
+.bold {
+    font-weight: bold;
+}
+
+#modal-observations, #modal-comments {
+    padding: 0.25rem;
+    border: 1px solid black;
+    border-radius: 0.25rem;
+    min-height: 5rem;
 }
 
 .modal-close {

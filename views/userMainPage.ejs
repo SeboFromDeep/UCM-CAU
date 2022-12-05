@@ -57,10 +57,23 @@
         const tableRows = document.querySelectorAll(".table-row")
         const modal = document.querySelectorAll("#adviceModal")
         const messages = <%- JSON.stringify(messages) %>
+  
 
         function openModal(index) {
+          const user = <%- JSON.stringify(locals.user) %>
+          console.log(messages[index])
+          $('#modal-type')[0].innerText = messages[index].tipo
           $('#modal-date')[0].innerText = messages[index].fecha
-          $('#adviceModal').show()
+          if (messages[index].subgrupo !== null){
+            $('#modal-group')[0].innerText = messages[index].grupo + ": "
+            $('#modal-subgroup')[0].innerText = messages[index].subgrupo
+          } 
+          else {
+            $('#modal-group')[0].innerText = messages[index].grupo
+            $('#modal-subgroup')[0].innerText = ""
+          }
+          $('#modal-observations')[0].innerText = messages[index].texto
+          $('#adviceModal').toggle()
         }
 
         function closeModal() {

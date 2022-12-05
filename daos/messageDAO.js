@@ -32,7 +32,7 @@ class MessageDAO{
                 callback(utils.DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
-                connection.query("SELECT AVI.fecha, AVI.texto, AVI.tipo, USU.nombre as nombreTecnico FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.tecnico = USU.idUsuario WHERE AVI.idUsuario = ? and AVI.activo = 1;",[idUser],
+                connection.query("SELECT AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreTecnico FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.tecnico = USU.idUsuario WHERE AVI.idUsuario = ? and AVI.activo = 1;",[idUser],
                 function(e, rows){
                     
                     connection.release();
@@ -44,6 +44,8 @@ class MessageDAO{
                                 fecha: message.fecha.toLocaleDateString(),
                                 texto: message.texto,
                                 tipo: message.tipo,
+                                grupo: message.grupo,
+                                subgrupo: message.subgrupo,
                                 tecnico: message.nombreTecnico
                             })
                         });

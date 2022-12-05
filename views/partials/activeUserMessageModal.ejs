@@ -3,26 +3,26 @@
         <div class="modal-content ">
             <div class="modal-body">
                 <div class="modal-header">
-                    <span id="modal-username"><%= locals.user.username %></span>
+                    <span class="bold" id="modal-username"><%= locals.user.username %></span>
                     <div class="modal-message-container">
-                        <span id="modal-message-label">Aviso <span id="modal-message-id">: <span id="modal-type"></span></span></span>
+                        <span class="bold" id="modal-type"></span>
                     </div>
                 </div>
                 <div class="modal-date-container">
-                    <span id="modal-date-label">Fecha:</span><span id="modal-date"></span>
+                    <span class="bold" id="modal-date-label">Fecha: </span><span id="modal-date"></span>
                 </div>
                 <div class="modal-category-container">
-                    <span id="modal-category-label">Comunicaciones: <span id="modal-category"></span></span>
+                    <span class="bold" id="modal-group"></span><span id="modal-subgroup"></span>
                 </div>
                 <div class="modal-profile-container">
-                    <span id="modal-profile-label">Perfil: <span id="modal-profile"></span></span>
+                    <span class="bold" id="modal-profile-label">Perfil: </span><span id="modal-profile"><%= locals.user.profile %> </span>
                 </div>
                 <div class="modal-observations-container">
-                    <span id="modal-observations-label">Observaciones:</span>
+                    <span class="bold" id="modal-observations-label">Observaciones:</span>
                     <p id="modal-observations"></p>
                 </div>
                 <div class="modal-comments-container">
-                    <span id="modal-comments-label">Observaciones:</span>
+                    <span class="bold" id="modal-comments-label">Comentarios del Técnico:</span>
                     <p id="modal-comments"></p>
                 </div>
             </div>
