@@ -42,8 +42,8 @@
                     <td class="date"><%= message.fecha %></td>
                     <td class="text"><%= message.texto.length > 199 ? message.texto.slice(0, 200) + "..." : message.texto %></td>
                     <td class="actions">
-                        <i class="action fa-solid fa-eye fa-xl black" id="eye-icon" onclick = openModal(<%= i %>)></i>
-                        <i class="action fa-solid fa-trash fa-xl black"></i>
+                        <i class="action fa-solid fa-eye fa-xl black" id="eye-icon" onclick = finishMessage(<%= i %>)></i>
+                        <i class="action fa-solid fa-trash fa-xl black" onclick = deleteMessage(<%= i %>)></i>
                     </td>
                   </tr>
                <% }); %> 
@@ -58,11 +58,17 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>
       const tableRows = document.querySelector("#eye-icon")
-      const modal = document.querySelectorAll("#adviceModal")
       const messages = <%- JSON.stringify(messages) %>
 
+      function finishMessage(index) {
+        openModal(index, "/messages/finish-message/", "Terminar Aviso")
+      }
 
-      function openModal(index) {
+      function deleteMessage(index) {
+        openModal(index, "/messages/delete-message/", "Borrar Aviso")
+      }
+
+      function openModal(index, action, buttonText) {
         const user = <%- JSON.stringify(locals.user) %>
         console.log(messages[index])
         $('#modal-username')[0].innerText = messages[index].usuario
@@ -77,7 +83,10 @@
           $('#modal-subgroup')[0].innerText = ""
         }
         $('#modal-observations')[0].innerText = messages[index].texto
-        $('#technician-comments').attr("action", "/messages/finish-message/" + messages[index].id)
+        $('#technician-comments').attr("action", action + messages[index].id)
+        $('#comments').val("")
+        $('.modal-action')[0].innerText = buttonText
+
         $('#adviceModal').toggle()
       }
 

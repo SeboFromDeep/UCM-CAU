@@ -104,7 +104,6 @@ class MessageDAO{
     }
 
     finishMessage(id, comments, callback){ //aquí el técnico se dispone a hacerle el comentario.
-        
         this.pool.getConnection(function(error,connection){
             if(error){
                 callback(utils.DB_CONNECTION_ERROR_MESSAGE)
@@ -122,19 +121,18 @@ class MessageDAO{
         });
     }
 
-    // TODO: no se borra se pone activo a 0
-    deleteAviso(idAviso,callback){
-        this.pool.getConnection(function(e,connection){
-            if(e){
+    deleteMessage(id, comments, callback){
+        this.pool.getConnection(function(error,connection){
+            if(error){
                 callback(utils.DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
                 
-                connection.query("DELETE FROM UCM_AW_CAU_AVI_Avisos WHERE idAviso = ?",[idAviso],
-                function(e, rows){
+                connection.query("UPDATE UCM_AW_CAU_AVI_Avisos SET comentarios = ?, estado = 'BORRADO' WHERE idAviso = ?", [comments, id],
+                function(error, result){
                     connection.release();
-                    if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
-                    else callback(null,true)
+                    if(error) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    else callback(null)
                 });
                 
             }

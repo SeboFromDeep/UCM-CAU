@@ -48,6 +48,13 @@ class messagesController {
             else res.status(200).redirect("/messages/my-messages")
         })
     }
+
+    deleteMessage(req, res) {
+        messageDAO.deleteMessage(req.params.id, req.body.comments, (error) => {
+            if (error) res.json(error)
+            else res.status(200).redirect("/messages/my-messages")
+        })
+    }
 }
 
 module.exports = messagesController
