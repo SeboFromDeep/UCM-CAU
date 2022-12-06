@@ -211,6 +211,12 @@ td {
     margin: 1rem;
 }
 
+.modal-body form {
+    display: flex;
+    flex-direction: column;
+    padding: 0 1rem;
+}
+
 .modal-header {
     font-size: 2rem;
 }
@@ -223,7 +229,7 @@ td {
     padding: 0.25rem;
     border: 1px solid black;
     border-radius: 0.25rem;
-    min-height: 5rem;
+    min-height: 2rem;
 }
 
 .modal-close {
@@ -236,7 +242,31 @@ td {
     padding: 0.25rem 0.5rem;
 }
 
+.modal-action {
+    font-size: 1.5rem;
+    font-family: 'Rubik';
+    background: #cd465e;
+    color: var(--secondary-color);
+    border: none;
+    border-radius: 0.25rem;
+    padding: 0.25rem 0.5rem;
+}
+
 .modal-close:hover {
     cursor: pointer;
     background-color: #6c2b79;
+}
+
+.modal-action:hover {
+    cursor: pointer;
+    background-color: rgb(172, 51, 74);
+}
+
+
+#comments {
+    font-family: 'Rubik';
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    min-height: 5rem;
+    resize: none
 }

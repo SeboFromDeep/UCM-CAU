@@ -29,4 +29,6 @@ messageRouter
 messageRouter
 .get("/my-messages", messageController.getMyMessages)
 
+.post("/finish-message/:id", userController.isUserTechnician, messageController.finishMessage)
+
 module.exports = messageRouter

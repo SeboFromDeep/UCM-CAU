@@ -22,6 +22,16 @@ class userController {
         }
     }
 
+    isUserTechnician(req, res, next) {
+        userDAO.getUserByEmail(req.session.currentUser, (error, user) => {
+            if (error) res.status(400).redirect("/login")
+            else {
+                if (!user.technician) res.status(400).redirect("/login")
+                else next()
+            }
+        })
+    }
+
     login(req, res) {
         userDAO.isUserCorrect(req.body.email, req.body.password, (error, isCorrect) => {
             if (error) res.render("login", {errors: [error], registered: false})

@@ -26,7 +26,7 @@ class messagesController {
                         messageDAO.getMyMessagesUser(user.userID,
                             (error, messages) => {
                                 if (error) res.json(error)
-                                else res.render("userMainPage", {messages: messages, current: ".mis-avisos"})
+                                else res.status(200).render("userMainPage", {messages: messages, current: ".mis-avisos"})
                             }
                         )
                     }
@@ -34,12 +34,19 @@ class messagesController {
                         messageDAO.getMyMessagesTecnico(user.userID,
                             (error, messages) => {
                                 if (error) res.json(error)
-                                else res.render("technicianMainPage", {messages: messages, current: ".mis-avisos"})
+                                else res.status(200).render("technicianMainPage", {messages: messages, current: ".mis-avisos"})
                             }
                         )
                     }
                 }
             })
+    }
+
+    finishMessage(req, res) {
+        messageDAO.finishMessage(req.params.id, req.body.comments, (error) => {
+            if (error) res.json(error)
+            else res.status(200).redirect("/messages/my-messages")
+        })
     }
 }
 

@@ -1,0 +1,35 @@
+<div class="modal fade" id="adviceModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content ">
+            <div class="modal-body">
+                <div class="modal-header">
+                    <span class="bold" id="modal-username"></span>
+                    <div class="modal-message-container">
+                        <span class="bold" id="modal-type"></span>
+                    </div>
+                </div>
+                <div class="modal-date-container">
+                    <span class="bold" id="modal-date-label">Fecha: </span><span id="modal-date"></span>
+                </div>
+                <div class="modal-category-container">
+                    <span class="bold" id="modal-group"></span><span id="modal-subgroup"></span>
+                </div>
+                <div class="modal-profile-container">
+                    <span class="bold" id="modal-profile-label">Perfil: </span><span id="modal-profile"><%= locals.user.profile %> </span>
+                </div>
+                <div class="modal-observations-container">
+                    <span class="bold" id="modal-observations-label">Observaciones:</span>
+                    <p id="modal-observations"></p>
+                </div>
+                <form class="modal-comments-container" id="technician-comments" method="POST">
+                    <span class="bold" id="modal-comments-label">Comentarios del Técnico:</span>
+                    <textarea name="comments" id="comments" placeholder="Introduce aquí tus comentarios" required></textarea>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-action" type="submit" form="technician-comments">Terminar Aviso</button>
+                <button class="modal-close" onclick = closeModal()>Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
