@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-12-2022 a las 20:02:44
+-- Tiempo de generación: 06-12-2022 a las 15:31:50
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -38,8 +38,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('EYVTMECWgSUXJdTj8L0NAPHx4S66H-0S', 1670008562, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"currentUser\":\"alumno@ucm.es\"}'),
-('mIefZXCP6dToCGJpa74wf0HW1t0LJNPi', 1670266947, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"currentUser\":\"alumno@ucm.es\"}');
+('-JFjkdHwnpfYkPGQw_PWIxnEm8Z5MmWa', 1670351622, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"currentUser\":\"alumno@ucm.es\"}'),
+('6OeTk9Wc9PD2TjSrCEDL8EXWsipD4ub3', 1670423430, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"currentUser\":\"alumno@ucm.es\"}');
 
 -- --------------------------------------------------------
 
@@ -51,28 +51,30 @@ CREATE TABLE `ucm_aw_cau_avi_avisos` (
   `idAviso` int(11) NOT NULL,
   `idUsuario` int(11) NOT NULL,
   `tipo` varchar(15) NOT NULL,
+  `grupo` varchar(30) NOT NULL,
+  `subgrupo` varchar(50) DEFAULT NULL,
   `fecha` date NOT NULL,
   `texto` varchar(1000) NOT NULL,
   `tecnico` int(50) DEFAULT NULL,
   `comentarios` varchar(1000) DEFAULT NULL,
-  `activo` tinyint(1) NOT NULL DEFAULT 1
+  `estado` varchar(10) NOT NULL DEFAULT 'ACTIVO'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `ucm_aw_cau_avi_avisos`
 --
 
-INSERT INTO `ucm_aw_cau_avi_avisos` (`idAviso`, `idUsuario`, `tipo`, `fecha`, `texto`, `tecnico`, `comentarios`, `activo`) VALUES
-(1, 3, 'Sugerencia', '0000-00-00', 'Preparar prácticas AW', 2, 'Aun te falta hacer la BD bobo', 1),
-(2, 5, 'Sugerencia', '0000-00-00', 'Mirar fechas de congreso', NULL, NULL, 1),
-(3, 4, 'Sugerencia', '0000-00-00', 'Ir al Supermercado', NULL, NULL, 1),
-(4, 1, 'Incidencia', '0000-00-00', 'Jugar al Fútbol', 1, 'Empieza a calentar que sales', 1),
-(5, 2, 'Felicitacion', '0000-00-00', 'Hablar con el profesor', 2, NULL, 1),
-(7, 1, 'Sugerencia', '0000-00-00', 'Entregar Practica Vountaria 4', 1, 'no lo has entregado parguela', 1),
-(8, 6, 'Felicitacion', '0000-00-00', 'Jugar ligoleyen', NULL, NULL, 1),
-(9, 8, 'Incidencia', '2022-11-30', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, quaerat aperiam non officia tempore aspernatur tempora dicta minima illum quisquam iure recusandae rerum molestiae sunt totam impedit ad possimus quia ipsum ut voluptate a! Vitae, ipsa? Rerum sint natus porro fuga! Itaque voluptatibus numquam doloribus consequuntur voluptatem dolore voluptates earum!', NULL, NULL, 1),
-(10, 8, 'Felicitacion', '2022-12-01', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, deleniti.', 1, NULL, 1),
-(11, 8, 'Sugerencia', '2022-11-23', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit esse quia quibusdam itaque quo iure. Nostrum qui temporibus asperiores, iste quo nulla recusandae eius quidem quaerat ducimus delectus, quas inventore consequatur voluptatem voluptas laudantium ab suscipit, tempora sit sequi cum pariatur quam eum atque! Dolore voluptatum temporibus itaque accusantium maxime accusamus sint ut? Perferendis vel quia ullam, sapiente aliquid earum dolore nemo, impedit ex vitae, ad modi culpa facere?\r\n', 2, NULL, 1);
+INSERT INTO `ucm_aw_cau_avi_avisos` (`idAviso`, `idUsuario`, `tipo`, `grupo`, `subgrupo`, `fecha`, `texto`, `tecnico`, `comentarios`, `estado`) VALUES
+(1, 3, 'Sugerencia', '', NULL, '0000-00-00', 'Preparar prácticas AW', 2, 'Aun te falta hacer la BD bobo', 'ACTIVO'),
+(2, 5, 'Sugerencia', '', NULL, '0000-00-00', 'Mirar fechas de congreso', NULL, NULL, 'ACTIVO'),
+(3, 4, 'Sugerencia', '', NULL, '0000-00-00', 'Ir al Supermercado', NULL, NULL, 'ACTIVO'),
+(4, 1, 'Incidencia', '', NULL, '2022-12-01', 'Jugar al Fútbol', 1, 'Empieza a calentar que sales', 'ACTIVO'),
+(5, 2, 'Felicitacion', '', NULL, '2022-12-01', 'Hablar con el profesor', 2, NULL, 'ACTIVO'),
+(7, 1, 'Sugerencia', '', NULL, '2022-12-01', 'Entregar Practica Vountaria 4', 1, 'no lo has entregado parguela', 'ACTIVO'),
+(8, 6, 'Felicitacion', '', NULL, '0000-00-00', 'Jugar ligoleyen', NULL, NULL, 'ACTIVO'),
+(9, 8, 'Incidencia', 'Comunicaciones', 'Correo electrónico', '2022-11-30', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, quaerat aperiam non officia tempore aspernatur tempora dicta minima illum quisquam iure recusandae rerum molestiae sunt totam impedit ad possimus quia ipsum ut voluptate a! Vitae, ipsa? Rerum sint natus porro fuga! Itaque voluptatibus numquam doloribus consequuntur voluptatem dolore voluptates earum!', NULL, NULL, 'ACTIVO'),
+(10, 8, 'Felicitacion', 'Toda la Universidad', NULL, '2022-12-01', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, deleniti.', 1, NULL, 'ACTIVO'),
+(11, 8, 'Sugerencia', 'Docencia', 'Blackboard Collaborate', '2022-11-23', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit esse quia quibusdam itaque quo iure. Nostrum qui temporibus asperiores, iste quo nulla recusandae eius quidem quaerat ducimus delectus, quas inventore consequatur voluptatem voluptas laudantium ab suscipit, tempora sit sequi cum pariatur quam eum atque! Dolore voluptatum temporibus itaque accusantium maxime accusamus sint ut? Perferendis vel quia ullam, sapiente aliquid earum dolore nemo, impedit ex vitae, ad modi culpa facere?\r\n', 2, NULL, 'ACTIVO');
 
 -- --------------------------------------------------------
 
