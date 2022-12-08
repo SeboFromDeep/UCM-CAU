@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/mainPageStyles.css">
     <link rel="stylesheet" href="/css/modal.css">
     <script src="https://kit.fontawesome.com/4b4a59d23d.js" crossorigin="anonymous"></script>
+    <script src="/js/SearchBar.js" defer></script>
     <title>UCM-CAU</title>
 </head>
 <body>
@@ -14,6 +15,16 @@
         <%- include ("./partials/userNavbar") %>
     </header>
     <main>
+
+        <div class="search-wrapper">
+          <div class="search-container">
+            <div class="search-bar">
+              <input type="text" name="search" id="search" placeholder="Buscar...">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            </div>
+          </div>
+        </div>
+
         <table class="table">
             <thead>
                 <tr class="table-header">
@@ -25,7 +36,7 @@
               </thead>
               <tbody>
                 <% messages.forEach((message, i) => { %>
-                  <tr class="table-row" onclick = openModal(<%= i %>)>
+                  <tr class="table-row" id="row-<%= i %>" onclick = openModal(<%= i %>)>
                     <td class="date"><%= message.fecha %></td>
                     <td class="text"><%= message.texto.length > 199 ? message.texto.slice(0, 200) + "..." : message.texto %></td>
                     <% switch (message.tipo) {
@@ -57,6 +68,8 @@
         const tableRows = document.querySelectorAll(".table-row")
         const modal = document.querySelectorAll("#adviceModal")
         const messages = <%- JSON.stringify(messages) %>
+        technician = <%- JSON.stringify(locals.user.technician) %>
+
   
 
         function openModal(index) {

@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/css/mainPageStyles.css">
     <link rel="stylesheet" href="/css/modal.css">
     <script src="https://kit.fontawesome.com/4b4a59d23d.js" crossorigin="anonymous"></script>
+    <script src="/js/searchBar.js" defer></script>
     <title>UCM-CAU</title>
 </head>
 <body>
@@ -14,6 +15,23 @@
         <%- include ("./partials/technicianNavbar") %>
     </header>
     <main>
+
+        <div class="search-wrapper">
+          <div class="search-container">
+            <div class="search-bar">
+              <input type="text" name="search" id="search" placeholder="Buscar...">
+              <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            </div>
+            <div class="checkbox-container">
+              <span>Usuarios</span>
+              <div class="wrap-toggle">
+                <input type="checkbox" id="toggle" class="invisible"/>
+                <label for="toggle" class="switch"></label>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <table class="table">
             <thead>
                 <tr class="table-header">
@@ -25,7 +43,7 @@
               </thead>
               <tbody>
                 <% messages.forEach((message, i) => { %>
-                  <tr class="table-row-no-hover">
+                  <tr class="table-row-no-hover" id="row-<%= i %>">
                     <% switch (message.tipo) {
                       case "Felicitacion": %>
                         <td class="type"><i class="fa-solid fa-heart fa-xl green"></i></td>
@@ -58,7 +76,8 @@
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>
       const tableRows = document.querySelector("#eye-icon")
-      const messages = <%- JSON.stringify(messages) %>
+      const messages = <%- JSON.stringify(messages) %>;
+      technician = <%- JSON.stringify(locals.user.technician) %>
 
       function finishMessage(index) {
         openModal(index, "/messages/finish-message/", "Terminar Aviso")
