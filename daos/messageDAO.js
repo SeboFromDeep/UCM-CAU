@@ -55,6 +55,39 @@ class MessageDAO{
         });
     }
 
+    getHistoricMessageUser(idUser,callback){
+
+        this.pool.getConnection(function(e,connection){
+            if(e){
+                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+            }
+            else{
+                connection.query("SELECT AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreTecnico, AVI.estado FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.tecnico = USU.idUsuario WHERE AVI.idUsuario = ? and AVI.estado = 'CERRADO';",[idUser],
+                function(e, rows){
+                    
+                    connection.release();
+                    if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    else {
+                        let messages = []
+                        rows.forEach(message => {
+                            messages.push({
+                                fecha: message.fecha.toLocaleDateString(),
+                                texto: message.texto,
+                                tipo: message.tipo,
+                                grupo: message.grupo,
+                                subgrupo: message.subgrupo,
+                                tecnico: message.nombreTecnico,
+                                estado: message.estado
+                            })
+                        });
+                        callback(null, messages)
+                    }
+                });
+                
+            }
+        });
+    }
+
     getMyMessagesTecnico(idTecnico, callback){
         this.pool.getConnection(function(e,connection){
             if(e){
@@ -62,6 +95,36 @@ class MessageDAO{
             }
             else{
                 connection.query("SELECT AVI.idAviso, AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreUsuario FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.idUsuario = USU.idUsuario WHERE AVI.tecnico = ? and AVI.estado = 'ACTIVO';", [idTecnico],
+                function(e, rows){
+                    connection.release();
+                    if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    else {
+                        let messages = []
+                        rows.forEach(message => {
+                            messages.push({
+                                id: message.idAviso,
+                                fecha: message.fecha.toLocaleDateString(),
+                                texto: message.texto,
+                                tipo: message.tipo,
+                                grupo: message.grupo,
+                                subgrupo: message.subgrupo,
+                                usuario: message.nombreUsuario,
+                            })
+                        });
+                        callback(null, messages)
+                    }
+                }); 
+            }
+        });
+    }
+
+    getMyHistoricMessagesTecnico(idTecnico, callback){
+        this.pool.getConnection(function(e,connection){
+            if(e){
+                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+            }
+            else{
+                connection.query("SELECT AVI.idAviso, AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreUsuario FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.idUsuario = USU.idUsuario WHERE AVI.tecnico = ? and AVI.estado = 'CERRADO';", [idTecnico],
                 function(e, rows){
                     connection.release();
                     if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);

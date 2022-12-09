@@ -22,6 +22,7 @@ class messagesController {
                 if (error) res.json(error)
                 else {
                     res.locals.user = user
+                   
                     if (!user.technician) {
                         messageDAO.getMyMessagesUser(user.userID,
                             (error, messages) => {
@@ -35,6 +36,33 @@ class messagesController {
                             (error, messages) => {
                                 if (error) res.json(error)
                                 else res.status(200).render("technicianMainPage", {messages: messages, current: ".mis-avisos"})
+                            }
+                        )
+                    }
+                }
+            })
+    }
+
+    getHistoricMessages(req, res) {
+        userDAO.getUserByEmail(req.session.currentUser,
+            (error, user) => {
+                if (error) res.json(error)
+                else {
+                    res.locals.user = user
+                    
+                    if (!user.technician) {
+                        messageDAO.getHistoricMessageUser(user.userID,
+                            (error, messages) => {
+                                if (error) res.json(error)
+                                else res.status(200).render("userMainPage", {messages: messages, current: ".his-avisos"})
+                            }
+                        )
+                    }
+                    else {
+                        messageDAO.getMyHistoricMessagesTecnico(user.userID,
+                            (error, messages) => {
+                                if (error) res.json(error)
+                                else res.status(200).render("technicianMainPage", {messages: messages, current: ".his-avisos"})
                             }
                         )
                     }
