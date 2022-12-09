@@ -1,4 +1,5 @@
 "use strict"
+
 class MessageDAO{
     constructor(pool) {
         this.pool=pool;
@@ -139,6 +140,31 @@ class MessageDAO{
         });
     }
 
+    getMessageOptions(profile, callback) {
+        this.pool.getConnection(function(e,connection){
+            if(e){
+                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+            }
+            else{
+                connection.query("SELECT * FROM ucm_aw_cau_cat_categorias where PERFIL = ? order by categoria, grupo, subgrupo;", [profile],
+                function(e, rows){
+                    connection.release();
+                    if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    else {
+                        let options = {}
+                        rows.forEach(row => {
+                            if (options[row.categoria] === undefined) options[row.categoria] = {}
+
+                            if (options[row.categoria][row.grupo] === undefined) options[row.categoria][row.grupo] = []
+
+                            options[row.categoria][row.grupo].push(row.subgrupo) 
+                        });
+                        callback(null, options)
+                    }
+                }); 
+            }
+        });
+    }
 
 }
 

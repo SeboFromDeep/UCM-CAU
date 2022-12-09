@@ -129,7 +129,7 @@ main {
 
 /* search bar */
 
-.search-wrapper {
+.search-wrapper, .button-wrapper {
     width: 80%;
 }
 
@@ -268,6 +268,32 @@ td {
 .action:hover {
 	cursor: pointer;
 	color: black;
+}
+
+.button-wrapper {
+    display: flex;
+}
+
+#open-modal-create {
+    font-size: 1.25rem;
+    font-family: 'Rubik';
+    margin-left: auto;
+    margin-right: 1rem;
+    padding: 0.25rem 0.5rem;
+    border: none;
+    border-radius: 8px;
+
+    background: var(--transparent);
+    color: var(--secondary-color);
+}
+
+#open-modal-create {
+    cursor: pointer;
+
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    -webkit-transition: background-color 0.5s ease;
+    -webkit-transition: color 0.5s ease;
 }
 
 .red {

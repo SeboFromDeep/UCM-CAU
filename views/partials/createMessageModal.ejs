@@ -1,0 +1,34 @@
+<div class="modal fade" id="create-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content ">
+            <div class="modal-body">
+                <div class="modal-header">
+                    <span class="bold" id="modal-username">Crear nuevo aviso</span>
+                </div>
+                <div class="modal-type-container">
+                    <select name="type" id="type">
+                        <option value="" disabled selected>Tipo</option>
+                        <option value="Sugerencia">Sugerencia</option>
+                        <option value="Incidencia">Incidencia</option>
+                        <option value="Felicitacion">Felicitación</option>
+                    </select>
+                </div>
+                <div class="modal-group-container">
+                    <select name="group" id="group">
+                    </select>
+                </div>
+                <div class="modal-subgroup-container">
+                    <select name="subgroup" id="subgroup">
+
+                    </select>
+                </div>
+                <div class="modal-observations-container">
+                    <span class="bold" id="modal-observations-label">Observaciones:</span>
+                    <p id="modal-observations"></p>
+                </div>
+            <div class="modal-footer">
+                <button class="modal-close" id="close-modal-create">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
