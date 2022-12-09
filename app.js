@@ -5,6 +5,7 @@ const bodyParser = require("body-parser")
 const multer = require("multer")
 const session = require("express-session")
 const mySQLSession = require("express-mysql-session")
+const logger = require("morgan")
 const mySQLStore = mySQLSession(session)
 const sessionStore = new mySQLStore({
     host: "localhost",
@@ -41,6 +42,7 @@ app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(multer({storage: storage, dest: path.join(__dirname, "/public/img")}).single("user-image"))
 app.use(middlewareSession)
+app.use(logger('dev'))
 app.set("views", path.join(__dirname, "/views"))
 app.set("view engine", "ejs")
 

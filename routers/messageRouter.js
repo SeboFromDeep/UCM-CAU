@@ -9,6 +9,7 @@ const UserController = require("./../controllers/userController")
 const MessageController = require("./../controllers/messageController")
 const MessageDAO = require("./../daos/messageDAO")
 const UserDAO = require("./../daos/userDAO")
+const messagesController = require("./../controllers/messageController")
 
 // Crear un pool de conexiones a la base de datos de MySQL
 const pool = mysql.createPool(config.mysqlConfig);
@@ -28,6 +29,9 @@ messageRouter
 
 messageRouter
 .get("/my-messages", messageController.getMyMessages)
+
+messageRouter
+.get("/his-messages",messageController.getHistoricMessages)
 
 messageRouter
 .post("/finish-message/:id", userController.isUserTechnician, messageController.finishMessage)
