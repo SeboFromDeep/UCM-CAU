@@ -12,6 +12,7 @@ const messageDAO = new MessageDAO(pool)
 const userDAO = new UserDAO(pool)
 
 const uC = require("./userController")
+const { json } = require("body-parser")
 
 const userController = new uC()
 
@@ -82,6 +83,41 @@ class messagesController {
             if (error) res.json(error)
             else res.status(200).redirect("/messages/my-messages")
         })
+    }
+
+    getMessageOptions(req, res) {
+        userDAO.getUserByEmail(req.session.currentUser,
+            (error, user) => {
+                if (error) res.json(error)
+                else {
+                    messageDAO.getMessageOptions(user.profile, (error, options) => {
+                        if (error) res.json(error)
+                        else {
+                            res
+                            .setHeader('content-type', 'application/json')
+                            .json(options);
+                        }
+                    })
+                }
+            })
+    }
+
+    createMessage(req, res) {
+        userDAO.getUserByEmail(req.session.currentUser,
+            (error, user) => {
+                if (error) res.json(error)
+                else {
+                    res.locals.user = user
+
+                    messageDAO.createMessage(user.userID, req.body, (error) => {
+                        console.log(error)
+                        if (error) res.json(error)
+                        else {
+                            res.status(200).redirect('/messages/my-messages')
+                        }
+                    })
+                }
+            })
     }
 }
 

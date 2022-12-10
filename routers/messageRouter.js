@@ -39,4 +39,10 @@ messageRouter
 messageRouter
 .post("/delete-message/:id", userController.isUserTechnician, messageController.deleteMessage)
 
+messageRouter
+.get("/message-options", messageController.getMessageOptions)
+
+messageRouter
+.post("/create-message", messageController.createMessage)
+
 module.exports = messageRouter

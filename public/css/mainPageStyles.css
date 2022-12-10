@@ -129,7 +129,7 @@ main {
 
 /* search bar */
 
-.search-wrapper {
+.search-wrapper, .button-wrapper {
     width: 80%;
 }
 
@@ -270,6 +270,32 @@ td {
 	color: black;
 }
 
+.button-wrapper {
+    display: flex;
+}
+
+#open-modal-create {
+    font-size: 1.25rem;
+    font-family: 'Rubik';
+    margin-left: auto;
+    margin-right: 1rem;
+    padding: 0.25rem 0.5rem;
+    border: none;
+    border-radius: 8px;
+
+    background: var(--transparent);
+    color: var(--secondary-color);
+}
+
+#open-modal-create {
+    cursor: pointer;
+
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    -webkit-transition: background-color 0.5s ease;
+    -webkit-transition: color 0.5s ease;
+}
+
 .red {
     color: red;
 }
@@ -286,14 +312,19 @@ td {
 	color: rgb(75, 68, 68);
 }
 
-/* Modal */
+/* Modals */
+
+/* show modal */
 
 .modal {
     font-size: 1.5rem;
 }
 
-.modal-body div + div{
-    margin: 1rem;
+.modal-body {
+    margin: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .modal-body form {
@@ -348,10 +379,51 @@ td {
 }
 
 
-#comments {
+#comments, #observations {
     font-family: 'Rubik';
     font-size: 1.5rem;
     margin-top: 1rem;
     min-height: 5rem;
     resize: none
+}
+
+/* create modal */
+
+#modal-create-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+#modal-create-body .modal-observations-container {
+    margin-top: 1rem;
+    grid-column: span 3;
+    display: flex;
+    flex-direction: column;
+}
+
+#modal-create-body .modal-select-container {
+    grid-column: 3;
+}
+
+#modal-create-body .modal-select-container {
+    grid-column: 3;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#text {
+    display: block;
+    textAlignVertical: 'top';
+    font-family: 'Rubik';
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    min-height: 5rem;
+    resize: none
+}
+
+#modal-create-body select {
+    font-family: 'Rubik';
+    font-size: 1.25rem;
 }
