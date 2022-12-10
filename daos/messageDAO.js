@@ -153,11 +153,7 @@ class MessageDAO{
     createMessage(idUser, message, callback){ 
         this.pool.getConnection(function(e,connection){
             if(e){
-<<<<<<< HEAD
                 callback("Error de la conexion de la base de datos de los avisos")
-=======
-                callback(new Error('Error de Conexión'))
->>>>>>> 5deb962efa74c94bf226551a9107c98a21ae0bcc
             }
             else{
                 if (message.type === 'Sugerencia') message.type = message.select
@@ -165,11 +161,7 @@ class MessageDAO{
                 connection.query("INSERT INTO UCM_AW_CAU_AVI_Avisos(idUsuario, tipo, grupo, subgrupo, texto) values (?, ?, ?, ?, ?)",[idUser, message.type, message.group, message.subgroup, message.text],
                 function(e, rows){
                     connection.release();
-<<<<<<< HEAD
                     if(e) callback("Error al acceso de la base de datos de createMessage");
-=======
-                    if(e) callback(new Error('Error de Acceso'))
->>>>>>> 5deb962efa74c94bf226551a9107c98a21ae0bcc
                     else callback(null)
                 });
             }
