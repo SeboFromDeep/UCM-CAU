@@ -69,14 +69,14 @@ INSERT INTO `ucm_aw_cau_avi_avisos` (`idAviso`, `idUsuario`, `tipo`, `grupo`, `s
 (3, 4, 'Sugerencia', '', NULL, '0000-00-00', 'Ir al Supermercado', NULL, NULL, 'ACTIVO'),
 (4, 7, 'Incidencia', 'Grupo', 'Subgrupo', '2022-12-01', 'Jugar al Fútbol', 1, 'Juega wachón', 'ACTIVO'),
 (5, 2, 'Felicitacion', 'Grupo', 'Subgrupo', '2022-12-01', 'Hablar con el profesor', 2, NULL, 'ACTIVO'),
-(7, 7, 'Sugerencia', '', NULL, '2022-12-01', 'Entregar Practica Vountaria 4', 1, 'Prueba al cerrar', 'ACTIVO'),
+(7, 7, 'Sugerencia', '', NULL, '2022-12-01', 'Entregar Practica Vountaria 4', 1, 'Prueba al cerrar', 'TERMINADO'),
 (8, 6, 'Felicitacion', '', NULL, '0000-00-00', 'Jugar ligoleyen', NULL, NULL, 'ACTIVO'),
 (9, 8, 'Incidencia', 'Comunicaciones', 'Correo electrónico', '2022-11-30', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, quaerat aperiam non officia tempore aspernatur tempora dicta minima illum quisquam iure recusandae rerum molestiae sunt totam impedit ad possimus quia ipsum ut voluptate a! Vitae, ipsa? Rerum sint natus porro fuga! Itaque voluptatibus numquam doloribus consequuntur voluptatem dolore voluptates earum!', NULL, NULL, 'ACTIVO'),
 (10, 8, 'Felicitacion', 'Toda la Universidad', NULL, '2022-12-01', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, deleniti.', 1, 'te jodiste', 'ACTIVO'),
 (11, 8, 'Sugerencia', 'Docencia', 'Blackboard Collaborate', '2022-11-23', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit esse quia quibusdam itaque quo iure. Nostrum qui temporibus asperiores, iste quo nulla recusandae eius quidem quaerat ducimus delectus, quas inventore consequatur voluptatem voluptas laudantium ab suscipit, tempora sit sequi cum pariatur quam eum atque! Dolore voluptatum temporibus itaque accusantium maxime accusamus sint ut? Perferendis vel quia ullam, sapiente aliquid earum dolore nemo, impedit ex vitae, ad modi culpa facere?\r\n', 2, NULL, 'ACTIVO'),
 (13, 8, 'Felicitacion', 'General', 'Archivo Universitario', '2022-12-10', 'Prueba', NULL, NULL, 'ACTIVO'),
 (14, 8, 'Queja', 'Conectividad', 'Wifi Eduroam (ssid: eduroam)', '2022-12-10', 'Prueba', NULL, NULL, 'ACTIVO'),
-(15, 8, 'Felicitacion', 'General', 'Archivo Universitario', '2022-12-10', 'Refactorización de las vistas', NULL, NULL, 'ACTIVO');
+(15, 8, 'Felicitacion', 'General', 'Archivo Universitario', '2022-12-10', 'Refactorización de las vistas', 1, NULL, 'TERMINADO');
 
 -- --------------------------------------------------------
 
