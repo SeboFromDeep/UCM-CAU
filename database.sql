@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-12-2022 a las 14:46:29
+-- Tiempo de generación: 10-12-2022 a las 14:55:00
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -38,7 +38,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('kecqf3VZ4OBlBH9uygShTZWOw8RcQDkV', 1670766364, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"currentUser\":\"alumno@ucm.es\"}');
+('mLO-5GFLUfBYZQuS31yC-5i1MZuV4A3N', 1670766868, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"currentUser\":\"aitor.tilla@ucm.es\"}');
 
 -- --------------------------------------------------------
 
@@ -67,15 +67,16 @@ INSERT INTO `ucm_aw_cau_avi_avisos` (`idAviso`, `idUsuario`, `tipo`, `grupo`, `s
 (1, 3, 'Sugerencia', '', NULL, '0000-00-00', 'Preparar prácticas AW', 2, 'Aun te falta hacer la BD bobo', 'ACTIVO'),
 (2, 5, 'Sugerencia', '', NULL, '0000-00-00', 'Mirar fechas de congreso', NULL, NULL, 'ACTIVO'),
 (3, 4, 'Sugerencia', '', NULL, '0000-00-00', 'Ir al Supermercado', NULL, NULL, 'ACTIVO'),
-(4, 7, 'Incidencia', 'Grupo', 'Subgrupo', '2022-12-01', 'Jugar al Fútbol', 1, 'Juega wachón', 'TERMINADO'),
+(4, 7, 'Incidencia', 'Grupo', 'Subgrupo', '2022-12-01', 'Jugar al Fútbol', 1, 'Juega wachón', 'ACTIVO'),
 (5, 2, 'Felicitacion', 'Grupo', 'Subgrupo', '2022-12-01', 'Hablar con el profesor', 2, NULL, 'ACTIVO'),
-(7, 7, 'Sugerencia', '', NULL, '2022-12-01', 'Entregar Practica Vountaria 4', 1, 'Prueba al cerrar', 'TERMINADO'),
+(7, 7, 'Sugerencia', '', NULL, '2022-12-01', 'Entregar Practica Vountaria 4', 1, 'Prueba al cerrar', 'ACTIVO'),
 (8, 6, 'Felicitacion', '', NULL, '0000-00-00', 'Jugar ligoleyen', NULL, NULL, 'ACTIVO'),
 (9, 8, 'Incidencia', 'Comunicaciones', 'Correo electrónico', '2022-11-30', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, quaerat aperiam non officia tempore aspernatur tempora dicta minima illum quisquam iure recusandae rerum molestiae sunt totam impedit ad possimus quia ipsum ut voluptate a! Vitae, ipsa? Rerum sint natus porro fuga! Itaque voluptatibus numquam doloribus consequuntur voluptatem dolore voluptates earum!', NULL, NULL, 'ACTIVO'),
-(10, 8, 'Felicitacion', 'Toda la Universidad', NULL, '2022-12-01', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, deleniti.', 1, 'te jodiste', 'BORRADO'),
+(10, 8, 'Felicitacion', 'Toda la Universidad', NULL, '2022-12-01', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, deleniti.', 1, 'te jodiste', 'ACTIVO'),
 (11, 8, 'Sugerencia', 'Docencia', 'Blackboard Collaborate', '2022-11-23', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit esse quia quibusdam itaque quo iure. Nostrum qui temporibus asperiores, iste quo nulla recusandae eius quidem quaerat ducimus delectus, quas inventore consequatur voluptatem voluptas laudantium ab suscipit, tempora sit sequi cum pariatur quam eum atque! Dolore voluptatum temporibus itaque accusantium maxime accusamus sint ut? Perferendis vel quia ullam, sapiente aliquid earum dolore nemo, impedit ex vitae, ad modi culpa facere?\r\n', 2, NULL, 'ACTIVO'),
-(12,8,'Sugerencia', 'Comunicaciones', 'Correo electrónico', '2022-12-08','Intenta mejorar tu contraseña',2,"este mensaje ha sido borrado porque has mejorado tu contraseña",'CERRADO'),
-(13,8,'Felicitacion','', 'Archivo Universitario','2022-10-20','Felicidades!! Has sacado matricula!',1,"este mensaje ha sido borrado porque nos hemos equivocado de alumno",'CERRADO');
+(13, 8, 'Felicitacion', 'General', 'Archivo Universitario', '2022-12-10', 'Prueba', NULL, NULL, 'ACTIVO'),
+(14, 8, 'Queja', 'Conectividad', 'Wifi Eduroam (ssid: eduroam)', '2022-12-10', 'Prueba', NULL, NULL, 'ACTIVO'),
+(15, 8, 'Felicitacion', 'General', 'Archivo Universitario', '2022-12-10', 'Refactorización de las vistas', NULL, NULL, 'ACTIVO');
 
 -- --------------------------------------------------------
 
