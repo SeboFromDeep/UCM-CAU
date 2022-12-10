@@ -54,7 +54,7 @@ class messagesController {
                         messageDAO.getHistoricMessageUser(user.userID,
                             (error, messages) => {
                                 if (error) res.json(error)
-                                else res.status(200).render("userMainPage", {messages: messages, current: ".his-avisos"})
+                                else res.status(200).render("userMainPage", {messages: messages, current: ".historico-de-avisos"})
                             }
                         )
                     }
@@ -62,7 +62,7 @@ class messagesController {
                         messageDAO.getMyHistoricMessagesTecnico(user.userID,
                             (error, messages) => {
                                 if (error) res.json(error)
-                                else res.status(200).render("technicianMainPage", {messages: messages, current: ".his-avisos"})
+                                else res.status(200).render("technicianMainPage", {messages: messages, current: ".historico-de-avisos"})
                             }
                         )
                     }
