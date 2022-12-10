@@ -1,0 +1,35 @@
+<table class="table">
+    <thead>
+        <tr class="table-header">
+          <th class="typeColumn top-left-corner">Tipo</th>
+          <th class="dateColumn">Fecha</th>
+          <th class="textColumn">Texto</th>
+          <th class="actionsColumn top-right-corner">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% messages.forEach((message, i) => { %>
+          <tr class="table-row-no-hover" id="row-<%= i %>">
+            <% switch (message.tipo) {
+              case "Felicitacion": %>
+                <td class="type"><i class="fa-solid fa-heart fa-xl green"></i></td>
+               <% break;
+              case "Sugerencia": %>
+                <td class="type"><i class="fa-solid fa-lightbulb fa-xl yellow"></i></td>
+               <% break;
+              case "Incidencia": %>
+                <td class="type"><i class="fa-solid fa-circle-exclamation fa-xl red"></i></td>
+               <% break;
+              default:
+                break;
+            } %> 
+            <td class="date"><%= message.fecha %></td>
+            <td class="text"><%= message.texto.length > 199 ? message.texto.slice(0, 200) + "..." : message.texto %></td>
+            <td class="actions">
+                <i class="action fa-solid fa-eye fa-xl black eye-icon"></i>
+                <i class="action fa-solid fa-trash fa-xl black trash-icon"></i>
+            </td>
+          </tr>
+       <% }); %> 
+      </tbody>
+</table>

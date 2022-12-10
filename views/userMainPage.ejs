@@ -9,14 +9,16 @@
     <script src="https://kit.fontawesome.com/4b4a59d23d.js" crossorigin="anonymous"></script>
     <script src="/js/searchBar.js" defer></script>
     <script src="/js/createMessage.js" defer></script>
+    <script src="/js/showUserMessage.js" defer></script>
     <title>UCM-CAU</title>
 </head>
 <body>
     <header>
-        <%- include ("./partials/userNavbar") %>
+        <%- include ("./partials/navbars/userNavbar") %>
     </header>
     <main>
 
+        <!-- Search Bar -->
         <div class="search-wrapper">
           <div class="search-container">
             <div class="search-bar">
@@ -26,81 +28,25 @@
           </div>
         </div>
         
-        <table class="table">
-            <thead>
-                <tr class="table-header">
-                  <th class="dateColumn top-left-corner">Fecha</th>
-                  <th class="textColumn">Texto</th>
-                  <th class="typeColumn">Tipo</th>
-                  <th class="assignedToColumn top-right-corner">Técnico</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% messages.forEach((message, i) => { %>
-                  <tr class="table-row" id="row-<%= i %>" onclick = openModal(<%= i %>)>
-                    <td class="date"><%= message.fecha %></td>
-                    <td class="text"><%= message.texto.length > 199 ? message.texto.slice(0, 200) + "..." : message.texto %></td>
-                    <% switch (message.tipo) {
-                      case "Felicitacion": %>
-                        <td class="type"><i class="fa-solid fa-heart fa-xl green"></i></td>
-                       <% break;
-                      case "Sugerencia": %>
-                        <td class="type"><i class="fa-solid fa-lightbulb fa-xl yellow"></i></td>
-                       <% break;
-                      case "Queja": %>
-                        <td class="type"><i class="fa-solid fa-lightbulb fa-xl yellow"></i></td>
-                       <% break;
-                      case "Incidencia": %>
-                        <td class="type"><i class="fa-solid fa-circle-exclamation fa-xl red"></i></td>
-                       <% break;
-                      default:
-                        break;
-                    } %> 
-                    <td class="assignedTo"><%= message.tecnico !== null ? message.tecnico : "" %></td>
-                  </tr>
-               <% }); %> 
-              </tbody>
-        </table>
+        <!-- Table with messages info -->
+        <%- include ("./partials/tables/userTable") %> 
 
         <div class="button-wrapper">
           <button id="open-modal-create">Crear Aviso</button>
         </div>
 
-        <%- include ("./partials/activeUserMessageModal") %>
+        <!-- Modal to show Message info -->
+        <%- include ("./partials/modals/activeUserMessageModal") %>
 
-        <%- include ("./partials/createMessageModal") %>
+        <!-- Modal to create a new Message -->
+        <%- include ("./partials/modals/createMessageModal") %>
 
 
       </main>
       <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
       <script>
-        const tableRows = document.querySelectorAll(".table-row")
-        const modal = document.querySelectorAll("#adviceModal")
         const messages = <%- JSON.stringify(messages) %>
-        technician = <%- JSON.stringify(locals.user.technician) %>
-
-  
-
-        function openModal(index) {
-          const user = <%- JSON.stringify(locals.user) %>
-          console.log(messages[index])
-          $('#modal-type')[0].innerText = messages[index].tipo
-          $('#modal-date')[0].innerText = messages[index].fecha
-          if (messages[index].subgrupo !== null){
-            $('#modal-group')[0].innerText = messages[index].grupo + ": "
-            $('#modal-subgroup')[0].innerText = messages[index].subgrupo
-          } 
-          else {
-            $('#modal-group')[0].innerText = messages[index].grupo
-            $('#modal-subgroup')[0].innerText = ""
-          }
-          $('#modal-observations')[0].innerText = messages[index].texto
-          $('#adviceModal').toggle()
-        }
-
-        function closeModal() {
-          $('#adviceModal').toggle()
-        }
+        const technician = <%- JSON.stringify(locals.user.technician) %>
       </script>
   </body>
 </html>

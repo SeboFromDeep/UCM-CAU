@@ -8,14 +8,16 @@
     <link rel="stylesheet" href="/css/modal.css">
     <script src="https://kit.fontawesome.com/4b4a59d23d.js" crossorigin="anonymous"></script>
     <script src="/js/searchBar.js" defer></script>
+    <script src="/js/showTechnicianMessage.js" defer></script>
     <title>UCM-CAU</title>
 </head>
 <body>
     <header>
-        <%- include ("./partials/technicianNavbar") %>
+        <%- include ("./partials/navbars/technicianNavbar") %>
     </header>
     <main>
 
+        <!-- Search Bar -->
         <div class="search-wrapper">
           <div class="search-container">
             <div class="search-bar">
@@ -32,86 +34,17 @@
           </div>
         </div>
 
-        <table class="table">
-            <thead>
-                <tr class="table-header">
-                  <th class="typeColumn top-left-corner">Tipo</th>
-                  <th class="dateColumn">Fecha</th>
-                  <th class="textColumn">Texto</th>
-                  <th class="actionsColumn top-right-corner">Acciones</th>
-                </tr>
-              </thead>
-              <tbody>
-                <% messages.forEach((message, i) => { %>
-                  <tr class="table-row-no-hover" id="row-<%= i %>">
-                    <% switch (message.tipo) {
-                      case "Felicitacion": %>
-                        <td class="type"><i class="fa-solid fa-heart fa-xl green"></i></td>
-                       <% break;
-                      case "Sugerencia": %>
-                        <td class="type"><i class="fa-solid fa-lightbulb fa-xl yellow"></i></td>
-                       <% break;
-                      case "Incidencia": %>
-                        <td class="type"><i class="fa-solid fa-circle-exclamation fa-xl red"></i></td>
-                       <% break;
-                      default:
-                        break;
-                    } %> 
-                    <td class="date"><%= message.fecha %></td>
-                    <td class="text"><%= message.texto.length > 199 ? message.texto.slice(0, 200) + "..." : message.texto %></td>
-                    <td class="actions">
-                        <i class="action fa-solid fa-eye fa-xl black" id="eye-icon" onclick = finishMessage(<%= i %>)></i>
-                        <i class="action fa-solid fa-trash fa-xl black" onclick = deleteMessage(<%= i %>)></i>
-                    </td>
-                  </tr>
-               <% }); %> 
-              </tbody>
-        </table>
 
-        <%- include ("./partials/activeTechnicianMessageModal") %>
+        <!-- Table with messages info -->
+        <%- include ("./partials/tables/myMessagesTechnicianTable") %> 
+
+        <%- include ("./partials/modals/activeTechnicianMessageModal") %>
 
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>
-      const tableRows = document.querySelector("#eye-icon")
-      const messages = <%- JSON.stringify(messages) %>;
-      technician = <%- JSON.stringify(locals.user.technician) %>
-
-      function finishMessage(index) {
-        openModal(index, "/messages/finish-message/", "Terminar Aviso")
-      }
-
-      function deleteMessage(index) {
-        openModal(index, "/messages/delete-message/", "Borrar Aviso")
-      }
-
-      function openModal(index, action, buttonText) {
-        const user = <%- JSON.stringify(locals.user) %>
-        console.log(messages[index])
-        $('#modal-username')[0].innerText = messages[index].usuario
-        $('#modal-type')[0].innerText = "Aviso " + messages[index].id + ": " + messages[index].tipo
-        $('#modal-date')[0].innerText = messages[index].fecha
-        if (messages[index].subgrupo !== null){
-          $('#modal-group')[0].innerText = messages[index].grupo + ": "
-          $('#modal-subgroup')[0].innerText = messages[index].subgrupo
-        } 
-        else {
-          $('#modal-group')[0].innerText = messages[index].grupo
-          $('#modal-subgroup')[0].innerText = ""
-        }
-        $('#modal-observations')[0].innerText = messages[index].texto
-        $('#technician-comments').attr("action", action + messages[index].id)
-        $('#comments').val("")
-        $('.modal-action')[0].innerText = buttonText
-
-        $('#adviceModal').toggle()
-      }
-
-      function closeModal() {
-        $('#adviceModal').toggle()
-      }
+      const messages = <%- JSON.stringify(messages) %>
+      const technician = <%- JSON.stringify(locals.user.technician) %>
     </script>
 </body>
 </html>

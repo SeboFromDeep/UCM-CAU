@@ -330,7 +330,6 @@ td {
 .modal-body form {
     display: flex;
     flex-direction: column;
-    padding: 0 1rem;
 }
 
 .modal-header {

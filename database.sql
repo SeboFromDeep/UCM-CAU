@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-12-2022 a las 15:31:50
+-- Tiempo de generación: 10-12-2022 a las 14:46:29
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -38,8 +38,7 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('-JFjkdHwnpfYkPGQw_PWIxnEm8Z5MmWa', 1670351622, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"currentUser\":\"alumno@ucm.es\"}'),
-('6OeTk9Wc9PD2TjSrCEDL8EXWsipD4ub3', 1670423430, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"currentUser\":\"alumno@ucm.es\"}');
+('kecqf3VZ4OBlBH9uygShTZWOw8RcQDkV', 1670766364, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"currentUser\":\"alumno@ucm.es\"}');
 
 -- --------------------------------------------------------
 
@@ -53,8 +52,8 @@ CREATE TABLE `ucm_aw_cau_avi_avisos` (
   `tipo` varchar(15) NOT NULL,
   `grupo` varchar(30) NOT NULL,
   `subgrupo` varchar(50) DEFAULT NULL,
-  `fecha` date NOT NULL,
-  `texto` varchar(1000) NOT NULL,
+  `fecha` date NOT NULL DEFAULT current_timestamp(),
+  `texto` varchar(1000) DEFAULT NULL,
   `tecnico` int(50) DEFAULT NULL,
   `comentarios` varchar(1000) DEFAULT NULL,
   `estado` varchar(10) NOT NULL DEFAULT 'ACTIVO'
@@ -68,15 +67,16 @@ INSERT INTO `ucm_aw_cau_avi_avisos` (`idAviso`, `idUsuario`, `tipo`, `grupo`, `s
 (1, 3, 'Sugerencia', '', NULL, '0000-00-00', 'Preparar prácticas AW', 2, 'Aun te falta hacer la BD bobo', 'ACTIVO'),
 (2, 5, 'Sugerencia', '', NULL, '0000-00-00', 'Mirar fechas de congreso', NULL, NULL, 'ACTIVO'),
 (3, 4, 'Sugerencia', '', NULL, '0000-00-00', 'Ir al Supermercado', NULL, NULL, 'ACTIVO'),
-(4, 1, 'Incidencia', '', NULL, '2022-12-01', 'Jugar al Fútbol', 1, 'Empieza a calentar que sales', 'ACTIVO'),
-(5, 2, 'Felicitacion', '', NULL, '2022-12-01', 'Hablar con el profesor', 2, NULL, 'ACTIVO'),
-(7, 1, 'Sugerencia', '', NULL, '2022-12-01', 'Entregar Practica Vountaria 4', 1, 'no lo has entregado parguela', 'ACTIVO'),
+(4, 7, 'Incidencia', 'Grupo', 'Subgrupo', '2022-12-01', 'Jugar al Fútbol', 1, 'Juega wachón', 'TERMINADO'),
+(5, 2, 'Felicitacion', 'Grupo', 'Subgrupo', '2022-12-01', 'Hablar con el profesor', 2, NULL, 'ACTIVO'),
+(7, 7, 'Sugerencia', '', NULL, '2022-12-01', 'Entregar Practica Vountaria 4', 1, 'Prueba al cerrar', 'TERMINADO'),
 (8, 6, 'Felicitacion', '', NULL, '0000-00-00', 'Jugar ligoleyen', NULL, NULL, 'ACTIVO'),
 (9, 8, 'Incidencia', 'Comunicaciones', 'Correo electrónico', '2022-11-30', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, quaerat aperiam non officia tempore aspernatur tempora dicta minima illum quisquam iure recusandae rerum molestiae sunt totam impedit ad possimus quia ipsum ut voluptate a! Vitae, ipsa? Rerum sint natus porro fuga! Itaque voluptatibus numquam doloribus consequuntur voluptatem dolore voluptates earum!', NULL, NULL, 'ACTIVO'),
-(10, 8, 'Felicitacion', 'Toda la Universidad', NULL, '2022-12-01', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, deleniti.', 1, NULL, 'ACTIVO'),
+(10, 8, 'Felicitacion', 'Toda la Universidad', NULL, '2022-12-01', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, deleniti.', 1, 'te jodiste', 'BORRADO'),
 (11, 8, 'Sugerencia', 'Docencia', 'Blackboard Collaborate', '2022-11-23', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit esse quia quibusdam itaque quo iure. Nostrum qui temporibus asperiores, iste quo nulla recusandae eius quidem quaerat ducimus delectus, quas inventore consequatur voluptatem voluptas laudantium ab suscipit, tempora sit sequi cum pariatur quam eum atque! Dolore voluptatum temporibus itaque accusantium maxime accusamus sint ut? Perferendis vel quia ullam, sapiente aliquid earum dolore nemo, impedit ex vitae, ad modi culpa facere?\r\n', 2, NULL, 'ACTIVO'),
-(12,8,'Sugerencia', 'Comunicaciones', 'Correo electrónico', '2022-12-08','Intenta mejorar tu contraseña',NULL,NULL,'CERRADO'),
-(13,8,'Felicitacion','', 'Archivo Universitario','2022-10-20','Felicidades!! Has sacado matricula!',1,NULL,'CERRADO');
+(13, 8, 'Felicitacion', 'General', 'Archivo Universitario', '2022-12-10', 'Prueba', NULL, NULL, 'ACTIVO'),
+(14, 8, 'Queja', 'Conectividad', 'Wifi Eduroam (ssid: eduroam)', '2022-12-10', 'Prueba', NULL, NULL, 'ACTIVO'),
+(15, 8, 'Felicitacion', 'General', 'Archivo Universitario', '2022-12-10', 'Refactorización de las vistas', NULL, NULL, 'ACTIVO');
 
 -- --------------------------------------------------------
 
@@ -85,136 +85,136 @@ INSERT INTO `ucm_aw_cau_avi_avisos` (`idAviso`, `idUsuario`, `tipo`, `grupo`, `s
 --
 
 CREATE TABLE `ucm_aw_cau_cat_categorias` (
-  `CATEGORIA` varchar(20) NOT NULL,
-  `GRUPO` varchar(30) NOT NULL,
-  `SUBGRUPO` varchar(50) NOT NULL,
-  `PERFIL` varchar(20) NOT NULL
+  `categoria` varchar(21) NOT NULL,
+  `grupo` varchar(30) NOT NULL,
+  `subgrupo` varchar(55) NOT NULL,
+  `perfil` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `ucm_aw_cau_cat_categorias`
 --
 
-INSERT INTO `ucm_aw_cau_cat_categorias` (`CATEGORIA`, `GRUPO`, `SUBGRUPO`, `PERFIL`) VALUES
-('Sugerencia/Incidenci', 'Web', 'Analítica Web', 'PAS'),
-('Sugerencia/Incidenci', 'Web', 'Analítica Web', 'PDI'),
-('Felicitacion', '', 'Archivo Universitario', 'Alumno'),
-('Felicitacion', '', 'Archivo Universitario', 'Antiguo Alumno'),
-('Felicitacion', '', 'Archivo Universitario', 'PAS'),
-('Felicitacion', '', 'Archivo Universitario', 'PDI'),
-('Felicitacion', '', 'Asesoría Jurídica', 'Alumno'),
-('Felicitacion', '', 'Asesoría Jurídica', 'Antiguo Alumno'),
-('Felicitacion', '', 'Asesoría Jurídica', 'PAS'),
-('Felicitacion', '', 'Asesoría JurídicaAsesoría Jurídica', 'PDI'),
-('Sugerencia/Incidenci', 'Docencia', 'Aula Virtual', 'Alumno'),
-('Sugerencia/Incidenci', 'Docencia', 'Aula Virtual', 'PDI'),
-('Felicitacion', '', 'Biblioteca', 'Alumno'),
-('Felicitacion', '', 'Biblioteca', 'Antiguo Alumno'),
-('Felicitacion', '', 'Biblioteca', 'PAS'),
-('Felicitacion', '', 'Biblioteca', 'PDI'),
-('Sugerencia/Incidenci', 'Docencia', 'Blackboard Collaborate', 'PAS'),
-('Sugerencia/Incidenci', 'Docencia', 'Blackboard Collaborate', 'PDI'),
-('Felicitacion', '', 'Centro de Información', 'Alumno'),
-('Felicitacion', '', 'Centro de Información', 'Antiguo Alumno'),
-('Felicitacion', '', 'Centro de Información', 'PAS'),
-('Felicitacion', '', 'Centro de Información', 'PDI'),
-('Sugerencia/Incidenci', 'Administración digital', 'Certificado digital de persona física', 'Alumno'),
-('Sugerencia/Incidenci', 'Administración digital', 'Certificado digital de persona física', 'PAS'),
-('Sugerencia/Incidenci', 'Administración digital', 'Certificado digital de persona física', 'PDI'),
-('Sugerencia/Incidenci', 'Administración digital', 'Certificado electrónico de empleado público', 'PAS'),
-('Sugerencia/Incidenci', 'Administración digital', 'Certificado electrónico de empleado público', 'PDI'),
-('Sugerencia/Incidenci', 'Conectividad', 'Conexión por cable en despachos', 'PAS'),
-('Sugerencia/Incidenci', 'Conectividad', 'Conexión por cable en despachos', 'PDI'),
-('Sugerencia/Incidenci', 'Comunicaciones', 'Correo electrónico', 'Alumno'),
-('Sugerencia/Incidenci', 'Comunicaciones', 'Correo electrónico', 'Antiguo Alumno'),
-('Sugerencia/Incidenci', 'Comunicaciones', 'Correo electrónico', 'PAS'),
-('Sugerencia/Incidenci', 'Comunicaciones', 'Correo electrónico', 'PDI'),
-('Sugerencia/Incidenci', 'Conectividad', 'Cortafuegos corporativo', 'Alumno'),
-('Sugerencia/Incidenci', 'Conectividad', 'Cortafuegos corporativo', 'PAS'),
-('Sugerencia/Incidenci', 'Conectividad', 'Cortafuegos corporativo', 'PDI'),
-('Sugerencia/Incidenci', 'Comunicaciones', 'Cuenta de Alumno', 'Alumno'),
-('Sugerencia/Incidenci', 'Comunicaciones', 'Cuenta de Alumno', 'Antiguo Alumno'),
-('Sugerencia/Incidenci', 'Conectividad', 'Cuenta de la Red SARA', 'PAS'),
-('Sugerencia/Incidenci', 'Comunicaciones', 'Cuenta de personal', 'PAS'),
-('Sugerencia/Incidenci', 'Comunicaciones', 'Cuenta de personal', 'PDI'),
-('Sugerencia/Incidenci', 'Comunicaciones', 'Cuenta genérica', 'PAS'),
-('Sugerencia/Incidenci', 'Comunicaciones', 'Cuenta genérica', 'PDI'),
-('Felicitacion', '', 'Departamentos docentes', 'Alumno'),
-('Felicitacion', '', 'Departamentos docentes', 'Antiguo Alumno'),
-('Felicitacion', '', 'Departamentos docentes', 'PAS'),
-('Felicitacion', '', 'Departamentos docentes', 'PDI'),
-('Sugerencia/Incidenci', 'Web', 'Emisión de certificados SSL', 'PAS'),
-('Sugerencia/Incidenci', 'Web', 'Emisión de certificados SSL', 'PDI'),
-('Sugerencia/Incidenci', 'Comunicaciones', 'Google Meet', 'Alumno'),
-('Sugerencia/Incidenci', 'Comunicaciones', 'Google Meet', 'Antiguo Alumno'),
-('Sugerencia/Incidenci', 'Comunicaciones', 'Google Meet', 'PAS'),
-('Sugerencia/Incidenci', 'Comunicaciones', 'Google Meet', 'PDI'),
-('Sugerencia/Incidenci', 'Web', 'Hosting: alojamiento de páginas web', 'PAS'),
-('Sugerencia/Incidenci', 'Web', 'Hosting: alojamiento de páginas web', 'PDI'),
-('Felicitacion', '', 'Inspección de Servicios', 'Alumno'),
-('Felicitacion', '', 'Inspección de Servicios', 'Antiguo Alumno'),
-('Felicitacion', '', 'Inspección de Servicios', 'PAS'),
-('Felicitacion', '', 'Inspección de Servicios', 'PDI'),
-('Sugerencia/Incidenci', 'Docencia', 'Listados de clase', 'PAS'),
-('Sugerencia/Incidenci', 'Docencia', 'Listados de clase', 'PDI'),
-('Sugerencia/Incidenci', 'Docencia', 'Moodle: Aula Global', 'Alumno'),
-('Sugerencia/Incidenci', 'Docencia', 'Moodle: Aula Global', 'PAS'),
-('Sugerencia/Incidenci', 'Docencia', 'Moodle: Aula Global', 'PDI'),
-('Felicitacion', '', 'Oficina de Gestión de Infraestructuras y Mantenimi', 'Alumno'),
-('Felicitacion', '', 'Oficina de Gestión de Infraestructuras y Mantenimi', 'Antiguo Alumno'),
-('Felicitacion', '', 'Oficina de Gestión de Infraestructuras y Mantenimi', 'PAS'),
-('Felicitacion', '', 'Oficina de Gestión de Infraestructuras y Mantenimi', 'PDI'),
-('Sugerencia/Incidenci', 'Docencia', 'Plataforma de cursos online Privados', 'Alumno'),
-('Sugerencia/Incidenci', 'Docencia', 'Plataforma de cursos online Privados', 'PDI'),
-('Sugerencia/Incidenci', 'Administración digital', 'Portafirmas', 'PAS'),
-('Sugerencia/Incidenci', 'Administración digital', 'Portafirmas', 'PDI'),
-('Sugerencia/Incidenci', 'Web', 'Portal de eventos', 'Alumno'),
-('Sugerencia/Incidenci', 'Web', 'Portal de eventos', 'Antiguo Alumno'),
-('Sugerencia/Incidenci', 'Web', 'Portal de eventos', 'PAS'),
-('Sugerencia/Incidenci', 'Web', 'Portal de eventos', 'PDI'),
-('Sugerencia/Incidenci', 'Web', 'Redirecciones web', 'PAS'),
-('Sugerencia/Incidenci', 'Web', 'Redirecciones web', 'PDI'),
-('Sugerencia/Incidenci', 'Administración digital', 'Registro electrónico', 'Alumno'),
-('Sugerencia/Incidenci', 'Administración digital', 'Registro electrónico', 'Antiguo Alumno'),
-('Sugerencia/Incidenci', 'Administración digital', 'Registro electrónico', 'PAS'),
-('Sugerencia/Incidenci', 'Administración digital', 'Registro electrónico', 'PDI'),
-('Sugerencia/Incidenci', 'Conectividad', 'Resolución de nombres de dominio (DNS)', 'PAS'),
-('Sugerencia/Incidenci', 'Administración digital', 'Sede electrónica', 'Alumno'),
-('Sugerencia/Incidenci', 'Administración digital', 'Sede electrónica', 'Antiguo Alumno'),
-('Sugerencia/Incidenci', 'Administración digital', 'Sede electrónica', 'PAS'),
-('Sugerencia/Incidenci', 'Administración digital', 'Sede electrónica', 'PDI'),
-('Felicitacion', '', 'Servicio de Administración', 'Alumno'),
-('Felicitacion', '', 'Servicio de Administración', 'Antiguo Alumno'),
-('Felicitacion', '', 'Servicio de Administración', 'PAS'),
-('Felicitacion', '', 'Servicio de Administración', 'PDI'),
-('Felicitacion', '', 'Servicio de Cafetería', 'Alumno'),
-('Felicitacion', '', 'Servicio de Cafetería', 'Antiguo Alumno'),
-('Felicitacion', '', 'Servicio de Cafetería', 'PAS'),
-('Felicitacion', '', 'Servicio de Cafetería', 'PDI'),
-('Felicitacion', '', 'Servicio de Documentación', 'Alumno'),
-('Felicitacion', '', 'Servicio de Documentación', 'Antiguo Alumno'),
-('Felicitacion', '', 'Servicio de Documentación', 'PAS'),
-('Felicitacion', '', 'Servicio de Documentación', 'PDI'),
-('Felicitacion', '', 'Servicio de Imprenta', 'Alumno'),
-('Felicitacion', '', 'Servicio de Imprenta', 'Antiguo Alumno'),
-('Felicitacion', '', 'Servicio de Imprenta', 'PAS'),
-('Felicitacion', '', 'Servicio de Imprenta', 'PDI'),
-('Felicitacion', '', 'Servicios Informáticos', 'Alumno'),
-('Felicitacion', '', 'Servicios Informáticos', 'Antiguo Alumno'),
-('Felicitacion', '', 'Servicios Informáticos', 'PAS'),
-('Felicitacion', '', 'Servicios Informáticos', 'PDI'),
-('Felicitacion', '', 'Toda la Universidad', 'Alumno'),
-('Felicitacion', '', 'Toda la Universidad', 'Antiguo Alumno'),
-('Felicitacion', '', 'Toda la Universidad', 'PAS'),
-('Felicitacion', '', 'Toda la Universidad', 'PDI'),
-('Sugerencia/Incidenci', 'Conectividad', 'VPN Acceso remoto', 'Alumno'),
-('Sugerencia/Incidenci', 'Conectividad', 'VPN Acceso remoto', 'PAS'),
-('Sugerencia/Incidenci', 'Conectividad', 'VPN Acceso remoto', 'PDI'),
-('Sugerencia/Incidenci', 'Conectividad', 'Wifi Eduroam (ssid: eduroam)', 'Alumno'),
-('Sugerencia/Incidenci', 'Conectividad', 'Wifi Eduroam (ssid: eduroam)', 'PAS'),
-('Sugerencia/Incidenci', 'Conectividad', 'Wifi Eduroam (ssid: eduroam)', 'PDI'),
-('Sugerencia/Incidenci', 'Conectividad', 'Wifi Eduroam (ssid: UCM-Visitantes)', 'PAS'),
-('Sugerencia/Incidenci', 'Conectividad', 'Wifi Eduroam (ssid: UCM-Visitantes)', 'PDI');
+INSERT INTO `ucm_aw_cau_cat_categorias` (`categoria`, `grupo`, `subgrupo`, `perfil`) VALUES
+('Sugerencia/Incidencia', 'Web', 'Analítica Web', 'PAS'),
+('Sugerencia/Incidencia', 'Web', 'Analítica Web', 'PDI'),
+('Felicitacion', 'General', 'Archivo Universitario', 'Alumno'),
+('Felicitacion', 'General', 'Archivo Universitario', 'Antiguo Alumno'),
+('Felicitacion', 'General', 'Archivo Universitario', 'PAS'),
+('Felicitacion', 'General', 'Archivo Universitario', 'PDI'),
+('Felicitacion', 'General', 'Asesoría Jurídica', 'Alumno'),
+('Felicitacion', 'General', 'Asesoría Jurídica', 'Antiguo Alumno'),
+('Felicitacion', 'General', 'Asesoría Jurídica', 'PAS'),
+('Felicitacion', 'General', 'Asesoría JurídicaAsesoría Jurídica', 'PDI'),
+('Sugerencia/Incidencia', 'Docencia', 'Aula Virtual', 'Alumno'),
+('Sugerencia/Incidencia', 'Docencia', 'Aula Virtual', 'PDI'),
+('Felicitacion', 'General', 'Biblioteca', 'Alumno'),
+('Felicitacion', 'General', 'Biblioteca', 'Antiguo Alumno'),
+('Felicitacion', 'General', 'Biblioteca', 'PAS'),
+('Felicitacion', 'General', 'Biblioteca', 'PDI'),
+('Sugerencia/Incidencia', 'Docencia', 'Blackboard Collaborate', 'PAS'),
+('Sugerencia/Incidencia', 'Docencia', 'Blackboard Collaborate', 'PDI'),
+('Felicitacion', 'General', 'Centro de Información', 'Alumno'),
+('Felicitacion', 'General', 'Centro de Información', 'Antiguo Alumno'),
+('Felicitacion', 'General', 'Centro de Información', 'PAS'),
+('Felicitacion', 'General', 'Centro de Información', 'PDI'),
+('Sugerencia/Incidencia', 'Administración digital', 'Certificado digital de persona física', 'Alumno'),
+('Sugerencia/Incidencia', 'Administración digital', 'Certificado digital de persona física', 'PAS'),
+('Sugerencia/Incidencia', 'Administración digital', 'Certificado digital de persona física', 'PDI'),
+('Sugerencia/Incidencia', 'Administración digital', 'Certificado electrónico de empleado público', 'PAS'),
+('Sugerencia/Incidencia', 'Administración digital', 'Certificado electrónico de empleado público', 'PDI'),
+('Sugerencia/Incidencia', 'Conectividad', 'Conexión por cable en despachos', 'PAS'),
+('Sugerencia/Incidencia', 'Conectividad', 'Conexión por cable en despachos', 'PDI'),
+('Sugerencia/Incidencia', 'Comunicaciones', 'Correo electrónico', 'Alumno'),
+('Sugerencia/Incidencia', 'Comunicaciones', 'Correo electrónico', 'Antiguo Alumno'),
+('Sugerencia/Incidencia', 'Comunicaciones', 'Correo electrónico', 'PAS'),
+('Sugerencia/Incidencia', 'Comunicaciones', 'Correo electrónico', 'PDI'),
+('Sugerencia/Incidencia', 'Conectividad', 'Cortafuegos corporativo', 'Alumno'),
+('Sugerencia/Incidencia', 'Conectividad', 'Cortafuegos corporativo', 'PAS'),
+('Sugerencia/Incidencia', 'Conectividad', 'Cortafuegos corporativo', 'PDI'),
+('Sugerencia/Incidencia', 'Comunicaciones', 'Cuenta de Alumno', 'Alumno'),
+('Sugerencia/Incidencia', 'Comunicaciones', 'Cuenta de Alumno', 'Antiguo Alumno'),
+('Sugerencia/Incidencia', 'Conectividad', 'Cuenta de la Red SARA', 'PAS'),
+('Sugerencia/Incidencia', 'Comunicaciones', 'Cuenta de personal', 'PAS'),
+('Sugerencia/Incidencia', 'Comunicaciones', 'Cuenta de personal', 'PDI'),
+('Sugerencia/Incidencia', 'Comunicaciones', 'Cuenta genérica', 'PAS'),
+('Sugerencia/Incidencia', 'Comunicaciones', 'Cuenta genérica', 'PDI'),
+('Felicitacion', 'General', 'Departamentos docentes', 'Alumno'),
+('Felicitacion', 'General', 'Departamentos docentes', 'Antiguo Alumno'),
+('Felicitacion', 'General', 'Departamentos docentes', 'PAS'),
+('Felicitacion', 'General', 'Departamentos docentes', 'PDI'),
+('Sugerencia/Incidencia', 'Web', 'Emisión de certificados SSL', 'PAS'),
+('Sugerencia/Incidencia', 'Web', 'Emisión de certificados SSL', 'PDI'),
+('Sugerencia/Incidencia', 'Comunicaciones', 'Google Meet', 'Alumno'),
+('Sugerencia/Incidencia', 'Comunicaciones', 'Google Meet', 'Antiguo Alumno'),
+('Sugerencia/Incidencia', 'Comunicaciones', 'Google Meet', 'PAS'),
+('Sugerencia/Incidencia', 'Comunicaciones', 'Google Meet', 'PDI'),
+('Sugerencia/Incidencia', 'Web', 'Hosting: alojamiento de páginas web', 'PAS'),
+('Sugerencia/Incidencia', 'Web', 'Hosting: alojamiento de páginas web', 'PDI'),
+('Felicitacion', 'General', 'Inspección de Servicios', 'Alumno'),
+('Felicitacion', 'General', 'Inspección de Servicios', 'Antiguo Alumno'),
+('Felicitacion', 'General', 'Inspección de Servicios', 'PAS'),
+('Felicitacion', 'General', 'Inspección de Servicios', 'PDI'),
+('Sugerencia/Incidencia', 'Docencia', 'Listados de clase', 'PAS'),
+('Sugerencia/Incidencia', 'Docencia', 'Listados de clase', 'PDI'),
+('Sugerencia/Incidencia', 'Docencia', 'Moodle: Aula Global', 'Alumno'),
+('Sugerencia/Incidencia', 'Docencia', 'Moodle: Aula Global', 'PAS'),
+('Sugerencia/Incidencia', 'Docencia', 'Moodle: Aula Global', 'PDI'),
+('Felicitacion', 'General', 'Oficina de Gestión de Infraestructuras y Mantenimiento', 'Alumno'),
+('Felicitacion', 'General', 'Oficina de Gestión de Infraestructuras y Mantenimiento', 'Antiguo Alumno'),
+('Felicitacion', 'General', 'Oficina de Gestión de Infraestructuras y Mantenimiento', 'PAS'),
+('Felicitacion', 'General', 'Oficina de Gestión de Infraestructuras y Mantenimiento', 'PDI'),
+('Sugerencia/Incidencia', 'Docencia', 'Plataforma de cursos online Privados', 'Alumno'),
+('Sugerencia/Incidencia', 'Docencia', 'Plataforma de cursos online Privados', 'PDI'),
+('Sugerencia/Incidencia', 'Administración digital', 'Portafirmas', 'PAS'),
+('Sugerencia/Incidencia', 'Administración digital', 'Portafirmas', 'PDI'),
+('Sugerencia/Incidencia', 'Web', 'Portal de eventos', 'Alumno'),
+('Sugerencia/Incidencia', 'Web', 'Portal de eventos', 'Antiguo Alumno'),
+('Sugerencia/Incidencia', 'Web', 'Portal de eventos', 'PAS'),
+('Sugerencia/Incidencia', 'Web', 'Portal de eventos', 'PDI'),
+('Sugerencia/Incidencia', 'Web', 'Redirecciones web', 'PAS'),
+('Sugerencia/Incidencia', 'Web', 'Redirecciones web', 'PDI'),
+('Sugerencia/Incidencia', 'Administración digital', 'Registro electrónico', 'Alumno'),
+('Sugerencia/Incidencia', 'Administración digital', 'Registro electrónico', 'Antiguo Alumno'),
+('Sugerencia/Incidencia', 'Administración digital', 'Registro electrónico', 'PAS'),
+('Sugerencia/Incidencia', 'Administración digital', 'Registro electrónico', 'PDI'),
+('Sugerencia/Incidencia', 'Conectividad', 'Resolución de nombres de dominio (DNS)', 'PAS'),
+('Sugerencia/Incidencia', 'Administración digital', 'Sede electrónica', 'Alumno'),
+('Sugerencia/Incidencia', 'Administración digital', 'Sede electrónica', 'Antiguo Alumno'),
+('Sugerencia/Incidencia', 'Administración digital', 'Sede electrónica', 'PAS'),
+('Sugerencia/Incidencia', 'Administración digital', 'Sede electrónica', 'PDI'),
+('Felicitacion', 'General', 'Servicio de Administración', 'Alumno'),
+('Felicitacion', 'General', 'Servicio de Administración', 'Antiguo Alumno'),
+('Felicitacion', 'General', 'Servicio de Administración', 'PAS'),
+('Felicitacion', 'General', 'Servicio de Administración', 'PDI'),
+('Felicitacion', 'General', 'Servicio de Cafetería', 'Alumno'),
+('Felicitacion', 'General', 'Servicio de Cafetería', 'Antiguo Alumno'),
+('Felicitacion', 'General', 'Servicio de Cafetería', 'PAS'),
+('Felicitacion', 'General', 'Servicio de Cafetería', 'PDI'),
+('Felicitacion', 'General', 'Servicio de Documentación', 'Alumno'),
+('Felicitacion', 'General', 'Servicio de Documentación', 'Antiguo Alumno'),
+('Felicitacion', 'General', 'Servicio de Documentación', 'PAS'),
+('Felicitacion', 'General', 'Servicio de Documentación', 'PDI'),
+('Felicitacion', 'General', 'Servicio de Imprenta', 'Alumno'),
+('Felicitacion', 'General', 'Servicio de Imprenta', 'Antiguo Alumno'),
+('Felicitacion', 'General', 'Servicio de Imprenta', 'PAS'),
+('Felicitacion', 'General', 'Servicio de Imprenta', 'PDI'),
+('Felicitacion', 'General', 'Servicios Informáticos', 'Alumno'),
+('Felicitacion', 'General', 'Servicios Informáticos', 'Antiguo Alumno'),
+('Felicitacion', 'General', 'Servicios Informáticos', 'PAS'),
+('Felicitacion', 'General', 'Servicios Informáticos', 'PDI'),
+('Felicitacion', 'General', 'Toda la Universidad', 'Alumno'),
+('Felicitacion', 'General', 'Toda la Universidad', 'Antiguo Alumno'),
+('Felicitacion', 'General', 'Toda la Universidad', 'PAS'),
+('Felicitacion', 'General', 'Toda la Universidad', 'PDI'),
+('Sugerencia/Incidencia', 'Conectividad', 'VPN Acceso remoto', 'Alumno'),
+('Sugerencia/Incidencia', 'Conectividad', 'VPN Acceso remoto', 'PAS'),
+('Sugerencia/Incidencia', 'Conectividad', 'VPN Acceso remoto', 'PDI'),
+('Sugerencia/Incidencia', 'Conectividad', 'Wifi Eduroam (ssid: eduroam)', 'Alumno'),
+('Sugerencia/Incidencia', 'Conectividad', 'Wifi Eduroam (ssid: eduroam)', 'PAS'),
+('Sugerencia/Incidencia', 'Conectividad', 'Wifi Eduroam (ssid: eduroam)', 'PDI'),
+('Sugerencia/Incidencia', 'Conectividad', 'Wifi Eduroam (ssid: UCM-Visitantes)', 'PAS'),
+('Sugerencia/Incidencia', 'Conectividad', 'Wifi Eduroam (ssid: UCM-Visitantes)', 'PDI');
 
 -- --------------------------------------------------------
 
@@ -262,14 +262,13 @@ ALTER TABLE `sessions`
 -- Indices de la tabla `ucm_aw_cau_avi_avisos`
 --
 ALTER TABLE `ucm_aw_cau_avi_avisos`
-  ADD PRIMARY KEY (`idAviso`),
-  ADD UNIQUE KEY `texto` (`texto`) USING HASH;
+  ADD PRIMARY KEY (`idAviso`);
 
 --
 -- Indices de la tabla `ucm_aw_cau_cat_categorias`
 --
 ALTER TABLE `ucm_aw_cau_cat_categorias`
-  ADD PRIMARY KEY (`SUBGRUPO`,`PERFIL`) USING BTREE;
+  ADD PRIMARY KEY (`subgrupo`,`perfil`) USING BTREE;
 
 --
 -- Indices de la tabla `ucm_aw_cau_usu_usuarios`
@@ -286,7 +285,7 @@ ALTER TABLE `ucm_aw_cau_usu_usuarios`
 -- AUTO_INCREMENT de la tabla `ucm_aw_cau_avi_avisos`
 --
 ALTER TABLE `ucm_aw_cau_avi_avisos`
-  MODIFY `idAviso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `idAviso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `ucm_aw_cau_usu_usuarios`
