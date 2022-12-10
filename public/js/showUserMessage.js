@@ -12,7 +12,8 @@ close.addEventListener('click', (event) => {
 })
 
 function showMessage(index) {
-  $('#modal-type')[0].innerText = messages[index].tipo
+  $('#modal-type')[0].innerText = messages[index].tipo + ": "
+  $('#modal-state')[0].innerText = messages[index].estado
   $('#modal-date')[0].innerText = messages[index].fecha
   if (messages[index].subgrupo !== null){
     $('#modal-group')[0].innerText = messages[index].grupo + ": "
