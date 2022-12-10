@@ -312,14 +312,19 @@ td {
 	color: rgb(75, 68, 68);
 }
 
-/* Modal */
+/* Modals */
+
+/* show modal */
 
 .modal {
     font-size: 1.5rem;
 }
 
-.modal-body div + div{
-    margin: 1rem;
+.modal-body {
+    margin: 0 0.5rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
 }
 
 .modal-body form {
@@ -374,10 +379,51 @@ td {
 }
 
 
-#comments {
+#comments, #observations {
     font-family: 'Rubik';
     font-size: 1.5rem;
     margin-top: 1rem;
     min-height: 5rem;
     resize: none
+}
+
+/* create modal */
+
+#modal-create-body {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+
+}
+
+#modal-create-body .modal-observations-container {
+    margin-top: 1rem;
+    grid-column: span 3;
+    display: flex;
+    flex-direction: column;
+}
+
+#modal-create-body .modal-select-container {
+    grid-column: 3;
+}
+
+#modal-create-body .modal-select-container {
+    grid-column: 3;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+#text {
+    display: block;
+    textAlignVertical: 'top';
+    font-family: 'Rubik';
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    min-height: 5rem;
+    resize: none
+}
+
+#modal-create-body select {
+    font-family: 'Rubik';
+    font-size: 1.25rem;
 }

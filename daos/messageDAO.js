@@ -150,17 +150,18 @@ class MessageDAO{
     }
 
 
-    createMessage(idUsuario,aviso,callback){ //aviso contiene  {tipo, fecha, texto}. no es necesario insertar el id
+    createMessage(idUser, message, callback){ 
         this.pool.getConnection(function(e,connection){
             if(e){
-                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+                callback(new Error('Error de Conexión'))
             }
             else{
-                
-                connection.query("INSERT INTO UCM_AW_CAU_AVI_Avisos(idUsuario, tipo, fecha, texto) ",[idUsuario,aviso.tipo, aviso.fecha, aviso.texto],
+                if (message.type === 'Sugerencia') message.type = message.select
+                console.log(idUser, message)
+                connection.query("INSERT INTO UCM_AW_CAU_AVI_Avisos(idUsuario, tipo, grupo, subgrupo, texto) values (?, ?, ?, ?, ?)",[idUser, message.type, message.group, message.subgroup, message.text],
                 function(e, rows){
                     connection.release();
-                    if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    if(e) callback(new Error('Error de Acceso'))
                     else callback(null)
                 });
             }

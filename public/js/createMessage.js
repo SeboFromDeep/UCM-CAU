@@ -1,6 +1,7 @@
 function updateGroupOptions(options, type){
     const groupSelect = document.querySelector('#group')
     const subgroupSelect = document.querySelector('#subgroup')
+    const isSugerencia = type === 'Sugerencia'
     
     $('#group').empty()
     $('#subgroup').empty()
@@ -17,11 +18,13 @@ function updateGroupOptions(options, type){
     for(subgroup in options[type][selected]) {
         subgroupSelect.innerHTML += '<option value="' + options[type][selected][subgroup] + '">' + options[type][selected][subgroup] + '</option'
     }
+
+    $('.modal-select-container').toggleClass('invisible', !isSugerencia)
+
 }
 
 function updateSubgroupOptions(options, type, group) {
     const subgroupSelect = document.querySelector('#subgroup')
-    console.log(options, type, group)
 
     $('#subgroup').empty()
 

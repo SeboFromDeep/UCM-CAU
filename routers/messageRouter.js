@@ -42,4 +42,7 @@ messageRouter
 messageRouter
 .get("/message-options", messageController.getMessageOptions)
 
+messageRouter
+.post("/create-message", messageController.createMessage)
+
 module.exports = messageRouter

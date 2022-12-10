@@ -91,13 +91,29 @@ class messagesController {
                 if (error) res.json(error)
                 else {
                     messageDAO.getMessageOptions(user.profile, (error, options) => {
-                        if (error) res.json({error: true})
+                        if (error) res.json(error)
                         else {
-                            // options.forEach(element => {
-                            // });
                             res
                             .setHeader('content-type', 'application/json')
                             .json(options);
+                        }
+                    })
+                }
+            })
+    }
+
+    createMessage(req, res) {
+        userDAO.getUserByEmail(req.session.currentUser,
+            (error, user) => {
+                if (error) res.json(error)
+                else {
+                    res.locals.user = user
+
+                    messageDAO.createMessage(user.userID, req.body, (error) => {
+                        console.log(error)
+                        if (error) res.json(error)
+                        else {
+                            res.status(200).redirect('/messages/my-messages')
                         }
                     })
                 }
