@@ -13,7 +13,7 @@ class UserDAO {
                 c.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE correo = ? AND contrasena = ?", [email, password],
                 function(e, rows) {
                     c.release()
-                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    if (e) callback(new Error("Error al acceso de la base de datos de isUserCorrect"))
                     else {
                         if (rows == 0) callback(null, false)
                         else callback(null, true)
@@ -30,7 +30,7 @@ class UserDAO {
             else {
                 c.query("SELECT idUsuario FROM ucm_aw_cau_usu_usuarios WHERE correo = ?", [user.correo],
                 function(e, rows) {
-                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    if (e) callback(new Error("Error al acceso de la base de datos de insertUser"))
                     
                     else {
                         if (rows != 0) callback(new Error("Ya existe este usuario"))
@@ -41,7 +41,7 @@ class UserDAO {
                                 c.query("INSERT INTO ucm_aw_cau_usu_usuarios (nombre, correo, contrasena, perfil, tecnico , nEmpleado, img) values(?,?,?, PAS, 1, ?, ?)",
                                 [user.nombre,user.correo,user.contrasena,user.nEmpleado,user.img], function(e, rows){
                                     c.release()
-                                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                                    if (e) callback(new Error("Error al acceso de la base de datos al insertar un usuario técnico"))
                                     else callback(null,true)
                                 });
                             }
@@ -50,7 +50,7 @@ class UserDAO {
                                 c.query("INSERT INTO ucm_aw_cau_usu_usuarios (nombre, correo, contrasena, perfil, tecnico , nEmpleado, img) values(?,?,?, ?, 0, NULL, ?)",
                                 [user.nombre,user.correo,user.contrasena,user.perfil,user.img], function(e, rows){
                                     c.release()
-                                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                                    if (e) callback(new Error("Error al acceso de la base de datos al insertar un usuario no tecnico"))
                                     else callback(null,true)
                                 });
                             }
@@ -70,7 +70,7 @@ class UserDAO {
             c.query("DELETE FROM ucm_aw_cau_usu_usuarios WHERE idUsuario = ? ", [idUser],
             function(e, rows) {
                 c.release()
-                if (e) callback(new Error("Error al acceso de la base de datos"))
+                if (e) callback(new Error("Error al acceso de la base de datos  de deleteUser"))
                 
                 else {
                     callback(null,true)
@@ -88,7 +88,7 @@ class UserDAO {
             c.query("SELECT tecnico FROM ucm_aw_cau_usu_usuarios WHERE idUsuario = ? ", [idUser],
             function(e, rows) {
                 c.release()
-                if (e) callback(new Error("Error al acceso de la base de datos"))
+                if (e) callback(new Error("Error al acceso de la base de datos de esTecnico"))
                 
                 else {
                     if (rows.length === 0) callback(null, false)
@@ -108,7 +108,7 @@ class UserDAO {
             c.query("SELECT idUsuario, nombre FROM ucm_aw_cau_usu_usuarios WHERE tecnico = 1",
             function(e, rows) {
                 c.release()
-                if (e) callback(new Error("Error al acceso de la base de datos"))
+                if (e) callback(new Error("Error al acceso de la base de datos de getTecnicos"))
                 
                 else {
                     if (rows == 0) callback(new Error("No existe el usuario"))
@@ -127,7 +127,7 @@ class UserDAO {
                 c.query("SELECT img FROM ucm_aw_cau_usu_usuarios WHERE correo = ?", [email],
                 function(e, rows) {
                     c.release()
-                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    if (e) callback(new Error("Error al acceso de la base de datos de getUserImageName"))
                     
                     else {
                         if (rows == 0) callback(new Error("No existe el usuario"))
@@ -146,7 +146,7 @@ class UserDAO {
                 c.query("SELECT idUsuario FROM ucm_aw_cau_usu_usuarios WHERE correo = ?", [email],
                 function(e, rows) {
                     c.release()
-                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    if (e) callback(new Error("Error al acceso de la base de datos de getUserId"))
                     else {
                         if (rows == 0) callback(null, false)
                         else callback(rows[0], true)
@@ -164,7 +164,7 @@ class UserDAO {
                 c.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE correo = ?", [email],
                 function(e, rows) {
                     c.release()
-                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    if (e) callback(new Error("Error al acceso de la base de datos de getuserByEmail"))
                     else {
                         if (rows == 0) callback(null, false)
                         else callback(null, {
