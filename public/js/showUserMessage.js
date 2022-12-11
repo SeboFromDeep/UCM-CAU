@@ -25,8 +25,7 @@ function showMessage(index) {
   }
   $('#modal-observations')[0].innerText = messages[index].texto
   if (messages[index].comentarios) {
-    if (messages[index].estado === 'BORRADA') $('#modal-comments-span')[0].innerText = "Este aviso ha sido eliminado por el técnico " + messages[index].tecnico + " debido a:"
-    console.log($('#modal-comments-span')[0])
+    if (messages[index].estado === 'BORRADA') $('#modal-comments-label')[0].innerText = "Este aviso ha sido eliminado por el técnico " + messages[index].tecnico + " debido a:"
     $('#modal-comments')[0].innerText = messages[index].comentarios
   }
   $('#show-modal').toggle()
