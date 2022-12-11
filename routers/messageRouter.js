@@ -34,6 +34,9 @@ messageRouter
 .get("/his-messages",messageController.getHistoricMessages)
 
 messageRouter
+.get("/entry-messages",messageController.getEntryMessages)
+
+messageRouter
 .post("/finish-message/:id", userController.isUserTechnician, messageController.finishMessage)
 
 messageRouter

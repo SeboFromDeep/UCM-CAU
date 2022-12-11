@@ -71,6 +71,21 @@ class messagesController {
             })
     }
 
+    getEntryMessages(req,res){
+        userDAO.getUserByEmail(req.session.currentUser,
+            (error, user) => {
+                if (error) res.json(error)
+                else {
+                    res.locals.user = user
+                    messageDAO.getAllActiveMessages((error, messages) => {
+                            if (error) res.json(error)
+                            else res.status(200).render("technicianMainPage", {messages: messages, current: ".avisos-entrantes"})
+                        }
+                    ) 
+                }
+            })
+    }
+
     finishMessage(req, res) {
         messageDAO.finishMessage(req.params.id, req.body.comments, (error) => {
             if (error) res.json(error)

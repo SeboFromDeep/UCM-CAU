@@ -17,6 +17,9 @@
               case "Sugerencia": %>
                 <td class="type"><i class="fa-solid fa-lightbulb fa-xl yellow"></i></td>
                <% break;
+              case "Queja": %>
+                <td class="type"><i class="fa-solid fa-lightbulb fa-xl yellow"></i></td>
+               <% break;
               case "Incidencia": %>
                 <td class="type"><i class="fa-solid fa-circle-exclamation fa-xl red"></i></td>
                <% break;
@@ -26,8 +29,22 @@
             <td class="date"><%= message.fecha %></td>
             <td class="text"><%= message.texto.length > 199 ? message.texto.slice(0, 200) + "..." : message.texto %></td>
             <td class="actions">
-                <i class="action fa-solid fa-eye fa-xl black eye-icon"></i>
-                <i class="action fa-solid fa-trash fa-xl black trash-icon"></i>
+          <%  switch (current) {
+                case ".mis-avisos": %>
+                  <i class="action fa-solid fa-eye fa-xl black eye-icon finish-message"></i>
+                  <i class="action fa-solid fa-trash fa-xl black trash-icon delete-message"></i>
+          <%      break;
+                case ".historico-de-avisos": %>
+                  <i class="action fa-solid fa-eye fa-xl black eye-icon see-message"></i>
+          <%      break;
+                case ".avisos-entrantes": %>
+                  <i class="fa-solid fa-user-plus"></i>
+                  <i class="action fa-solid fa-trash fa-xl black trash-icon"></i>
+          <%      break;
+                case ".gestion-de-usuarios": %>
+                  <i class="action fa-solid fa-trash fa-xl black trash-icon"></i>
+          <%      break;
+          } %>
             </td>
           </tr>
        <% }); %> 

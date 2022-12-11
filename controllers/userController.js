@@ -66,6 +66,21 @@ class userController {
 
         }
     }
+
+    getActiveUsers (req, res) {
+        userDAO.getUserByEmail(req.session.currentUser,
+            (error, user) => {
+                if (error) res.json(error)
+                else {
+                    res.locals.user = user
+                    userDAO.getActiveUsers(user.userID, (error, users) => {
+                            if (error) res.json(error)
+                            else res.status(200).render("technicianMainPage", {users: users, current: ".gestion-de-usuarios"})
+                        }
+                    ) 
+                }
+            })
+    }
 }
 
 module.exports = userController

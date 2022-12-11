@@ -33,4 +33,7 @@ userRouter
     })
 })
 
+userRouter
+.get("/user-management", userController.getActiveUsers)
+
 module.exports = userRouter

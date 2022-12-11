@@ -97,7 +97,7 @@ class MessageDAO{
                 callback(utils.DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
-                connection.query("SELECT AVI.idAviso, AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreUsuario FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.idUsuario = USU.idUsuario WHERE AVI.tecnico = ? and AVI.estado = 'ACTIVO';", [idTecnico],
+                connection.query("SELECT AVI.idAviso, AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreUsuario, AVI.estado FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.idUsuario = USU.idUsuario WHERE AVI.tecnico = ? and AVI.estado = 'ACTIVA';", [idTecnico],
                 function(e, rows){
                     connection.release();
                     if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
@@ -112,6 +112,7 @@ class MessageDAO{
                                 grupo: message.grupo,
                                 subgrupo: message.subgrupo,
                                 usuario: message.nombreUsuario,
+                                estado: message.estado
                             })
                         });
                         callback(null, messages)
@@ -127,7 +128,7 @@ class MessageDAO{
                 callback(utils.DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
-                connection.query("SELECT AVI.idAviso, AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreUsuario FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.idUsuario = USU.idUsuario WHERE AVI.tecnico = ? and AVI.estado <> 'ACTIVO';", [idTecnico],
+                connection.query("SELECT AVI.idAviso, AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreUsuario, AVI.comentarios ,AVI.estado FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.idUsuario = USU.idUsuario WHERE AVI.tecnico = ? and AVI.estado <> 'ACTIVA';", [idTecnico],
                 function(e, rows){
                     connection.release();
                     if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
@@ -142,11 +143,47 @@ class MessageDAO{
                                 grupo: message.grupo,
                                 subgrupo: message.subgrupo,
                                 usuario: message.nombreUsuario,
+                                comentarios: message.comentarios,
+                                estado: message.estado
                             })
                         });
                         callback(null, messages)
                     }
                 }); 
+            }
+        });
+    }
+
+    getAllActiveMessages(callback){
+        this.pool.getConnection(function(e,connection){
+            if(e){
+                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+            }
+            else{
+                connection.query("SELECT AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreTecnico, AVI.estado, AVI.comentarios FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.tecnico = USU.idUsuario WHERE  AVI.estado = 'ACTIVO';",
+                function(e, rows){
+
+                    connection.release();
+                    if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    else {
+                        let messages = []
+                        console.log(rows)
+                        rows.forEach(message => {
+                            messages.push({
+                                fecha: message.fecha.toLocaleDateString(),
+                                texto: message.texto,
+                                tipo: message.tipo,
+                                grupo: message.grupo,
+                                subgrupo: message.subgrupo,
+                                tecnico: message.nombreTecnico,
+                                estado: message.estado,
+                                comentarios: message.comentarios
+                            })
+                        });
+                        callback(null, messages)
+                    }
+                });
+
             }
         });
     }

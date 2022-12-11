@@ -327,7 +327,7 @@ td {
     gap: 1rem;
 }
 
-.modal-body form {
+.modal-body .modal-comments-container {
     display: flex;
     flex-direction: column;
 }

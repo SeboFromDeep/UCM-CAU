@@ -8,7 +8,13 @@
     <link rel="stylesheet" href="/css/modal.css">
     <script src="https://kit.fontawesome.com/4b4a59d23d.js" crossorigin="anonymous"></script>
     <script src="/js/searchBar.js" defer></script>
-    <script src="/js/showTechnicianMessage.js" defer></script>
+    <% if (current === ".avisos-entrantes") { %>
+
+    <% } else if (current === ".gestion-de-usuarios") { %>
+
+    <% } else { %> 
+      <script src="/js/showTechnicianMessage.js" defer></script>
+    <% } %> 
     <title>UCM-CAU</title>
 </head>
 <body>
@@ -36,15 +42,36 @@
 
 
         <!-- Table with messages info -->
-        <%- include ("./partials/tables/myMessagesTechnicianTable") %> 
+        <% if (current === ".gestion-de-usuarios") { %>
+            <div class="">Gestion de usuarios</div>
+        <% } else { %>
+            <%- include ("./partials/tables/technicianTable") %> 
+        <% } %> 
 
-        <%- include ("./partials/modals/activeTechnicianMessageModal") %>
+        <% if (current === ".mis-avisos") { %>
+          <%- include ("./partials/modals/activeTechnicianMessageModal") %>
+        <% } else if (current === ".historico-de-avisos") { %>
+          <%- include ("./partials/modals/nonActiveTechnicianMessageModal") %>
+        <% } else if (current === ".gestion-de-usuarios") { %> 
+          <div class="">Modal Gestion de usuarios</div> 
+        <% } else { %> 
+          <div class="">Modal Avisos entrantes</div>
+        <% } %> 
+
+
+
+
 
     </main>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script>
-      const messages = <%- JSON.stringify(messages) %>
-      const technician = <%- JSON.stringify(locals.user.technician) %>
+      <% if (current === ".gestion-de-usuarios") { %>
+        const users = <%- JSON.stringify(users) %>
+      <% }  
+      else { %>  
+        const messages = <%- JSON.stringify(messages) %>
+        const technician = <%- JSON.stringify(locals.user.technician) %>
+      <% } %>
     </script>
 </body>
 </html>
