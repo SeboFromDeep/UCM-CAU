@@ -31,7 +31,7 @@ const storage = multer.diskStorage({
         cb(null, path.join(__dirname, "/public/img"))
     },
     filename: function(req, file, cb) {
-        cb(null, file.originalname)
+        cb(null, req.body.email.split("@")[0] + path.extname(file.originalname))
     }
 })
 
@@ -40,7 +40,7 @@ const storage = multer.diskStorage({
 const app = express()
 app.use(express.static("public"))
 app.use(bodyParser.urlencoded({extended: false}))
-app.use(multer({storage: storage, dest: path.join(__dirname, "/public/img")}).single("user-image"))
+app.use(multer({storage: storage}).single("user-image"))
 app.use(middlewareSession)
 app.use(logger('dev'))
 app.set("views", path.join(__dirname, "/views"))

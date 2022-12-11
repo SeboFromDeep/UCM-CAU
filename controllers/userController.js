@@ -1,5 +1,6 @@
 "use strict"
 
+const path = require("path")
 const mysql = require("mysql")
 const UserDAO = require("../daos/userDAO")
 const config = require("../config")
@@ -56,7 +57,7 @@ class userController {
                 perfil: req.body.profile,
                 tecnico: req.body.isTechnician === "true" ? 1 : 0,
                 nEmpleado: req.body.employeeID ? req.body.employeeID : null,
-                img: req.file ? req.file.originalname : null
+                img: req.file ? req.body.email.split("@")[0] + path.extname(req.file.originalname) : null
             }
             userDAO.insertUser(user, (error, inserted) => {
                 if (inserted) res.render("login", {registered: true, errors: null})

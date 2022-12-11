@@ -1,6 +1,5 @@
 const {check, validationResult} = require("express-validator")
 
-// TODO: validar el formato del número de empleado(solo si esta activado el checkbox)
 const validateSignup = [
     check("email", "Introduce tu correo UCM")
     .custom((value, {req}) => {
