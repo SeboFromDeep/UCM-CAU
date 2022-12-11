@@ -26,8 +26,16 @@
             <td class="date"><%= message.fecha %></td>
             <td class="text"><%= message.texto.length > 199 ? message.texto.slice(0, 200) + "..." : message.texto %></td>
             <td class="actions">
+              <% if(current === ".mis-avisos") {%>
                 <i class="action fa-solid fa-eye fa-xl black eye-icon"></i>
                 <i class="action fa-solid fa-trash fa-xl black trash-icon"></i>
+              <% } %>
+              <% if(current === ".historico-de-avisos") {%>
+                <i class="action fa-solid fa-eye fa-xl black eye-icon"></i>
+              <% } %>
+              <% if(current === ".avisos-entrantes") {%>
+                <i class="action fa-solid fa-eye fa-xl black eye-icon"></i>
+              <% } %>
             </td>
           </tr>
        <% }); %> 
