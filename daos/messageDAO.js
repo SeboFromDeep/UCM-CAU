@@ -167,7 +167,6 @@ class MessageDAO{
                     if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
                     else {
                         let messages = []
-                        console.log(rows)
                         rows.forEach(message => {
                             messages.push({
                                 fecha: message.fecha.toLocaleDateString(),

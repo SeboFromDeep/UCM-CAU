@@ -42,10 +42,10 @@
 
 
         <!-- Table with messages info -->
-        <% if (current === ".gestion-de-usuarios") { %>
-            <div class="">Gestion de usuarios</div>
-        <% } else { %>
+        <% if (current !== ".gestion-de-usuarios") { %>
             <%- include ("./partials/tables/technicianTable") %> 
+        <% } else { %>
+            <div class="">Gestion de usuarios</div>
         <% } %> 
 
         <% if (current === ".mis-avisos") { %>
