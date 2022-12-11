@@ -125,7 +125,7 @@ class MessageDAO{
                 callback(utils.DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
-                connection.query("SELECT AVI.idAviso, AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreUsuario FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.idUsuario = USU.idUsuario WHERE AVI.tecnico = ? and (AVI.estado ='TERMINADO' or AVI.estado='BORRADO') ;", [idTecnico],
+                connection.query("SELECT AVI.idAviso, AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreUsuario FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.idUsuario = USU.idUsuario WHERE AVI.tecnico = ? and AVI.estado <> 'ACTIVO';", [idTecnico],
                 function(e, rows){
                     connection.release();
                     if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
@@ -175,7 +175,7 @@ class MessageDAO{
             }
             else{
                 
-                connection.query("UPDATE UCM_AW_CAU_AVI_Avisos SET comentarios = ?, estado = 'TERMINADO' WHERE idAviso = ?", [comments, id],
+                connection.query("UPDATE UCM_AW_CAU_AVI_Avisos SET comentarios = ?, estado = 'TERMINADA' WHERE idAviso = ?", [comments, id],
                 function(error, result){
                     connection.release();
                     if(error) callback(utils.DB_ACCESS_ERROR_MESSAGE);
@@ -193,7 +193,7 @@ class MessageDAO{
             }
             else{
                 
-                connection.query("UPDATE UCM_AW_CAU_AVI_Avisos SET comentarios = ?, estado = 'BORRADO' WHERE idAviso = ?", [comments, id],
+                connection.query("UPDATE UCM_AW_CAU_AVI_Avisos SET comentarios = ?, estado = 'BORRADA' WHERE idAviso = ?", [comments, id],
                 function(error, result){
                     connection.release();
                     if(error) callback(utils.DB_ACCESS_ERROR_MESSAGE);
