@@ -160,7 +160,7 @@ class MessageDAO{
                 callback(utils.DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
-                connection.query("SELECT AVI.idAviso, AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreUsuario, AVI.estado, AVI.comentarios FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.idUsuario = USU.idUsuario WHERE AVI.tecnico IS NULL AND AVI.estado = 'ACTIVA';",
+                connection.query("SELECT AVI.idAviso, AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreUsuario, AVI.estado, AVI.comentarios, AVI.tecnico FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.idUsuario = USU.idUsuario WHERE AVI.estado = 'ACTIVA';",
                 function(e, rows){
                     
                     connection.release();
@@ -177,7 +177,8 @@ class MessageDAO{
                                 grupo: message.grupo,
                                 subgrupo: message.subgrupo,
                                 estado: message.estado,
-                                comentarios: message.comentarios
+                                comentarios: message.comentarios,
+                                tecnico: message.tecnico
                             })
                         });
                         callback(null, messages)

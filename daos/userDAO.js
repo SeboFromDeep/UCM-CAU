@@ -61,23 +61,41 @@ class UserDAO {
         })      
     }
 
-   deleteUser(idUser, callback){
-    this.pool.getConnection(function(e, c) {
-        if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+    deleteUser(idUser, callback){
+        this.pool.getConnection(function(e, c) {
+            if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
 
-        else {
-            c.query("UPDATE ucm_aw_cau_usu_usuarios USU, ucm_aw_cau_avi_avisos AVI SET USU.activo = 0, AVI.estado = 'USUARIO BORRADO' WHERE USU.idUsuario = ? AND USU.idUsuario = AVI.idUsuario AND AVI.estado = 'ACTIVA';", [idUser],
-            function(e, rows) {
-                c.release()
-                if (e) callback(new Error("Error al acceso de la base de datos"))
-                
-                else {
-                    callback(null)
-                }
-            })
-        }
-    })
-   }
+            else {
+                c.query("UPDATE ucm_aw_cau_usu_usuarios USU, ucm_aw_cau_avi_avisos AVI SET USU.activo = 0, AVI.estado = 'USUARIO BORRADO' WHERE USU.idUsuario = ? AND USU.idUsuario = AVI.idUsuario AND AVI.estado = 'ACTIVA';", [idUser],
+                function(e, rows) {
+                    c.release()
+                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    
+                    else {
+                        callback(null)
+                    }
+                })
+            }
+        })
+    }
+
+    deleteTechnician(idUser, callback){
+        this.pool.getConnection(function(e, c) {
+            if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+
+            else {
+                c.query("UPDATE ucm_aw_cau_usu_usuarios USU, ucm_aw_cau_avi_avisos AVI SET USU.activo = 0, AVI.tecnico = NULL WHERE USU.idUsuario = ? AND USU.idUsuario = AVI.tecnico AND AVI.estado = 'ACTIVA';", [idUser],
+                function(e, rows) {
+                    c.release()
+                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    
+                    else {
+                        callback(null)
+                    }
+                })
+            }
+        })
+    }
 
    esTecnico(idUser,callback){
     this.pool.getConnection(function(e, c) {

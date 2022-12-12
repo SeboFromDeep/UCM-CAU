@@ -123,7 +123,6 @@ class userController {
             (error, user) => {
                 if (error) res.json(error)
                 else {
-                    console.log(user)
                     if (!user.technician) {
                         userDAO.deleteUser(user.userID, (error) => {
                             if (error) res.json(error)
@@ -131,10 +130,9 @@ class userController {
                         }) 
                     }
                     else {
-                        messageDAO.getTechnicianMessagesInfo(user.userID, (error, info) => {
-                            res
-                            .setHeader('content-type', 'application/json')
-                            .json(JSON.stringify(info));
+                        userDAO.deleteTechnician(user.userID, (error, info) => {
+                            if (error) res.json(error)
+                            res.status(200).redirect("/users/user-management")
                         }) 
 
                     }

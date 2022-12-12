@@ -31,8 +31,13 @@
             <td class="actions">
               <% switch (current) {
               case ".avisos-entrantes": %>
-                <i class="action fa-solid fa-user-plus fa-xl black user-icon assign-message"></i>
-                <i class="action fa-solid fa-trash fa-xl black trash-icon delete-message"></i>
+              <% if (message.tecnico) { %>
+                <i class="action fa-solid fa-user-plus fa-xl gray user-icon assign-message"></i>
+                <i class="action fa-solid fa-trash fa-xl gray trash-icon delete-message"></i>
+              <% } else { %>
+              <i class="action fa-solid fa-user-plus fa-xl black user-icon assign-message"></i>
+              <i class="action fa-solid fa-trash fa-xl black trash-icon delete-message"></i>
+              <% } %> 
                <% break;
               case ".mis-avisos": %>
                 <i class="action fa-solid fa-eye fa-xl black eye-icon finish-message"></i>
