@@ -1,6 +1,7 @@
     const form = document.querySelector("#assign-form")
     const select = document.querySelector("#technician")
     const assignIcons = document.querySelectorAll(".assign-message")
+    const deleteIcons = document.querySelectorAll(".delete-message")
 
     assignIcons.forEach((icon, i) => {
         icon.addEventListener('click', (event) => {
@@ -8,8 +9,18 @@
             openAssignModal(i)
         })
     })
+
+    deleteIcons.forEach((icon, i) => {
+        icon.addEventListener('click', (event) => {
+            openDeleteModal(i)
+        })
+    })
+
+    document.querySelectorAll(".modal-close")[1].addEventListener('click', (event) => {
+        $('#adviceModal').toggle()
+    }) 
+
     function openAssignModal(index) {
-        console.log()
         $('#modal-username')[0].innerText = messages[index].usuario
         $('#modal-type')[0].innerText = "Aviso " + messages[index].id + ": " + messages[index].tipo + " " + messages[index].estado
         $('#modal-date')[0].innerText = messages[index].fecha
@@ -26,13 +37,33 @@
     
         $('#assign-modal').toggle()
     }
+
+    function openDeleteModal(index) {
+        $('[id=modal-username]')[1].innerText = messages[index].usuario
+        $('[id=modal-type]')[1].innerText = "Aviso " + messages[index].id + ": " + messages[index].tipo + " " + messages[index].estado
+        $('[id=modal-date]')[1].innerText = messages[index].fecha
+        if (messages[index].subgrupo !== null){
+          $('[id=modal-group]')[1].innerText = messages[index].grupo + ": "
+          $('[id=modal-subgroup]')[1].innerText = messages[index].subgrupo
+        } 
+        else {
+          $('[id=modal-group]')[1].innerText = messages[index].grupo
+          $('[id=modal-subgroup]')[1].innerText = ""
+        }
+        $('[id=modal-observations]')[1].innerText = messages[index].texto
+        $('[id=technician-comments]').attr("action", "/messages/delete-unassigned-message/" + messages[index].id)
+        $('#comments').val("")
+        $('.modal-action')[1].innerText = "Borrar aviso"
+      
+        $('#adviceModal').toggle()
+      }
     
     function closeModal() {
         $('#assign-modal').toggle()
     }
 
     function getAllTechnicians() {
-        if (!$("#technician").val()) {
+        if (select.length === 1) {
             $.ajax({
                 method: 'GET',
                 url: '/users/active-technicians',

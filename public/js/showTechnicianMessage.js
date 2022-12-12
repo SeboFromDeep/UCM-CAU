@@ -46,9 +46,9 @@ function seeMessage(index) {
   $('#adviceModal').toggle()
 }
 
-function closeModal() {
+document.querySelectorAll(".modal-close")[0].addEventListener('click', (event) => {
   $('#adviceModal').toggle()
-}
+}) 
 
 function openModal(index, action, buttonText) {
   $('#modal-username')[0].innerText = messages[index].usuario

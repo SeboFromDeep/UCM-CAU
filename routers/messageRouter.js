@@ -43,6 +43,7 @@ messageRouter
 .post("/finish-message/:id", userController.isUserTechnician, messageController.finishMessage)
 
 messageRouter
+.post("/delete-unassigned-message/:id", userController.isUserTechnician, messageController.deleteUnassignedMessage)
 .post("/delete-message/:id", userController.isUserTechnician, messageController.deleteMessage)
 
 messageRouter

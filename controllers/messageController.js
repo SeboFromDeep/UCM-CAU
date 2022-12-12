@@ -107,6 +107,19 @@ class messagesController {
         })
     }
 
+    deleteUnassignedMessage(req, res) {
+        console.log(req.url)
+        userDAO.getUserByEmail(req.session.currentUser, (error, user) => {
+            if (error) res.json(error)
+            else {
+                messageDAO.deleteUnassignedMessage(user.userID, req.params.id, req.body.comments, (error) => {
+                    if (error) res.json(error)
+                    else res.status(200).redirect("/messages/my-messages")
+                })
+            }
+        })
+    }
+
     getMessageOptions(req, res) {
         userDAO.getUserByEmail(req.session.currentUser,
             (error, user) => {

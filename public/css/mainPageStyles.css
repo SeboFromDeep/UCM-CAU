@@ -431,3 +431,13 @@ td {
     font-family: 'Rubik';
     font-size: 1.25rem;
 }
+
+#assign-form {
+    font-family: 'Rubik';
+    align-self: center;
+    justify-content: center;
+}
+
+#assign-form > * {
+    font-size: 1.5rem;
+}

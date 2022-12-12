@@ -260,6 +260,23 @@ class MessageDAO{
         });
     }
 
+    deleteUnassignedMessage(idUser, idMessage, comments, callback) {
+        this.pool.getConnection(function(error,connection){
+            if(error){
+                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+            }
+            else{
+                connection.query("UPDATE UCM_AW_CAU_AVI_Avisos SET tecnico = ?, comentarios = ?, estado = 'BORRADA' WHERE idAviso = ?", [idUser, comments, idMessage],
+                function(error, result){
+                    connection.release();
+                    if(error) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    else callback(null)
+                });
+                
+            }
+        });
+    }
+
     getMessageOptions(profile, callback) {
         this.pool.getConnection(function(e,connection){
             if(e){
