@@ -18,7 +18,22 @@
                     </div>
                 </div>
                 <div class="profile-messages-data">
-                    
+                    <div class="messages-count-container">
+                        <% if (locals.user.technician) { %>
+                            <span id="total-messages-count-label">Avisos gestionados: </span><span id="total-messages-count"></span>
+                        <% } else { %>
+                            <span id="total-messages-count-label">Avisos Realizados: </span><span id="total-messages-count"></span>
+                        <% } %>
+                        <div class="incidencias-count-container">
+                            <span id="incidencias-count-label">Incidencias: </span><span id="incidencias-count"></span>
+                        </div>
+                        <div class="sugerencias-count-container">
+                            <span id="sugerencias-count-label">Sugerencias: </span><span id="sugerencias-count"></span>
+                        </div>
+                        <div class="felicitaciones-count-container">
+                            <span id="felicitaciones-count-label">Felicitaciones: </span><span id="felicitaciones-count"></span>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="modal-footer">

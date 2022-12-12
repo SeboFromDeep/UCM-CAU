@@ -303,6 +303,56 @@ class MessageDAO{
         });
     }
 
+    getUserMessagesInfo(idUser, callback) {
+        this.pool.getConnection(function(error,connection){
+            if(error){
+                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+            }
+            else{
+                connection.query("SELECT count(tipo) as count, tipo as tipo FROM `ucm_aw_cau_avi_avisos` where idUsuario = ? GROUP by tipo;", [idUser],
+                function(error, rows){
+                    connection.release();
+                    if(error) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    else {
+                        let info = {}
+                        rows.forEach((row) => {
+                            if (row.tipo !== 'Queja') info[row.tipo] ? info[row.tipo] += row.count : info[row.tipo] = row.count
+                            else info['Sugerencia'] ? info['Sugerencia'] += row.count : info['Sugerencia'] = row.count
+                            info['Total'] ? info['Total'] += row.count : info['Total'] = row.count
+                        })
+                        callback(null, info)
+                    }
+                });
+                
+            }
+        });
+    }
+
+    getTechnicianMessagesInfo(idTechnician, callback) {
+        this.pool.getConnection(function(error,connection){
+            if(error){
+                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+            }
+            else{
+                connection.query("SELECT count(tipo) as count, tipo as tipo FROM `ucm_aw_cau_avi_avisos` where tecnico = ? GROUP by tipo;", [idTechnician],
+                function(error, rows){
+                    connection.release();
+                    if(error) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    else {
+                        let info = {}
+                        rows.forEach((row) => {
+                            if (row.tipo !== 'Queja') info[row.tipo] ? info[row.tipo] += row.count : info[row.tipo] = row.count
+                            else info['Sugerencia'] ? info['Sugerencia'] += row.count : info['Sugerencia'] = row.count
+                            info['Total'] ? info['Total'] += row.count : info['Total'] = row.count
+                        })
+                        callback(null, info)
+                    }
+                });
+                
+            }
+        });
+    }
+
 }
 
 

@@ -3,11 +3,13 @@
 const path = require("path")
 const mysql = require("mysql")
 const UserDAO = require("../daos/userDAO")
+const MesssageDAO = require("../daos/messageDAO")
 const config = require("../config")
 
 const pool = mysql.createPool(config.mysqlConfig)
 
 const userDAO = new UserDAO(pool)
+const messageDAO = new MesssageDAO(pool)
 
 
 
@@ -65,6 +67,30 @@ class userController {
             })
 
         }
+    }
+
+    getMessagesInfo(req, res) {
+        userDAO.getUserByEmail(req.session.currentUser,
+            (error, user) => {
+                if (error) res.json(error)
+                else {
+                    if (!user.technician) {
+                        messageDAO.getUserMessagesInfo(user.userID, (error, info) => {
+                            res
+                            .setHeader('content-type', 'application/json')
+                            .json(JSON.stringify(info));
+                        }) 
+                    }
+                    else {
+                        messageDAO.getTechnicianMessagesInfo(user.userID, (error, info) => {
+                            res
+                            .setHeader('content-type', 'application/json')
+                            .json(JSON.stringify(info));
+                        }) 
+
+                    }
+                }
+            })
     }
 
     getActiveUsers(req, res) {

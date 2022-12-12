@@ -32,6 +32,7 @@ userRouter
         }
     })
 })
+.get("/user-messages-info", userController.getMessagesInfo)
 
 userRouter
 .get("/active-technicians", userController.getActiveTechnicians)
