@@ -99,26 +99,6 @@ class UserDAO {
     })
    }
 
-   
-   getTecnicos(callback){
-    this.pool.getConnection(function(e, c) {
-        if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
-
-        else {
-            c.query("SELECT idUsuario, nombre FROM ucm_aw_cau_usu_usuarios WHERE tecnico = 1",
-            function(e, rows) {
-                c.release()
-                if (e) callback(new Error("Error al acceso de la base de datos"))
-                
-                else {
-                    if (rows == 0) callback(new Error("No existe el usuario"))
-                    else callback(null, rows)
-                }
-            })
-        }
-    })        
-   }
-
     getUserImageName(email, callback) {
         this.pool.getConnection(function(e, c) {
             if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
@@ -199,6 +179,27 @@ class UserDAO {
             }
         })
     }
+
+    getActiveTechnicians(callback) {
+        this.pool.getConnection(function(e, c) {
+            if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+            else {
+                c.query("SELECT idUsuario, nombre FROM ucm_aw_cau_usu_usuarios WHERE tecnico = 1 AND activo = 1",
+                function(e, rows) {
+                    c.release()
+                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    
+                    else {
+                        let users = {}
+                        rows.forEach((user) => {
+                            users[user.idUsuario] = user.nombre
+                        })
+                        callback(null, users)
+                    }
+                })
+            }
+        })        
+       }
 }
 
 module.exports = UserDAO

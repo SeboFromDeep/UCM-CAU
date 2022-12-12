@@ -160,7 +160,7 @@ class MessageDAO{
                 callback(utils.DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
-                connection.query("SELECT AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreTecnico, AVI.estado, AVI.comentarios FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.tecnico = USU.idUsuario WHERE  AVI.estado = 'ACTIVA';",
+                connection.query("SELECT AVI.idAviso, AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreUsuario, AVI.estado, AVI.comentarios FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.idUsuario = USU.idUsuario WHERE AVI.tecnico IS NULL AND AVI.estado = 'ACTIVA';",
                 function(e, rows){
                     
                     connection.release();
@@ -169,18 +169,37 @@ class MessageDAO{
                         let messages = []
                         rows.forEach(message => {
                             messages.push({
+                                id: message.idAviso,
+                                usuario: message.nombreUsuario,
                                 fecha: message.fecha.toLocaleDateString(),
                                 texto: message.texto,
                                 tipo: message.tipo,
                                 grupo: message.grupo,
                                 subgrupo: message.subgrupo,
-                                tecnico: message.nombreTecnico,
                                 estado: message.estado,
                                 comentarios: message.comentarios
                             })
                         });
                         callback(null, messages)
                     }
+                });
+                
+            }
+        });
+    }
+
+    assignMessage(idUser, idMessage, callback) {
+        this.pool.getConnection(function(e,connection){
+            if(e){
+                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+            }
+            else{
+                
+                connection.query("UPDATE ucm_aw_cau_avi_avisos SET tecnico = ? WHERE idAviso = ?",[idUser, idMessage],
+                function(e, rows){
+                    connection.release();
+                    if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    else callback(null);
                 });
                 
             }

@@ -17,6 +17,13 @@ const { json } = require("body-parser")
 const userController = new uC()
 
 class messagesController {
+    assignMessage(req, res) {
+        messageDAO.assignMessage(req.body.technician, req.params.id, (error) => {
+            if (error) res.json(error)
+            else res.status(200).redirect("/messages/my-messages")
+        })
+    }
+
     getMyMessages(req, res) {
         userDAO.getUserByEmail(req.session.currentUser,
             (error, user) => {

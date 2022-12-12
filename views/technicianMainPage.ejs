@@ -9,7 +9,7 @@
     <script src="https://kit.fontawesome.com/4b4a59d23d.js" crossorigin="anonymous"></script>
     <script src="/js/searchBar.js" defer></script>
     <% if (current === ".avisos-entrantes") { %>
-
+      <script src="/js/assignTechnician.js" defer></script>
     <% } else if (current === ".gestion-de-usuarios") { %>
 
     <% } else { %> 
@@ -55,7 +55,7 @@
         <% } else if (current === ".gestion-de-usuarios") { %> 
           <div class="">Modal Gestion de usuarios</div> 
         <% } else { %> 
-          <div class="">Modal Avisos entrantes</div>
+          <%- include ("./partials/modals/unassignedTechnicianMessageModal") %>
         <% } %> 
 
 
@@ -63,7 +63,7 @@
 
 
     </main>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
     <script>
       <% if (current === ".gestion-de-usuarios") { %>
         const users = <%- JSON.stringify(users) %>

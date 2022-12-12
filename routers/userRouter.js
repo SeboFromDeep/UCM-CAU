@@ -34,6 +34,9 @@ userRouter
 })
 
 userRouter
+.get("/active-technicians", userController.getActiveTechnicians)
+
+userRouter
 .get("/user-management", userController.getActiveUsers)
 
 module.exports = userRouter

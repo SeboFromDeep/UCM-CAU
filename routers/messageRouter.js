@@ -28,6 +28,9 @@ messageRouter
 })
 
 messageRouter
+.post("/assign-message/:id", messageController.assignMessage)
+
+messageRouter
 .get("/my-messages", messageController.getMyMessages)
 
 messageRouter

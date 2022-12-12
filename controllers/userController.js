@@ -67,19 +67,29 @@ class userController {
         }
     }
 
-    getActiveUsers (req, res) {
+    getActiveUsers(req, res) {
         userDAO.getUserByEmail(req.session.currentUser,
             (error, user) => {
                 if (error) res.json(error)
                 else {
                     res.locals.user = user
                     userDAO.getActiveUsers(user.userID, (error, users) => {
-                            if (error) res.json(error)
-                            else res.status(200).render("technicianMainPage", {users: users, current: ".gestion-de-usuarios"})
-                        }
-                    ) 
-                }
-            })
+                        if (error) res.json(error)
+                        else res.status(200).render("technicianMainPage", {users: users, current: ".gestion-de-usuarios"})
+                    } 
+            )}
+        })
+    }
+    
+    getActiveTechnicians(req, res) {
+        userDAO.getActiveTechnicians((error, users) => {
+            if (error) res.json(error)
+            else {
+                res
+                .setHeader('content-type', 'application/json')
+                .json(JSON.stringify(users));
+            }
+        })
     }
 }
 
