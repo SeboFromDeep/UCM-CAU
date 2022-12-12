@@ -1,0 +1,32 @@
+<table class="table">
+    <thead>
+        <tr class="table-header">
+          <th class="dateColumn top-left-corner">Fecha</th>
+          <th class="nameColumn">Nombre</th>
+          <th class="roleColumn">Rol</th>
+          <th class="actionsColumn top-right-corner">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% users.forEach((user, i) => { %>
+            <% console.log(user) %> 
+          <tr class="table-row-no-hover" id="row-<%= i %>">
+            <td class="date">01/01/2022</td>
+            <td class="text"><%= user.nombre %> </td>
+            <% switch (user.tecnico) {
+              case 0: %>
+                <td class="text">TÉCNICO</td>
+               <% break;
+              case 1: %>
+                <td class="text">USUARIO</i></td>
+               <% break;
+              default:
+                break;
+            } %> 
+            <td class="actions">
+                <i class="action fa-solid fa-trash fa-xl black trash-icon delete-user"></i>
+            </td>
+          </tr>
+       <% }); %> 
+      </tbody>
+</table>

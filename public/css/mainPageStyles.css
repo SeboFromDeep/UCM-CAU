@@ -247,7 +247,7 @@ td {
     padding: 1rem 1rem;
 }
 
-.textColumn {
+.textColumn, .nameColumn {
     width: 60%;
 }
 
@@ -310,6 +310,10 @@ td {
 
 .black {
 	color: rgb(75, 68, 68);
+}
+
+.gray{
+    color: gray
 }
 
 /* Modals */
