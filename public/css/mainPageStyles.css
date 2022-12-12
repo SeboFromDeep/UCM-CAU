@@ -450,3 +450,7 @@ td {
     justify-content: left;
     column-gap: 2rem;
 }
+
+.role {
+    text-align: center;
+}

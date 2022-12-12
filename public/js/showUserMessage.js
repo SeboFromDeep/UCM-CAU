@@ -1,5 +1,5 @@
 const tableRows = document.querySelectorAll(".table-row")
-const close = document.querySelector('.modal-close') 
+const close = document.querySelector('#show-modal .modal-close') 
 
 tableRows.forEach((row, i) => {
     row.addEventListener('click', (event) => {

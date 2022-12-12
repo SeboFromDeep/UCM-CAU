@@ -33,6 +33,7 @@ userRouter
     })
 })
 .get("/user-messages-info", userController.getMessagesInfo)
+.get("/delete/:id", userController.deleteUser)
 
 userRouter
 .get("/active-technicians", userController.getActiveTechnicians)

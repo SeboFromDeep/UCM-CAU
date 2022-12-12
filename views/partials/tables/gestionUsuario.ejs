@@ -11,20 +11,20 @@
         <% users.forEach((user, i) => { %>
             <% console.log(user) %> 
           <tr class="table-row-no-hover" id="row-<%= i %>">
-            <td class="date">01/01/2022</td>
-            <td class="text"><%= user.nombre %> </td>
+            <td class="date"><%= user.fecha_registro.toLocaleDateString() %> </td>
+            <td class="user-name"><%= user.nombre %> </td>
             <% switch (user.tecnico) {
               case 0: %>
-                <td class="text">USUARIO</i></td>
+                <td class="role">USUARIO</i></td>
               <% break;
               case 1: %>
-                <td class="text">TÉCNICO</td>
+                <td class="role">TÉCNICO</td>
                <% break;
               default:
                 break;
             } %> 
             <td class="actions">
-                <i class="action fa-solid fa-trash fa-xl black trash-icon delete-user"></i>
+              <a href="/users/delete/<%= user.idUsuario %>"><i class="action fa-solid fa-trash fa-xl black trash-icon delete-user"></i></a>
             </td>
           </tr>
        <% }); %> 

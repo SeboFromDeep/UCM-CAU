@@ -145,7 +145,6 @@ class messagesController {
                     res.locals.user = user
 
                     messageDAO.createMessage(user.userID, req.body, (error) => {
-                        console.log(error)
                         if (error) res.json(error)
                         else {
                             res.status(200).redirect('/messages/my-messages')

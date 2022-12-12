@@ -10,7 +10,7 @@ class UserDAO {
             if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
 
             else {
-                c.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE correo = ? AND contrasena = ?", [email, password],
+                c.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE correo = ? AND contrasena = ? AND activo = 1", [email, password],
                 function(e, rows) {
                     c.release()
                     if (e) callback(new Error("Error al acceso de la base de datos"))
@@ -61,19 +61,18 @@ class UserDAO {
         })      
     }
 
-    // TODO: no se borra se pone activo a 0
-   deleteUser(idUser,callback){
+   deleteUser(idUser, callback){
     this.pool.getConnection(function(e, c) {
         if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
 
         else {
-            c.query("DELETE FROM ucm_aw_cau_usu_usuarios WHERE idUsuario = ? ", [idUser],
+            c.query("UPDATE ucm_aw_cau_usu_usuarios USU, ucm_aw_cau_avi_avisos AVI SET USU.activo = 0, AVI.estado = 'USUARIO BORRADO' WHERE USU.idUsuario = ? AND USU.idUsuario = AVI.idUsuario AND AVI.estado = 'ACTIVA';", [idUser],
             function(e, rows) {
                 c.release()
                 if (e) callback(new Error("Error al acceso de la base de datos"))
                 
                 else {
-                    callback(null,true)
+                    callback(null)
                 }
             })
         }
@@ -163,12 +162,39 @@ class UserDAO {
         })
     }
 
+    getUserByID(id, callback) {
+        this.pool.getConnection(function(e, c) {
+            if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+
+            else {
+                c.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE idUsuario = ?", [id],
+                function(e, rows) {
+                    c.release()
+                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    else {
+                        if (rows == 0) callback(null, false)
+                        else callback(null, {
+                            userID: rows[0].idUsuario,
+                            username: rows[0].nombre,
+                            email: rows[0].correo,
+                            password: rows[0].contrasena,
+                            profile: rows[0].perfil,
+                            technician: rows[0].tecnico === 0 ? false : true,
+                            employeeID: rows[0].nEmpleado,
+                            signupDate: rows[0].fecha_registro.toLocaleDateString()
+                        })
+                    }
+                })
+            }
+        })
+    }
+
     getActiveUsers(idUser, callback) {
         this.pool.getConnection(function(e, c) {
             if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
 
             else {
-                c.query("SELECT nombre, tecnico FROM ucm_aw_cau_usu_usuarios WHERE idUsuario <> ?", [idUser],
+                c.query("SELECT idUsuario, fecha_registro, nombre, tecnico FROM ucm_aw_cau_usu_usuarios WHERE idUsuario <> ? AND activo = 1", [idUser],
                 function(e, rows) {
                     c.release()
                     if (e) callback(new Error("Error al acceso de la base de datos"))

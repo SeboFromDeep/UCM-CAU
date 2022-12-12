@@ -213,7 +213,6 @@ class MessageDAO{
             }
             else{
                 if (message.type === 'Sugerencia') message.type = message.select
-                console.log(idUser, message)
                 connection.query("INSERT INTO UCM_AW_CAU_AVI_Avisos(idUsuario, tipo, grupo, subgrupo, texto) values (?, ?, ?, ?, ?)",[idUser, message.type, message.group, message.subgroup, message.text],
                 function(e, rows){
                     connection.release();

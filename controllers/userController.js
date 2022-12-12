@@ -117,6 +117,30 @@ class userController {
             }
         })
     }
+
+    deleteUser(req, res) {
+        userDAO.getUserByID(req.params.id,
+            (error, user) => {
+                if (error) res.json(error)
+                else {
+                    console.log(user)
+                    if (!user.technician) {
+                        userDAO.deleteUser(user.userID, (error) => {
+                            if (error) res.json(error)
+                            res.status(200).redirect("/users/user-management")
+                        }) 
+                    }
+                    else {
+                        messageDAO.getTechnicianMessagesInfo(user.userID, (error, info) => {
+                            res
+                            .setHeader('content-type', 'application/json')
+                            .json(JSON.stringify(info));
+                        }) 
+
+                    }
+                }
+            })
+    }
 }
 
 module.exports = userController
