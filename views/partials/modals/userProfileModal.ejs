@@ -1,0 +1,29 @@
+<div class="modal fade" id="profile-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
+        <div class="modal-content ">
+            <div class="modal-body">
+                <div class="modal-header">
+                    <img class="user-image" src="/users/userImg" alt="imagen">
+                    <span class="bold" id="profile-username"><%= locals.user.username %></span>
+                </div>
+                <div class="profile-user-data"> 
+                    <div class="user-date-container">
+                        <span class="bold" id="user-date-label">Fecha de creación: </span><span id="user-date">1/1/2022</span>
+                    </div>
+                    <div class="user-profile-container">
+                        <span class="bold" id="user-profile-label">Perfil: </span><span id="user-date"><%= locals.user.profile %> </span>
+                    </div>
+                    <div class="user-password-container">
+                        <span class="bold" id="user-password-label">Contraseña: </span><span id="user-password"><%= locals.user.password %></span>
+                    </div>
+                </div>
+                <div class="profile-messages-data">
+                    
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-close">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
