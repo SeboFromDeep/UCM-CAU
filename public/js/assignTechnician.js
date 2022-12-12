@@ -16,7 +16,7 @@
         })
     })
 
-    document.querySelectorAll(".modal-close")[1].addEventListener('click', (event) => {
+    document.querySelectorAll("#adviceModal .modal-close")[0].addEventListener('click', (event) => {
         $('#adviceModal').toggle()
     }) 
 

@@ -155,7 +155,7 @@ class UserDAO {
                             profile: rows[0].perfil,
                             technician: rows[0].tecnico === 0 ? false : true,
                             employeeID: rows[0].nEmpleado,
-                            img: rows[0].img !== null ? rows[0].img : "noUser.png"
+                            signupDate: rows[0].fecha_registro.toLocaleDateString()
                         })
                     }
                 })

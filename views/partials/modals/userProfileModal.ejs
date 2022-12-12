@@ -8,7 +8,7 @@
                 </div>
                 <div class="profile-user-data"> 
                     <div class="user-date-container">
-                        <span class="bold" id="user-date-label">Fecha de creación: </span><span id="user-date">1/1/2022</span>
+                        <span class="bold" id="user-date-label">Fecha de creación: </span><span id="user-date"><%= locals.user.signupDate %></span>
                     </div>
                     <div class="user-profile-container">
                         <span class="bold" id="user-profile-label">Perfil: </span><span id="user-date"><%= locals.user.profile %> </span>
@@ -20,18 +20,18 @@
                 <div class="profile-messages-data">
                     <div class="messages-count-container">
                         <% if (locals.user.technician) { %>
-                            <span id="total-messages-count-label">Avisos gestionados: </span><span id="total-messages-count"></span>
+                            <span class="bold" id="total-messages-count-label">Avisos gestionados: </span><span id="total-messages-count"></span>
                         <% } else { %>
                             <span id="total-messages-count-label">Avisos Realizados: </span><span id="total-messages-count"></span>
                         <% } %>
                         <div class="incidencias-count-container">
-                            <span id="incidencias-count-label">Incidencias: </span><span id="incidencias-count"></span>
+                            <span class="bold" id="incidencias-count-label">Incidencias: </span><span id="incidencias-count"></span>
                         </div>
                         <div class="sugerencias-count-container">
-                            <span id="sugerencias-count-label">Sugerencias: </span><span id="sugerencias-count"></span>
+                            <span class="bold" id="sugerencias-count-label">Sugerencias: </span><span id="sugerencias-count"></span>
                         </div>
                         <div class="felicitaciones-count-container">
-                            <span id="felicitaciones-count-label">Felicitaciones: </span><span id="felicitaciones-count"></span>
+                            <span class="bold" id="felicitaciones-count-label">Felicitaciones: </span><span id="felicitaciones-count"></span>
                         </div>
                     </div>
                 </div>

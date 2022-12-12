@@ -445,3 +445,8 @@ td {
 #assign-form > * {
     font-size: 1.5rem;
 }
+
+#profile-modal .modal-header {
+    justify-content: left;
+    column-gap: 2rem;
+}

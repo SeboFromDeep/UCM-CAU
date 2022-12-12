@@ -1,4 +1,5 @@
 const userImage = document.querySelector(".user-image")
+const closeButton = document.querySelector("#profile-modal .modal-close")
 
 userImage.addEventListener("click", (event) => {
     $.ajax({
@@ -9,6 +10,10 @@ userImage.addEventListener("click", (event) => {
             addMessagesInfo(info)
         }
     })
+    $('#profile-modal').toggle()
+})
+
+closeButton.addEventListener("click", (event) => {
     $('#profile-modal').toggle()
 })
 
