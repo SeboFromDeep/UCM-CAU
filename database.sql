@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 10-12-2022 a las 14:55:00
+-- Tiempo de generación: 12-12-2022 a las 16:56:26
 -- Versión del servidor: 10.4.25-MariaDB
 -- Versión de PHP: 8.1.10
 
@@ -38,7 +38,8 @@ CREATE TABLE `sessions` (
 --
 
 INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
-('mLO-5GFLUfBYZQuS31yC-5i1MZuV4A3N', 1670766868, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"currentUser\":\"aitor.tilla@ucm.es\"}');
+('MHIT6z0MqklP6j2eIgN3NhpMJQki_aNr', 1670939548, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"currentUser\":\"aitor.tilla@ucm.es\"}'),
+('Ry516szDWjsNM6QgqPdo0ew64N64RzR4', 1670946953, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"currentUser\":\"aitor.tilla@ucm.es\"}');
 
 -- --------------------------------------------------------
 
@@ -56,7 +57,7 @@ CREATE TABLE `ucm_aw_cau_avi_avisos` (
   `texto` varchar(1000) DEFAULT NULL,
   `tecnico` int(50) DEFAULT NULL,
   `comentarios` varchar(1000) DEFAULT NULL,
-  `estado` varchar(10) NOT NULL DEFAULT 'ACTIVO'
+  `estado` varchar(10) NOT NULL DEFAULT 'ACTIVA'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -64,19 +65,21 @@ CREATE TABLE `ucm_aw_cau_avi_avisos` (
 --
 
 INSERT INTO `ucm_aw_cau_avi_avisos` (`idAviso`, `idUsuario`, `tipo`, `grupo`, `subgrupo`, `fecha`, `texto`, `tecnico`, `comentarios`, `estado`) VALUES
-(1, 3, 'Sugerencia', '', NULL, '0000-00-00', 'Preparar prácticas AW', 2, 'Aun te falta hacer la BD bobo', 'ACTIVO'),
-(2, 5, 'Sugerencia', '', NULL, '0000-00-00', 'Mirar fechas de congreso', NULL, NULL, 'ACTIVO'),
-(3, 4, 'Sugerencia', '', NULL, '0000-00-00', 'Ir al Supermercado', NULL, NULL, 'ACTIVO'),
-(4, 7, 'Incidencia', 'Grupo', 'Subgrupo', '2022-12-01', 'Jugar al Fútbol', 1, 'Juega wachón', 'ACTIVO'),
-(5, 2, 'Felicitacion', 'Grupo', 'Subgrupo', '2022-12-01', 'Hablar con el profesor', 2, NULL, 'ACTIVO'),
-(7, 7, 'Sugerencia', '', NULL, '2022-12-01', 'Entregar Practica Vountaria 4', 1, 'Prueba al cerrar', 'TERMINADO'),
-(8, 6, 'Felicitacion', '', NULL, '0000-00-00', 'Jugar ligoleyen', NULL, NULL, 'ACTIVO'),
-(9, 8, 'Incidencia', 'Comunicaciones', 'Correo electrónico', '2022-11-30', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, quaerat aperiam non officia tempore aspernatur tempora dicta minima illum quisquam iure recusandae rerum molestiae sunt totam impedit ad possimus quia ipsum ut voluptate a! Vitae, ipsa? Rerum sint natus porro fuga! Itaque voluptatibus numquam doloribus consequuntur voluptatem dolore voluptates earum!', NULL, NULL, 'ACTIVO'),
-(10, 8, 'Felicitacion', 'Toda la Universidad', NULL, '2022-12-01', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, deleniti.', 1, 'te jodiste', 'ACTIVO'),
-(11, 8, 'Sugerencia', 'Docencia', 'Blackboard Collaborate', '2022-11-23', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit esse quia quibusdam itaque quo iure. Nostrum qui temporibus asperiores, iste quo nulla recusandae eius quidem quaerat ducimus delectus, quas inventore consequatur voluptatem voluptas laudantium ab suscipit, tempora sit sequi cum pariatur quam eum atque! Dolore voluptatum temporibus itaque accusantium maxime accusamus sint ut? Perferendis vel quia ullam, sapiente aliquid earum dolore nemo, impedit ex vitae, ad modi culpa facere?\r\n', 2, NULL, 'ACTIVO'),
-(13, 8, 'Felicitacion', 'General', 'Archivo Universitario', '2022-12-10', 'Prueba', NULL, NULL, 'ACTIVO'),
-(14, 8, 'Queja', 'Conectividad', 'Wifi Eduroam (ssid: eduroam)', '2022-12-10', 'Prueba', NULL, NULL, 'ACTIVO'),
-(15, 8, 'Felicitacion', 'General', 'Archivo Universitario', '2022-12-10', 'Refactorización de las vistas', 1, NULL, 'TERMINADO');
+(1, 3, 'Sugerencia', '', NULL, '2022-12-01', 'Preparar prácticas AW', 2, 'Aun te falta hacer la BD bobo', 'ACTIVA'),
+(2, 5, 'Sugerencia', '', NULL, '2022-12-01', 'Mirar fechas de congreso', NULL, 'Mirame esta', 'BORRADA'),
+(3, 4, 'Sugerencia', '', NULL, '1900-01-01', 'Ir al Supermercado', 1, 'hecho', 'BORRADA'),
+(4, 7, 'Incidencia', 'Grupo', 'Subgrupo', '2022-12-01', 'Jugar al Fútbol', 1, NULL, 'ACTIVA'),
+(5, 2, 'Felicitacion', 'Grupo', 'Subgrupo', '2022-12-01', 'Hablar con el profesor', 2, NULL, 'ACTIVA'),
+(7, 7, 'Sugerencia', '', NULL, '2022-12-01', 'Entregar Practica Vountaria 4', 1, 'No es necesario', 'BORRADA'),
+(8, 6, 'Felicitacion', '', NULL, '2022-12-31', 'Jugar ligoleyen', 2, NULL, 'ACTIVA'),
+(9, 8, 'Incidencia', 'Comunicaciones', 'Correo electrónico', '2022-11-30', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, quaerat aperiam non officia tempore aspernatur tempora dicta minima illum quisquam iure recusandae rerum molestiae sunt totam impedit ad possimus quia ipsum ut voluptate a! Vitae, ipsa? Rerum sint natus porro fuga! Itaque voluptatibus numquam doloribus consequuntur voluptatem dolore voluptates earum!', NULL, NULL, 'ACTIVA'),
+(10, 8, 'Felicitacion', 'Toda la Universidad', NULL, '2022-12-01', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, deleniti.', 1, 'Lorem efectivamente.', 'BORRADA'),
+(11, 8, 'Sugerencia', 'Docencia', 'Blackboard Collaborate', '2022-11-23', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit esse quia quibusdam itaque quo iure. Nostrum qui temporibus asperiores, iste quo nulla recusandae eius quidem quaerat ducimus delectus, quas inventore consequatur voluptatem voluptas laudantium ab suscipit, tempora sit sequi cum pariatur quam eum atque! Dolore voluptatum temporibus itaque accusantium maxime accusamus sint ut? Perferendis vel quia ullam, sapiente aliquid earum dolore nemo, impedit ex vitae, ad modi culpa facere?\r\n', 2, 'borrado', 'BORRADA'),
+(13, 8, 'Felicitacion', 'General', 'Archivo Universitario', '2022-12-10', 'Prueba', 1, 'Prueba borrar sin asignar', 'BORRADA'),
+(14, 8, 'Queja', 'Conectividad', 'Wifi Eduroam (ssid: eduroam)', '2022-12-10', 'Prueba', NULL, NULL, 'ACTIVA'),
+(15, 8, 'Felicitacion', 'General', 'Archivo Universitario', '2022-12-10', 'Refactorización de las vistas', NULL, NULL, 'ACTIVA'),
+(16, 8, 'Sugerencia', 'Web', 'Portal de eventos', '2022-12-10', '¿Puede por favor funcionar todo ya? De verdad lo pido.', 1, 'Todo saldrá bien bbsito', 'TERMINADA'),
+(17, 8, 'Queja', 'Administración digital', 'Certificado digital de persona física', '2022-12-12', 'Me quejo mucho', 1, 'literalmente yo', 'TERMINADA');
 
 -- --------------------------------------------------------
 
@@ -231,22 +234,25 @@ CREATE TABLE `ucm_aw_cau_usu_usuarios` (
   `tecnico` int(1) NOT NULL,
   `nEmpleado` varchar(8) DEFAULT NULL,
   `img` varchar(45) DEFAULT NULL,
-  `activo` tinyint(1) NOT NULL DEFAULT 1
+  `activo` tinyint(1) NOT NULL DEFAULT 1,
+  `fecha_registro` date NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `ucm_aw_cau_usu_usuarios`
 --
 
-INSERT INTO `ucm_aw_cau_usu_usuarios` (`idUsuario`, `nombre`, `correo`, `contrasena`, `perfil`, `tecnico`, `nEmpleado`, `img`, `activo`) VALUES
-(1, 'aitor', 'aitor.tilla@ucm.es', 'aitor', 'PAS', 1, '1234-abc', 'aitor.png', 1),
-(2, 'felipe', 'felipe.lotas@ucm.es', 'felipe', 'PAS', 1, '5678-def', 'felipe.png', 1),
-(3, 'steve', 'steve.curros@ucm.es', 'steve', 'Antiguo Alumno', 0, NULL, 'steve.png', 1),
-(4, 'bill', 'bill.puertas@ucm.es', 'bill', 'PDI', 0, NULL, 'bill.png', 1),
-(5, 'alberto', 'albarto.lopez@ucm.es', 'alberto', 'Alumno', 0, NULL, NULL, 1),
-(6, 'usuario', 'usuario@ucm.es', 'usuario', 'Alumno', 0, NULL, NULL, 1),
-(7, 'Sebo', 'sebpinto@ucm.es', '123456aA*', 'PAS', 0, NULL, NULL, 1),
-(8, 'alumno', 'alumno@ucm.es', '', 'Alumno', 0, NULL, NULL, 1);
+INSERT INTO `ucm_aw_cau_usu_usuarios` (`idUsuario`, `nombre`, `correo`, `contrasena`, `perfil`, `tecnico`, `nEmpleado`, `img`, `activo`, `fecha_registro`) VALUES
+(1, 'aitor', 'aitor.tilla@ucm.es', 'aitor', 'PAS', 1, '1234-abc', 'aitor.png', 1, '2022-12-12'),
+(2, 'felipe', 'felipe.lotas@ucm.es', 'felipe', 'PAS', 1, '5678-def', 'felipe.png', 1, '2022-12-12'),
+(3, 'steve', 'steve.curros@ucm.es', 'steve', 'Antiguo Alumno', 0, NULL, 'steve.png', 1, '2022-12-12'),
+(4, 'bill', 'bill.puertas@ucm.es', 'bill', 'PDI', 0, NULL, 'bill.png', 1, '2022-12-12'),
+(5, 'alberto', 'albarto.lopez@ucm.es', 'alberto', 'Alumno', 0, NULL, NULL, 1, '2022-12-12'),
+(6, 'usuario', 'usuario@ucm.es', 'usuario', 'Alumno', 0, NULL, NULL, 1, '2022-12-12'),
+(7, 'Sebo', 'sebpinto@ucm.es', '123456aA*', 'PAS', 0, NULL, NULL, 1, '2022-12-12'),
+(8, 'alumno', 'alumno@ucm.es', '', 'Alumno', 0, NULL, NULL, 1, '2022-12-12'),
+(10, 'prueba', 'prueba@ucm.es', '123456aA*', 'Alumno', 0, NULL, 'prueba.png', 1, '2022-12-12'),
+(11, 'pruebatecnico', 'pruebatecnico@ucm.es', '123456aA*', 'PAS', 0, NULL, 'pruebatecnico.png', 1, '2022-12-12');
 
 --
 -- Índices para tablas volcadas
@@ -285,13 +291,13 @@ ALTER TABLE `ucm_aw_cau_usu_usuarios`
 -- AUTO_INCREMENT de la tabla `ucm_aw_cau_avi_avisos`
 --
 ALTER TABLE `ucm_aw_cau_avi_avisos`
-  MODIFY `idAviso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `idAviso` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `ucm_aw_cau_usu_usuarios`
 --
 ALTER TABLE `ucm_aw_cau_usu_usuarios`
-  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
