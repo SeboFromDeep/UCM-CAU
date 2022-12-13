@@ -1,6 +1,7 @@
 const finishIcons = document.querySelectorAll(".finish-message")
 const deleteIcons = document.querySelectorAll(".delete-message")
 const seeIcons = document.querySelectorAll(".see-message")
+const closeIcon = document.querySelector("#adviceModal .modal-close")
 
 finishIcons.forEach((icon, i) => {
     icon.addEventListener('click', (event) => {
@@ -46,7 +47,7 @@ function seeMessage(index) {
   $('#adviceModal').toggle()
 }
 
-document.querySelectorAll("#adviceModal .modal-close")[0].addEventListener('click', (event) => {
+closeIcon.addEventListener('click', (event) => {
   $('#adviceModal').toggle()
 }) 
 
