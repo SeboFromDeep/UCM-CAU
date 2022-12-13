@@ -69,13 +69,13 @@ INSERT INTO `ucm_aw_cau_avi_avisos` (`idAviso`, `idUsuario`, `tipo`, `grupo`, `s
 (2, 5, 'Sugerencia', 'Web', 'Portal de eventos', '2022-12-01', 'Me gustaria saber de que eventos se trata específicamente en el portal de la página web.', NULL, NULL, 'BORRADA'),
 (3, 4, 'Sugerencia', 'Docencia', 'Blackboard Collaborate', '1900-01-01', 'Me gustaria que incorporaseis en la UCM una aplicación muy util llamado collaborate ', 1, 'hecho', 'BORRADA'),
 (4, 7, 'Incidencia', 'Web', 'Redirecciones web', '2022-12-01', 'Cada vez que entro a mi cuenta, me ridirige a la página principal de la UCM', 1, NULL, 'ACTIVA'),
-(5, 2, 'Felicitacion', 'Servicio de Cafeteria', NULL, '2022-12-01', 'Felicitaciones! ha ganado un premio con un cupon en la cafeteria', 2, NULL, 'ACTIVA'),
+(5, 2, 'Felicitacion', 'General', 'Servicio de Cafeteria', '2022-12-01', 'Felicitaciones! ha ganado un premio con un cupon en la cafeteria', 2, NULL, 'ACTIVA'),
 (7, 7, 'Sugerencia', 'Administración digital', 'Certificado electrónico de empleado público', '2022-12-01', 'necesito el certificado de Aitor Tilla para cumplir con mi trabajo', 1, 'No es necesario', 'BORRADA'),
-(8, 6, 'Felicitacion', 'Toda la Universidad', NULL, '2022-12-31', 'Enhorabuena!! ha sido el estudiante con las mayores cualificaciones de toda la Universidad.', 2, NULL, 'ACTIVA'),
+(8, 6, 'Felicitacion', 'General', 'Toda la Universidad', '2022-12-31', 'Enhorabuena!! ha sido el estudiante con las mayores cualificaciones de toda la Universidad.', 2, NULL, 'ACTIVA'),
 (9, 8, 'Incidencia', 'Comunicaciones', 'Correo electrónico', '2022-11-30', 'Me gustaria recibir mi los avisos en mi correo electrónico', NULL, NULL, 'ACTIVA'),
-(10, 8, 'Felicitacion', 'Toda la Universidad', NULL, '2022-12-01', 'Hoy acabo el grado de ingenieria informática y me gustaria agradecer a todo el equipo de la UCM por su excelente trabajo', 1, 'Muchísimas gracias. Ha sido un honor tenerte como alumno', 'BORRADA'),
+(10, 8, 'Felicitacion', 'General', 'Toda la Universidad', '2022-12-01', 'Hoy acabo el grado de ingenieria informática y me gustaria agradecer a todo el equipo de la UCM por su excelente trabajo', 1, 'Muchísimas gracias. Ha sido un honor tenerte como alumno', 'BORRADA'),
 (11, 5, 'Sugerencia', 'Docencia', 'Listado de clase', '2022-11-23', 'Me gustaria recibir un listado de todos los alumnos que se han matriculado en el grado de ingenieria informática', 2, 'Usted no tiene el permiso para recibir la lista que ha solicitado', 'BORRADA'),
-(13, 1, 'Felicitacion', 'Servicio de Administración', NULL, '2022-12-10', 'Felicidades por ser admitido en el servicio técnico', 2, NULL, 'BORRADA'),
+(13, 1, 'Felicitacion', 'General', 'Servicio de Administración', '2022-12-10', 'Felicidades por ser admitido en el servicio técnico', 2, NULL, 'BORRADA'),
 (14, 8, 'Incidencia', 'Conectividad', 'Wifi Eduroam (ssid: eduroam)', '2022-12-10', 'El wifi se ha caido en toda la universidad', NULL, NULL, 'ACTIVA'),
 (15, 8, 'Sugerencia', 'Comunicaciones', 'Cuenta de Alumno', '2022-12-10', 'Se me ha olvidado la contraseña de la cuenta de la universidad', NULL, NULL, 'ACTIVA'),
 (16, 8, 'Sugerencia', 'Web', 'Portal de eventos', '2022-12-10', '¿Puede por favor decirme como funcionan los eventos? no he recibido las notificaciones esta semana.', 1, 'Los eventos como su nombre indica, son eventos especiales, no son recordatorios', 'TERMINADA'),
@@ -249,7 +249,7 @@ INSERT INTO `ucm_aw_cau_usu_usuarios` (`idUsuario`, `nombre`, `correo`, `contras
 (4, 'bill', 'bill.puertas@ucm.es', 'bill', 'PDI', 0, NULL, 'bill.png', 1, '2020-12-12'),
 (5, 'alberto', 'albarto.lopez@ucm.es', 'alberto', 'Alumno', 0, NULL, NULL, 1, '2014-12-12'),
 (6, 'Elena', 'Elena@ucm.es', 'usuario', 'Alumno', 0, NULL, NULL, 1, '2021-12-12'),
-(7, 'Sebo', 'sebpinto@ucm.es', '123456aA*', 'PAS', 0, NULL, NULL, 1, '2022-3-6'),
+(7, 'Sebo', 'sebpinto@ucm.es', '123456aA*', 'PAS', 1, NULL, NULL, 1, '2022-3-6'),
 (8, 'Carlo', 'carlo@ucm.es', '54321bB*', 'Alumno', 0, NULL, NULL, 1, '2022-12-12');
 
 
