@@ -26,30 +26,16 @@ messageRouter
 .get("/", (req, res) => {
     res.status(200).redirect("/messages/my-messages")
 })
-
-messageRouter
-.post("/assign-message/:id", messageController.assignMessage)
-
-messageRouter
-.get("/my-messages", messageController.getMyMessages)
-
-messageRouter
-.get("/his-messages",messageController.getHistoricMessages)
-
-messageRouter
 .get("/entry-messages",messageController.getEntryMessages)
-
-messageRouter
-.post("/finish-message/:id", userController.isUserTechnician, messageController.finishMessage)
-
-messageRouter
-.post("/delete-unassigned-message/:id", userController.isUserTechnician, messageController.deleteUnassignedMessage)
-.post("/delete-message/:id", userController.isUserTechnician, messageController.deleteMessage)
-
-messageRouter
+.get("/my-messages", messageController.getMyMessages)
+.get("/his-messages",messageController.getHistoricMessages)
 .get("/message-options", messageController.getMessageOptions)
 
 messageRouter
+.post("/assign-message/:id", userController.isUserTechnician, messageController.assignMessage)
+.post("/delete-unassigned-message/:id", userController.isUserTechnician, messageController.deleteUnassignedMessage)
+.post("/finish-message/:id", userController.isUserTechnician, messageController.finishMessage)
+.post("/delete-message/:id", userController.isUserTechnician, messageController.deleteMessage)
 .post("/create-message", messageController.createMessage)
 
 module.exports = messageRouter

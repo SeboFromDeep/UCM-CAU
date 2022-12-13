@@ -34,11 +34,7 @@ userRouter
 })
 .get("/user-messages-info", userController.getMessagesInfo)
 .get("/delete/:id", userController.deleteUser)
-
-userRouter
 .get("/active-technicians", userController.getActiveTechnicians)
-
-userRouter
 .get("/user-management", userController.getActiveUsers)
 
 module.exports = userRouter
