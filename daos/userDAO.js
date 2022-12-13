@@ -217,7 +217,7 @@ class UserDAO {
             if (e) callback(new Error(DB_CONNECTION_ERROR_MESSAGE))
 
             else {
-                c.query("SELECT idUsuario, fecha_registro, nombre, tecnico FROM ucm_aw_cau_usu_usuarios WHERE idUsuario <> ? AND activo = 1", [idUser],
+                c.query("SELECT idUsuario, fecha_registro, nombre, tecnico FROM ucm_aw_cau_usu_usuarios WHERE idUsuario <> ? AND activo = 1 ORDER BY nombre ASC;", [idUser],
                 function(e, rows) {
                     c.release()
                     if (e) callback(new Error(DB_ACCESS_ERROR_MESSAGE))
@@ -233,7 +233,7 @@ class UserDAO {
         this.pool.getConnection(function(e, c) {
             if (e) callback(new Error(DB_CONNECTION_ERROR_MESSAGE))
             else {
-                c.query("SELECT idUsuario, nombre FROM ucm_aw_cau_usu_usuarios WHERE tecnico = 1 AND activo = 1",
+                c.query("SELECT idUsuario, nombre FROM ucm_aw_cau_usu_usuarios WHERE tecnico = 1 AND activo = 1 ORDER BY nombre ASC;",
                 function(e, rows) {
                     c.release()
                     if (e) callback(new Error(DB_ACCESS_ERROR_MESSAGE))
