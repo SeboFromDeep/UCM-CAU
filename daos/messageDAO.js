@@ -67,7 +67,7 @@ class MessageDAO{
                 callback(DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
-                connection.query("SELECT AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreTecnico, AVI.estado, AVI.comentarios FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.tecnico = USU.idUsuario WHERE AVI.idUsuario = ? and AVI.estado <> 'ACTIVA';",[idUser],
+                connection.query("SELECT AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreTecnico, AVI.estado, AVI.comentarios FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.tecnico = USU.idUsuario WHERE AVI.idUsuario = ? and AVI.estado <> 'ACTIVA' ORDER BY AVI.idAviso DESC;",[idUser],
                 function(e, rows){
                     
                     connection.release();
@@ -131,7 +131,7 @@ class MessageDAO{
                 callback(DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
-                connection.query("SELECT AVI.idAviso, AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreUsuario, AVI.comentarios ,AVI.estado FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.idUsuario = USU.idUsuario WHERE AVI.tecnico = ? and AVI.estado <> 'ACTIVA';", [idTecnico],
+                connection.query("SELECT AVI.idAviso, AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreUsuario, AVI.comentarios ,AVI.estado FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.idUsuario = USU.idUsuario WHERE AVI.tecnico = ? and AVI.estado <> 'ACTIVA' ORDER BY AVI.idAviso DESC;", [idTecnico],
                 function(e, rows){
                     connection.release();
                     if(e) callback(DB_ACCESS_ERROR_MESSAGE);
