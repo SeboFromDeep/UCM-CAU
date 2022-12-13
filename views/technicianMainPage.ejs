@@ -25,22 +25,24 @@
     </header>
     <main>
 
-        <!-- Search Bar -->
-        <div class="search-wrapper">
-          <div class="search-container">
-            <div class="search-bar">
-              <input type="text" name="search" id="search" placeholder="Buscar...">
-              <i class="fa-solid fa-magnifying-glass search-icon"></i>
-            </div>
-            <div class="checkbox-container">
-              <span>Usuarios</span>
-              <div class="wrap-toggle">
-                <input type="checkbox" id="toggle" class="invisible"/>
-                <label for="toggle" class="switch"></label>
+        <% if (current !== ".gestion-de-usuarios") { %>
+          <!-- Search Bar -->
+          <div class="search-wrapper">
+            <div class="search-container">
+              <div class="search-bar">
+                <input type="text" name="search" id="search" placeholder="Buscar...">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+              </div>
+              <div class="checkbox-container">
+                <span>Usuarios</span>
+                <div class="wrap-toggle">
+                  <input type="checkbox" id="toggle" class="invisible"/>
+                  <label for="toggle" class="switch"></label>
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        <% } %>
 
 
         <!-- Table with messages info -->
