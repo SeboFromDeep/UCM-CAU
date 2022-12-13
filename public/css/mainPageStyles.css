@@ -319,8 +319,6 @@ td {
 
 /* Modals */
 
-/* show modal */
-
 .modal {
     font-size: 1.5rem;
 }
@@ -395,8 +393,6 @@ td {
     min-height: 5rem;
     resize: none
 }
-
-/* create modal */
 
 #modal-create-body {
     display: grid;
