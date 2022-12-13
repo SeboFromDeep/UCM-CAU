@@ -50,7 +50,7 @@ class userController {
     signUp(req, res) {
         const errors = validationResult(req).errors
         if (errors.length !== 0){
-            fs.unlinkSync("./public/img/" + req.file.filename)
+            if(req.file) fs.unlinkSync("./public/img/" + req.file.filename)
             res.render("signup", {errors: errors})
         }
         else {
@@ -59,13 +59,14 @@ class userController {
                 correo: req.body.email,
                 contrasena: req.body.password,
                 perfil: req.body.profile,
-                tecnico: req.body.isTechnician === "true" ? 1 : 0,
+                tecnico: req.body.isTechnician === "on" ? 1 : 0,
                 nEmpleado: req.body.employeeID ? req.body.employeeID : null,
                 img: req.file ? req.body.email.split("@")[0] + path.extname(req.file.originalname) : null
             }
             userDAO.insertUser(user, (error, inserted) => {
-                if (inserted) res.render("login", {registered: true, errors: null})
-                else res.render("signup", {errors: [error.message]})
+                console.log(error.message.toString())
+                if (error) res.render("signup", {errors: [{msg: error.message.toString()}]})  
+                else res.render("login", {registered: true, errors: null}) 
             })
 
         }

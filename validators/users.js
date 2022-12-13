@@ -36,8 +36,10 @@ const validateSignup = [
     }),
     check("user-image")
     .custom((value, {req}) => {
-        if (path.extname(req.file.originalname) !== ".jpg" && path.extname(req.file.originalname) !== ".png" && path.extname(req.file.originalname) !== ".jpeg"){
-            throw new Error("Sólo se aceptan imágenes con extension .jpg, .jpeg o .png")
+        if(req.file){
+            if (path.extname(req.file.originalname) !== ".jpg" && path.extname(req.file.originalname) !== ".png" && path.extname(req.file.originalname) !== ".jpeg"){
+                throw new Error("Sólo se aceptan imágenes con extension .jpg, .jpeg o .png")
+            }
         }
         return true
     }),

@@ -27,6 +27,7 @@ class UserDAO {
     }
 
     insertUser(user, callback){
+        console.log(user)
         this.pool.getConnection(function(e, c) {
             if (e) callback(new Error(DB_CONNECTION_ERROR_MESSAGE))
 
@@ -41,8 +42,9 @@ class UserDAO {
                             
                             //usuario técnico
                             if(user.tecnico === 1){
-                                c.query("INSERT INTO ucm_aw_cau_usu_usuarios (nombre, correo, contrasena, perfil, tecnico , nEmpleado, img) values(?,?,?, PAS, 1, ?, ?)",
+                                c.query("INSERT INTO ucm_aw_cau_usu_usuarios (nombre, correo, contrasena, perfil, tecnico , nEmpleado, img) values(?,?,?, 'PAS', 1, ?, ?)",
                                 [user.nombre,user.correo,user.contrasena,user.nEmpleado,user.img], function(e, rows){
+                                    console.log(rows)
                                     c.release()
                                     if (e) callback(new Error(DB_ACCESS_ERROR_MESSAGE))
                                     else callback(null,true)

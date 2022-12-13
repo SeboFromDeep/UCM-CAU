@@ -18,8 +18,8 @@ closeButton.addEventListener("click", (event) => {
 })
 
 function addMessagesInfo(info) {
-    $('#total-messages-count')[0].innerText = info['Total']
-    $('#incidencias-count')[0].innerText = info['Incidencia']
-    $('#sugerencias-count')[0].innerText = info['Sugerencia']
-    $('#felicitaciones-count')[0].innerText = info['Felicitacion']
+    $('#total-messages-count')[0].innerText = info['Total'] ? info['Total'] : 0
+    $('#incidencias-count')[0].innerText = info['Incidencia'] ? info['Incidencia'] : 0
+    $('#sugerencias-count')[0].innerText = info['Sugerencia'] ? info['Sugerencia'] : 0
+    $('#felicitaciones-count')[0].innerText = info['Felicitacion'] ? info['Felicitacion'] : 0
 }
