@@ -1,5 +1,8 @@
 "use strict"
 
+const DB_CONNECTION_ERROR_MESSAGE = "Error en la conexión a la Base de Datos"
+const DB_ACCESS_ERROR_MESSAGE = "Error en el acceso a la Base de Datos"
+
 class UserDAO {
     constructor(pool) {
         this.pool = pool
@@ -7,13 +10,13 @@ class UserDAO {
 
     isUserCorrect(email, password, callback) {
         this.pool.getConnection(function(e, c) {
-            if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+            if (e) callback(new Error(DB_CONNECTION_ERROR_MESSAGE))
 
             else {
                 c.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE correo = ? AND contrasena = ? AND activo = 1", [email, password],
                 function(e, rows) {
                     c.release()
-                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    if (e) callback(new Error(DB_ACCESS_ERROR_MESSAGE))
                     else {
                         if (rows == 0) callback(null, false)
                         else callback(null, true)
@@ -25,12 +28,12 @@ class UserDAO {
 
     insertUser(user, callback){
         this.pool.getConnection(function(e, c) {
-            if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+            if (e) callback(new Error(DB_CONNECTION_ERROR_MESSAGE))
 
             else {
                 c.query("SELECT idUsuario FROM ucm_aw_cau_usu_usuarios WHERE correo = ?", [user.correo],
                 function(e, rows) {
-                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    if (e) callback(new Error(DB_ACCESS_ERROR_MESSAGE))
                     
                     else {
                         if (rows != 0) callback(new Error("Ya existe este usuario"))
@@ -41,7 +44,7 @@ class UserDAO {
                                 c.query("INSERT INTO ucm_aw_cau_usu_usuarios (nombre, correo, contrasena, perfil, tecnico , nEmpleado, img) values(?,?,?, PAS, 1, ?, ?)",
                                 [user.nombre,user.correo,user.contrasena,user.nEmpleado,user.img], function(e, rows){
                                     c.release()
-                                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                                    if (e) callback(new Error(DB_ACCESS_ERROR_MESSAGE))
                                     else callback(null,true)
                                 });
                             }
@@ -50,7 +53,7 @@ class UserDAO {
                                 c.query("INSERT INTO ucm_aw_cau_usu_usuarios (nombre, correo, contrasena, perfil, tecnico , nEmpleado, img) values(?,?,?, ?, 0, NULL, ?)",
                                 [user.nombre,user.correo,user.contrasena,user.perfil,user.img], function(e, rows){
                                     c.release()
-                                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                                    if (e) callback(new Error(DB_ACCESS_ERROR_MESSAGE))
                                     else callback(null,true)
                                 });
                             }
@@ -63,13 +66,13 @@ class UserDAO {
 
     deleteUser(idUser, callback){
         this.pool.getConnection(function(e, c) {
-            if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+            if (e) callback(new Error(DB_CONNECTION_ERROR_MESSAGE))
 
             else {
                 c.query("UPDATE ucm_aw_cau_usu_usuarios USU, ucm_aw_cau_avi_avisos AVI SET USU.activo = 0, AVI.estado = 'USUARIO BORRADO' WHERE USU.idUsuario = ? AND USU.idUsuario = AVI.idUsuario AND AVI.estado = 'ACTIVA';", [idUser],
                 function(e, rows) {
                     c.release()
-                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    if (e) callback(new Error(DB_ACCESS_ERROR_MESSAGE))
                     
                     else {
                         callback(null)
@@ -81,13 +84,13 @@ class UserDAO {
 
     deleteTechnician(idUser, callback){
         this.pool.getConnection(function(e, c) {
-            if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+            if (e) callback(new Error(DB_CONNECTION_ERROR_MESSAGE))
 
             else {
                 c.query("UPDATE ucm_aw_cau_usu_usuarios USU, ucm_aw_cau_avi_avisos AVI SET USU.activo = 0, AVI.tecnico = NULL WHERE USU.idUsuario = ? AND USU.idUsuario = AVI.tecnico AND AVI.estado = 'ACTIVA';", [idUser],
                 function(e, rows) {
                     c.release()
-                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    if (e) callback(new Error(DB_ACCESS_ERROR_MESSAGE))
                     
                     else {
                         callback(null)
@@ -99,13 +102,13 @@ class UserDAO {
 
    esTecnico(idUser,callback){
     this.pool.getConnection(function(e, c) {
-        if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+        if (e) callback(new Error(DB_CONNECTION_ERROR_MESSAGE))
 
         else {
             c.query("SELECT tecnico FROM ucm_aw_cau_usu_usuarios WHERE idUsuario = ? ", [idUser],
             function(e, rows) {
                 c.release()
-                if (e) callback(new Error("Error al acceso de la base de datos"))
+                if (e) callback(new Error(DB_ACCESS_ERROR_MESSAGE))
                 
                 else {
                     if (rows.length === 0) callback(null, false)
@@ -118,13 +121,13 @@ class UserDAO {
 
     getUserImageName(email, callback) {
         this.pool.getConnection(function(e, c) {
-            if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+            if (e) callback(new Error(DB_CONNECTION_ERROR_MESSAGE))
 
             else {
                 c.query("SELECT img FROM ucm_aw_cau_usu_usuarios WHERE correo = ?", [email],
                 function(e, rows) {
                     c.release()
-                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    if (e) callback(new Error(DB_ACCESS_ERROR_MESSAGE))
                     
                     else {
                         if (rows == 0) callback(new Error("No existe el usuario"))
@@ -137,13 +140,13 @@ class UserDAO {
 
     getUserId (email,callback){
         this.pool.getConnection(function(e, c) {
-            if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+            if (e) callback(new Error(DB_CONNECTION_ERROR_MESSAGE))
 
             else {
                 c.query("SELECT idUsuario FROM ucm_aw_cau_usu_usuarios WHERE correo = ?", [email],
                 function(e, rows) {
                     c.release()
-                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    if (e) callback(new Error(DB_ACCESS_ERROR_MESSAGE))
                     else {
                         if (rows == 0) callback(null, false)
                         else callback(rows[0], true)
@@ -155,13 +158,13 @@ class UserDAO {
 
     getUserByEmail(email, callback) {
         this.pool.getConnection(function(e, c) {
-            if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+            if (e) callback(new Error(DB_CONNECTION_ERROR_MESSAGE))
 
             else {
                 c.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE correo = ?", [email],
                 function(e, rows) {
                     c.release()
-                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    if (e) callback(new Error(DB_ACCESS_ERROR_MESSAGE))
                     else {
                         if (rows == 0) callback(null, false)
                         else callback(null, {
@@ -182,13 +185,13 @@ class UserDAO {
 
     getUserByID(id, callback) {
         this.pool.getConnection(function(e, c) {
-            if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+            if (e) callback(new Error(DB_CONNECTION_ERROR_MESSAGE))
 
             else {
                 c.query("SELECT * FROM ucm_aw_cau_usu_usuarios WHERE idUsuario = ?", [id],
                 function(e, rows) {
                     c.release()
-                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    if (e) callback(new Error(DB_ACCESS_ERROR_MESSAGE))
                     else {
                         if (rows == 0) callback(null, false)
                         else callback(null, {
@@ -209,13 +212,13 @@ class UserDAO {
 
     getActiveUsers(idUser, callback) {
         this.pool.getConnection(function(e, c) {
-            if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+            if (e) callback(new Error(DB_CONNECTION_ERROR_MESSAGE))
 
             else {
                 c.query("SELECT idUsuario, fecha_registro, nombre, tecnico FROM ucm_aw_cau_usu_usuarios WHERE idUsuario <> ? AND activo = 1", [idUser],
                 function(e, rows) {
                     c.release()
-                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    if (e) callback(new Error(DB_ACCESS_ERROR_MESSAGE))
                     else {
                         callback(null, rows)
                     }
@@ -226,12 +229,12 @@ class UserDAO {
 
     getActiveTechnicians(callback) {
         this.pool.getConnection(function(e, c) {
-            if (e) callback(new Error("Error de la conexion de la base de datos del usuario"))
+            if (e) callback(new Error(DB_CONNECTION_ERROR_MESSAGE))
             else {
                 c.query("SELECT idUsuario, nombre FROM ucm_aw_cau_usu_usuarios WHERE tecnico = 1 AND activo = 1",
                 function(e, rows) {
                     c.release()
-                    if (e) callback(new Error("Error al acceso de la base de datos"))
+                    if (e) callback(new Error(DB_ACCESS_ERROR_MESSAGE))
                     
                     else {
                         let users = {}

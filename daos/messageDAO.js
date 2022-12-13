@@ -1,5 +1,8 @@
 "use strict"
 
+const DB_CONNECTION_ERROR_MESSAGE = "Error en la conexión a la Base de Datos"
+const DB_ACCESS_ERROR_MESSAGE = "Error en el acceso a la Base de Datos"
+
 class MessageDAO{
     constructor(pool) {
         this.pool=pool;
@@ -9,14 +12,14 @@ class MessageDAO{
     getMessage(idMessage,callback){
         this.pool.getConnection(function(e,connection){
             if(e){
-                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+                callback(DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
                 
                 connection.query("SELECT * FROM UCM_AW_CAU_AVI_Avisos WHERE idAviso = ?",[idMessage],
                 function(e, rows){
                     connection.release();
-                    if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    if(e) callback(DB_ACCESS_ERROR_MESSAGE);
                     else callback(null, rows[0]);
                 });
                 
@@ -27,14 +30,14 @@ class MessageDAO{
     getMyMessagesUser(idUser,callback){
         this.pool.getConnection(function(e,connection){
             if(e){
-                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+                callback(DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
                 connection.query("SELECT AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreTecnico, AVI.estado, AVI.comentarios FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.tecnico = USU.idUsuario WHERE AVI.idUsuario = ? and AVI.estado = 'ACTIVA';",[idUser],
                 function(e, rows){
                     
                     connection.release();
-                    if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    if(e) callback(DB_ACCESS_ERROR_MESSAGE);
                     else {
                         let messages = []
                         rows.forEach(message => {
@@ -61,14 +64,14 @@ class MessageDAO{
 
         this.pool.getConnection(function(e,connection){
             if(e){
-                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+                callback(DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
                 connection.query("SELECT AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreTecnico, AVI.estado, AVI.comentarios FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.tecnico = USU.idUsuario WHERE AVI.idUsuario = ? and AVI.estado <> 'ACTIVA';",[idUser],
                 function(e, rows){
                     
                     connection.release();
-                    if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    if(e) callback(DB_ACCESS_ERROR_MESSAGE);
                     else {
                         let messages = []
                         rows.forEach(message => {
@@ -94,13 +97,13 @@ class MessageDAO{
     getMyMessagesTecnico(idTecnico, callback){
         this.pool.getConnection(function(e,connection){
             if(e){
-                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+                callback(DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
                 connection.query("SELECT AVI.idAviso, AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreUsuario, AVI.estado FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.idUsuario = USU.idUsuario WHERE AVI.tecnico = ? and AVI.estado = 'ACTIVA';", [idTecnico],
                 function(e, rows){
                     connection.release();
-                    if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    if(e) callback(DB_ACCESS_ERROR_MESSAGE);
                     else {
                         let messages = []
                         rows.forEach(message => {
@@ -125,13 +128,13 @@ class MessageDAO{
     getMyHistoricMessagesTecnico(idTecnico, callback){
         this.pool.getConnection(function(e,connection){
             if(e){
-                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+                callback(DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
                 connection.query("SELECT AVI.idAviso, AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreUsuario, AVI.comentarios ,AVI.estado FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.idUsuario = USU.idUsuario WHERE AVI.tecnico = ? and AVI.estado <> 'ACTIVA';", [idTecnico],
                 function(e, rows){
                     connection.release();
-                    if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    if(e) callback(DB_ACCESS_ERROR_MESSAGE);
                     else {
                         let messages = []
                         rows.forEach(message => {
@@ -157,14 +160,14 @@ class MessageDAO{
     getAllActiveMessages(callback){
         this.pool.getConnection(function(e,connection){
             if(e){
-                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+                callback(DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
                 connection.query("SELECT AVI.idAviso, AVI.fecha, AVI.texto, AVI.tipo, AVI.grupo, AVI.subgrupo, USU.nombre as nombreUsuario, AVI.estado, AVI.comentarios, AVI.tecnico FROM UCM_AW_CAU_AVI_Avisos AVI LEFT JOIN ucm_aw_cau_usu_usuarios USU on AVI.idUsuario = USU.idUsuario WHERE AVI.estado = 'ACTIVA';",
                 function(e, rows){
                     
                     connection.release();
-                    if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    if(e) callback(DB_ACCESS_ERROR_MESSAGE);
                     else {
                         let messages = []
                         rows.forEach(message => {
@@ -192,14 +195,14 @@ class MessageDAO{
     assignMessage(idUser, idMessage, callback) {
         this.pool.getConnection(function(e,connection){
             if(e){
-                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+                callback(DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
                 
                 connection.query("UPDATE ucm_aw_cau_avi_avisos SET tecnico = ? WHERE idAviso = ?",[idUser, idMessage],
                 function(e, rows){
                     connection.release();
-                    if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    if(e) callback(DB_ACCESS_ERROR_MESSAGE);
                     else callback(null);
                 });
                 
@@ -227,14 +230,14 @@ class MessageDAO{
     finishMessage(id, comments, callback){ //aquí el técnico se dispone a hacerle el comentario.
         this.pool.getConnection(function(error,connection){
             if(error){
-                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+                callback(DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
                 
                 connection.query("UPDATE UCM_AW_CAU_AVI_Avisos SET comentarios = ?, estado = 'TERMINADA' WHERE idAviso = ?", [comments, id],
                 function(error, result){
                     connection.release();
-                    if(error) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    if(error) callback(DB_ACCESS_ERROR_MESSAGE);
                     else callback(null)
                 });
                 
@@ -245,14 +248,14 @@ class MessageDAO{
     deleteMessage(id, comments, callback){
         this.pool.getConnection(function(error,connection){
             if(error){
-                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+                callback(DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
                 
                 connection.query("UPDATE UCM_AW_CAU_AVI_Avisos SET comentarios = ?, estado = 'BORRADA' WHERE idAviso = ?", [comments, id],
                 function(error, result){
                     connection.release();
-                    if(error) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    if(error) callback(DB_ACCESS_ERROR_MESSAGE);
                     else callback(null)
                 });
                 
@@ -263,13 +266,13 @@ class MessageDAO{
     deleteUnassignedMessage(idUser, idMessage, comments, callback) {
         this.pool.getConnection(function(error,connection){
             if(error){
-                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+                callback(DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
                 connection.query("UPDATE UCM_AW_CAU_AVI_Avisos SET tecnico = ?, comentarios = ?, estado = 'BORRADA' WHERE idAviso = ?", [idUser, comments, idMessage],
                 function(error, result){
                     connection.release();
-                    if(error) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    if(error) callback(DB_ACCESS_ERROR_MESSAGE);
                     else callback(null)
                 });
                 
@@ -280,13 +283,13 @@ class MessageDAO{
     getMessageOptions(profile, callback) {
         this.pool.getConnection(function(e,connection){
             if(e){
-                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+                callback(DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
                 connection.query("SELECT * FROM ucm_aw_cau_cat_categorias where PERFIL = ? order by categoria, grupo, subgrupo;", [profile],
                 function(e, rows){
                     connection.release();
-                    if(e) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    if(e) callback(DB_ACCESS_ERROR_MESSAGE);
                     else {
                         let options = {}
                         rows.forEach(row => {
@@ -306,13 +309,13 @@ class MessageDAO{
     getUserMessagesInfo(idUser, callback) {
         this.pool.getConnection(function(error,connection){
             if(error){
-                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+                callback(DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
                 connection.query("SELECT count(tipo) as count, tipo as tipo FROM `ucm_aw_cau_avi_avisos` where idUsuario = ? GROUP by tipo;", [idUser],
                 function(error, rows){
                     connection.release();
-                    if(error) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    if(error) callback(DB_ACCESS_ERROR_MESSAGE);
                     else {
                         let info = {}
                         rows.forEach((row) => {
@@ -331,13 +334,13 @@ class MessageDAO{
     getTechnicianMessagesInfo(idTechnician, callback) {
         this.pool.getConnection(function(error,connection){
             if(error){
-                callback(utils.DB_CONNECTION_ERROR_MESSAGE)
+                callback(DB_CONNECTION_ERROR_MESSAGE)
             }
             else{
                 connection.query("SELECT count(tipo) as count, tipo as tipo FROM `ucm_aw_cau_avi_avisos` where tecnico = ? GROUP by tipo;", [idTechnician],
                 function(error, rows){
                     connection.release();
-                    if(error) callback(utils.DB_ACCESS_ERROR_MESSAGE);
+                    if(error) callback(DB_ACCESS_ERROR_MESSAGE);
                     else {
                         let info = {}
                         rows.forEach((row) => {
