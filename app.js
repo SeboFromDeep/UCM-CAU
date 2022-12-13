@@ -24,7 +24,6 @@ const middlewareSession = session({
 const UserController = require("./controllers/userController")
 const userController = new UserController()
 const userValidator = require("./validators/users")
-const { check } = require("express-validator")
 
 const storage = multer.diskStorage({
     destination: function(req, file, cb) {

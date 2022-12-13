@@ -11,9 +11,8 @@ const pool = mysql.createPool(config.mysqlConfig)
 const userDAO = new UserDAO(pool)
 const messageDAO = new MesssageDAO(pool)
 
-
-
-const {check, validationResult} = require("express-validator")
+const {validationResult} = require("express-validator")
+const fs = require("fs")
 
 class userController {
 
@@ -50,7 +49,10 @@ class userController {
 
     signUp(req, res) {
         const errors = validationResult(req).errors
-        if (errors.length !== 0) res.render("signup", {errors: errors})
+        if (errors.length !== 0){
+            fs.unlinkSync("./public/img/" + req.file.filename)
+            res.render("signup", {errors: errors})
+        }
         else {
             const user = {
                 nombre: req.body.username,

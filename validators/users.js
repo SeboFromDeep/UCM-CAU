@@ -1,4 +1,5 @@
 const {check, validationResult} = require("express-validator")
+const path = require("path")
 
 const validateSignup = [
     check("email", "Introduce tu correo UCM")
@@ -30,6 +31,13 @@ const validateSignup = [
         if (req.body.isTechnician) {
             let pattern = /(^[0-9]{4})([-])([a-z]{3})$/
             if (!pattern.test(value)) throw new Error("Nº de Empleado incorrecto") 
+        }
+        return true
+    }),
+    check("user-image")
+    .custom((value, {req}) => {
+        if (path.extname(req.file.originalname) !== ".jpg" && path.extname(req.file.originalname) !== ".png" && path.extname(req.file.originalname) !== ".jpeg"){
+            throw new Error("Sólo se aceptan imágenes con extension .jpg, .jpeg o .png")
         }
         return true
     }),

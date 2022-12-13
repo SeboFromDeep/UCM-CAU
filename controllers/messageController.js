@@ -11,26 +11,15 @@ const pool = mysql.createPool(config.mysqlConfig)
 const messageDAO = new MessageDAO(pool)
 const userDAO = new UserDAO(pool)
 
-const uC = require("./userController")
-const { json } = require("body-parser")
-
-const userController = new uC()
-
 class messagesController {
-    assignMessage(req, res) {
-        messageDAO.assignMessage(req.body.technician, req.params.id, (error) => {
-            if (error) res.json(error)
-            else res.status(200).redirect("/messages/my-messages")
-        })
-    }
-
+    
     getMyMessages(req, res) {
         userDAO.getUserByEmail(req.session.currentUser,
             (error, user) => {
                 if (error) res.json(error)
                 else {
                     res.locals.user = user
-                   
+                    
                     if (!user.technician) {
                         messageDAO.getMyMessagesUser(user.userID,
                             (error, messages) => {
@@ -45,12 +34,12 @@ class messagesController {
                                 if (error) res.json(error)
                                 else res.status(200).render("technicianMainPage", {messages: messages, current: ".mis-avisos"})
                             }
-                        )
+                            )
+                        }
                     }
-                }
-            })
+                })
     }
-
+            
     getHistoricMessages(req, res) {
         userDAO.getUserByEmail(req.session.currentUser,
             (error, user) => {
@@ -64,20 +53,20 @@ class messagesController {
                                 if (error) res.json(error)
                                 else res.status(200).render("userMainPage", {messages: messages, current: ".historico-de-avisos"})
                             }
-                        )
+                            )
+                        }
+            else {
+                messageDAO.getMyHistoricMessagesTecnico(user.userID,
+                    (error, messages) => {
+                        if (error) res.json(error)
+                        else res.status(200).render("technicianMainPage", {messages: messages, current: ".historico-de-avisos"})
                     }
-                    else {
-                        messageDAO.getMyHistoricMessagesTecnico(user.userID,
-                            (error, messages) => {
-                                if (error) res.json(error)
-                                else res.status(200).render("technicianMainPage", {messages: messages, current: ".historico-de-avisos"})
-                            }
-                        )
-                    }
+                    )
                 }
-            })
+            }
+        })
     }
-
+            
     getEntryMessages(req,res){
         userDAO.getUserByEmail(req.session.currentUser,
             (error, user) => {
@@ -85,28 +74,35 @@ class messagesController {
                 else {
                     res.locals.user = user
                     messageDAO.getAllActiveMessages((error, messages) => {
-                            if (error) res.json(error)
-                            else res.status(200).render("technicianMainPage", {messages: messages, current: ".avisos-entrantes"})
-                        }
+                        if (error) res.json(error)
+                        else res.status(200).render("technicianMainPage", {messages: messages, current: ".avisos-entrantes"})
+                    }
                     ) 
                 }
             })
     }
 
+    assignMessage(req, res) {
+        messageDAO.assignMessage(req.body.technician, req.params.id, (error) => {
+            if (error) res.json(error)
+            else res.status(200).redirect("/messages/my-messages")
+        })
+    }
+    
     finishMessage(req, res) {
         messageDAO.finishMessage(req.params.id, req.body.comments, (error) => {
             if (error) res.json(error)
             else res.status(200).redirect("/messages/my-messages")
         })
     }
-
+    
     deleteMessage(req, res) {
         messageDAO.deleteMessage(req.params.id, req.body.comments, (error) => {
             if (error) res.json(error)
             else res.status(200).redirect("/messages/my-messages")
         })
     }
-
+                
     deleteUnassignedMessage(req, res) {
         console.log(req.url)
         userDAO.getUserByEmail(req.session.currentUser, (error, user) => {
