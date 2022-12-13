@@ -65,21 +65,21 @@ CREATE TABLE `ucm_aw_cau_avi_avisos` (
 --
 
 INSERT INTO `ucm_aw_cau_avi_avisos` (`idAviso`, `idUsuario`, `tipo`, `grupo`, `subgrupo`, `fecha`, `texto`, `tecnico`, `comentarios`, `estado`) VALUES
-(1, 3, 'Sugerencia', '', NULL, '2022-12-01', 'Preparar prácticas AW', 2, 'Aun te falta hacer la BD bobo', 'ACTIVA'),
-(2, 5, 'Sugerencia', '', NULL, '2022-12-01', 'Mirar fechas de congreso', NULL, 'Mirame esta', 'BORRADA'),
-(3, 4, 'Sugerencia', '', NULL, '1900-01-01', 'Ir al Supermercado', 1, 'hecho', 'BORRADA'),
-(4, 7, 'Incidencia', 'Grupo', 'Subgrupo', '2022-12-01', 'Jugar al Fútbol', 1, NULL, 'ACTIVA'),
-(5, 2, 'Felicitacion', 'Grupo', 'Subgrupo', '2022-12-01', 'Hablar con el profesor', 2, NULL, 'ACTIVA'),
-(7, 7, 'Sugerencia', '', NULL, '2022-12-01', 'Entregar Practica Vountaria 4', 1, 'No es necesario', 'BORRADA'),
-(8, 6, 'Felicitacion', '', NULL, '2022-12-31', 'Jugar ligoleyen', 2, NULL, 'ACTIVA'),
-(9, 8, 'Incidencia', 'Comunicaciones', 'Correo electrónico', '2022-11-30', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Suscipit, quaerat aperiam non officia tempore aspernatur tempora dicta minima illum quisquam iure recusandae rerum molestiae sunt totam impedit ad possimus quia ipsum ut voluptate a! Vitae, ipsa? Rerum sint natus porro fuga! Itaque voluptatibus numquam doloribus consequuntur voluptatem dolore voluptates earum!', NULL, NULL, 'ACTIVA'),
-(10, 8, 'Felicitacion', 'Toda la Universidad', NULL, '2022-12-01', 'Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente, deleniti.', 1, 'Lorem efectivamente.', 'BORRADA'),
-(11, 8, 'Sugerencia', 'Docencia', 'Blackboard Collaborate', '2022-11-23', 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Odit esse quia quibusdam itaque quo iure. Nostrum qui temporibus asperiores, iste quo nulla recusandae eius quidem quaerat ducimus delectus, quas inventore consequatur voluptatem voluptas laudantium ab suscipit, tempora sit sequi cum pariatur quam eum atque! Dolore voluptatum temporibus itaque accusantium maxime accusamus sint ut? Perferendis vel quia ullam, sapiente aliquid earum dolore nemo, impedit ex vitae, ad modi culpa facere?\r\n', 2, 'borrado', 'BORRADA'),
-(13, 8, 'Felicitacion', 'General', 'Archivo Universitario', '2022-12-10', 'Prueba', 1, 'Prueba borrar sin asignar', 'BORRADA'),
-(14, 8, 'Queja', 'Conectividad', 'Wifi Eduroam (ssid: eduroam)', '2022-12-10', 'Prueba', NULL, NULL, 'ACTIVA'),
-(15, 8, 'Felicitacion', 'General', 'Archivo Universitario', '2022-12-10', 'Refactorización de las vistas', NULL, NULL, 'ACTIVA'),
-(16, 8, 'Sugerencia', 'Web', 'Portal de eventos', '2022-12-10', '¿Puede por favor funcionar todo ya? De verdad lo pido.', 1, 'Todo saldrá bien bbsito', 'TERMINADA'),
-(17, 8, 'Queja', 'Administración digital', 'Certificado digital de persona física', '2022-12-12', 'Me quejo mucho', 1, 'literalmente yo', 'TERMINADA');
+(1, 3, 'Sugerencia', 'Comunicaciones', 'Google Meet', '2022-12-01', 'Me he reunido con mi profesor en Google Meet pero no me han enviado el enlace para poder reunirme. Solicito el enlace ya que se trata de una reunión muy importante', 2, 'Acabamos de recibir la queja. Hemos arreglado el problema que imposibilitaba el envio de enlaces', 'ACTIVA'),
+(2, 5, 'Sugerencia', 'Web', 'Portal de eventos', '2022-12-01', 'Me gustaria saber de que eventos se trata específicamente en el portal de la página web.', NULL, NULL, 'BORRADA'),
+(3, 4, 'Sugerencia', 'Docencia', 'Blackboard Collaborate', '1900-01-01', 'Me gustaria que incorporaseis en la UCM una aplicación muy util llamado collaborate ', 1, 'hecho', 'BORRADA'),
+(4, 7, 'Incidencia', 'Web', 'Redirecciones web', '2022-12-01', 'Cada vez que entro a mi cuenta, me ridirige a la página principal de la UCM', 1, NULL, 'ACTIVA'),
+(5, 2, 'Felicitacion', 'Servicio de Cafeteria', NULL, '2022-12-01', 'Felicitaciones! ha ganado un premio con un cupon en la cafeteria', 2, NULL, 'ACTIVA'),
+(7, 7, 'Sugerencia', 'Administración digital', 'Certificado electrónico de empleado público', '2022-12-01', 'necesito el certificado de Aitor Tilla para cumplir con mi trabajo', 1, 'No es necesario', 'BORRADA'),
+(8, 6, 'Felicitacion', 'Toda la Universidad', NULL, '2022-12-31', 'Enhorabuena!! ha sido el estudiante con las mayores cualificaciones de toda la Universidad.', 2, NULL, 'ACTIVA'),
+(9, 8, 'Incidencia', 'Comunicaciones', 'Correo electrónico', '2022-11-30', 'Me gustaria recibir mi los avisos en mi correo electrónico', NULL, NULL, 'ACTIVA'),
+(10, 8, 'Felicitacion', 'Toda la Universidad', NULL, '2022-12-01', 'Hoy acabo el grado de ingenieria informática y me gustaria agradecer a todo el equipo de la UCM por su excelente trabajo', 1, 'Muchísimas gracias. Ha sido un honor tenerte como alumno', 'BORRADA'),
+(11, 5, 'Sugerencia', 'Docencia', 'Listado de clase', '2022-11-23', 'Me gustaria recibir un listado de todos los alumnos que se han matriculado en el grado de ingenieria informática', 2, 'Usted no tiene el permiso para recibir la lista que ha solicitado', 'BORRADA'),
+(13, 1, 'Felicitacion', 'Servicio de Administración', NULL, '2022-12-10', 'Felicidades por ser admitido en el servicio técnico', 2, NULL, 'BORRADA'),
+(14, 8, 'Incidencia', 'Conectividad', 'Wifi Eduroam (ssid: eduroam)', '2022-12-10', 'El wifi se ha caido en toda la universidad', NULL, NULL, 'ACTIVA'),
+(15, 8, 'Sugerencia', 'Comunicaciones', 'Cuenta de Alumno', '2022-12-10', 'Se me ha olvidado la contraseña de la cuenta de la universidad', NULL, NULL, 'ACTIVA'),
+(16, 8, 'Sugerencia', 'Web', 'Portal de eventos', '2022-12-10', '¿Puede por favor decirme como funcionan los eventos? no he recibido las notificaciones esta semana.', 1, 'Los eventos como su nombre indica, son eventos especiales, no son recordatorios', 'TERMINADA'),
+(17, 8, 'Incidencia', 'Administración digital', 'Certificado digital de persona física', '2022-12-12', 'No me acepta el certificado digital que he mandado anteriormente', 1, 'Tu certificado está caducado', 'TERMINADA');
 
 -- --------------------------------------------------------
 
@@ -243,16 +243,15 @@ CREATE TABLE `ucm_aw_cau_usu_usuarios` (
 --
 
 INSERT INTO `ucm_aw_cau_usu_usuarios` (`idUsuario`, `nombre`, `correo`, `contrasena`, `perfil`, `tecnico`, `nEmpleado`, `img`, `activo`, `fecha_registro`) VALUES
-(1, 'aitor', 'aitor.tilla@ucm.es', 'aitor', 'PAS', 1, '1234-abc', 'aitor.png', 1, '2022-12-12'),
-(2, 'felipe', 'felipe.lotas@ucm.es', 'felipe', 'PAS', 1, '5678-def', 'felipe.png', 1, '2022-12-12'),
-(3, 'steve', 'steve.curros@ucm.es', 'steve', 'Antiguo Alumno', 0, NULL, 'steve.png', 1, '2022-12-12'),
-(4, 'bill', 'bill.puertas@ucm.es', 'bill', 'PDI', 0, NULL, 'bill.png', 1, '2022-12-12'),
-(5, 'alberto', 'albarto.lopez@ucm.es', 'alberto', 'Alumno', 0, NULL, NULL, 1, '2022-12-12'),
-(6, 'usuario', 'usuario@ucm.es', 'usuario', 'Alumno', 0, NULL, NULL, 1, '2022-12-12'),
-(7, 'Sebo', 'sebpinto@ucm.es', '123456aA*', 'PAS', 0, NULL, NULL, 1, '2022-12-12'),
-(8, 'alumno', 'alumno@ucm.es', '', 'Alumno', 0, NULL, NULL, 1, '2022-12-12'),
-(10, 'prueba', 'prueba@ucm.es', '123456aA*', 'Alumno', 0, NULL, 'prueba.png', 1, '2022-12-12'),
-(11, 'pruebatecnico', 'pruebatecnico@ucm.es', '123456aA*', 'PAS', 0, NULL, 'pruebatecnico.png', 1, '2022-12-12');
+(1, 'aitor', 'aitor.tilla@ucm.es', 'aitor', 'PAS', 1, '1234-abc', 'aitor.png', 1, '2000-12-12'),
+(2, 'felipe', 'felipe.lotas@ucm.es', 'felipe', 'PAS', 1, '5678-def', 'felipe.png', 1, '1999-9-12'),
+(3, 'steve', 'steve.curros@ucm.es', 'steve', 'Antiguo Alumno', 0, NULL, 'steve.png', 1, '2019-12-12'),
+(4, 'bill', 'bill.puertas@ucm.es', 'bill', 'PDI', 0, NULL, 'bill.png', 1, '2020-12-12'),
+(5, 'alberto', 'albarto.lopez@ucm.es', 'alberto', 'Alumno', 0, NULL, NULL, 1, '2014-12-12'),
+(6, 'Elena', 'Elena@ucm.es', 'usuario', 'Alumno', 0, NULL, NULL, 1, '2021-12-12'),
+(7, 'Sebo', 'sebpinto@ucm.es', '123456aA*', 'PAS', 0, NULL, NULL, 1, '2022-3-6'),
+(8, 'Carlo', 'carlo@ucm.es', '54321bB*', 'Alumno', 0, NULL, NULL, 1, '2022-12-12');
+
 
 --
 -- Índices para tablas volcadas
