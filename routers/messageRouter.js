@@ -1,15 +1,10 @@
 "use strict"
 
-const { json } = require("body-parser")
-const { Router, request } = require("express")
 const express = require("express")
 const mysql = require("mysql")
 const config = require("../config")
 const UserController = require("./../controllers/userController")
 const MessageController = require("./../controllers/messageController")
-const MessageDAO = require("./../daos/messageDAO")
-const UserDAO = require("./../daos/userDAO")
-const messagesController = require("./../controllers/messageController")
 
 // Crear un pool de conexiones a la base de datos de MySQL
 const pool = mysql.createPool(config.mysqlConfig);

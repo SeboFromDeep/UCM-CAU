@@ -1,7 +1,5 @@
 "use strict"
 
-const { json } = require("body-parser")
-const { Router, request } = require("express")
 const express = require("express")
 const mysql = require("mysql")
 const config = require("../config")
